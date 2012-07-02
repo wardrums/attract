@@ -1,0 +1,12 @@
+.editbox {
+	display:none;
+}
+
+input {
+	height: 10px;
+	margin: 0px;
+}
+
+.table th, .table td {
+	line-height: 22px;
+}
