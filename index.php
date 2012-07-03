@@ -73,14 +73,17 @@
 									</td>
 									
 									<td class="edit_td">
+										<span id="status_<?php echo $id; ?>" class="status text"><?php echo $status; ?></span>
 										<span class="status text"><?php echo $status; ?></span>
 									</td>
 									
 									<td class="edit_td">
+										<span id="notes_<?php echo $id; ?>" class="notes text"><?php echo $notes; ?></span>
 										<span class="notes text"><?php echo $notes; ?></span>
 									</td>
 									
 									<td class="edit_td">
+										<span id="owner_<?php echo $id; ?>" class="owner text"><?php echo $owner; ?></span>
 										<span class="owner text"><?php echo $owner; ?></span>
 									</td>
 								</tr>

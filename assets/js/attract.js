@@ -93,31 +93,32 @@ $(document).ready(function() {
 		var item = $("#" + cell + "_" + row_id);
 		var item_input = $("#" + cell + "_" + "input" + "_" + row_id);
 		$(item).hide();
-		$(item_input).show();
+		$(item_input).show().focus();
 	}
 	
 	function editThis(row_id, cell) {
 		// Simple log print
 		console.log("We are editing the " + cell + " in row " + row_id);
+		var item = $("#" + cell + "_" + row_id);
+		var item_input = $("#" + cell + "_" + "input" + "_" + row_id);
 		var value = $("#" + cell + "_" + "input" + "_" + row_id).val();
-		var dataString = 'id=' + row_id + '&cell=' + cell + '&value=' + value;
 		// We make the actual query
 		if(value.length > 0) {
 			$.ajax({
 				type: "POST",
 				url: "table_edit_ajax.php",
-				data: dataString,
+				data: {id: row_id, cell: cell, value: value},
 				cache: false,
 				success: function(html){
 					$("#" + cell + "_" + row_id).html(value);
 					}
 			});
+		$(item).show();
+		$(item_input).hide();
 		} else {
 			alert('Enter something.');
 		}
 	}
-	
-	//sendAjaxQuery(6, "number", "");
 	
 	
 	$(".edit_td").click(function(){
@@ -135,6 +136,17 @@ $(document).ready(function() {
 	$(".editbox").mouseup(function() {
 		return false
 	});
+	
+	// Pressing escape key interrupts the action
+	$(document).keypress(function(event){
+		console.log("key pressed");
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '27' ){ //13 is code for Enter key
+			$(".editbox").hide();
+			$(".text").show();	
+		}
+	});
+	
 
 	// Outside click action
 	$(document).mouseup(function(){
