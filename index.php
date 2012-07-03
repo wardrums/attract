@@ -9,6 +9,14 @@
 		<link href="assets/css/tablecloth.css" rel="stylesheet">
 		<link href="assets/css/prettify.css" rel="stylesheet"> 
 		<link href="assets/css/attract.css" rel="stylesheet"> 
+		
+		<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.metadata.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.tablesorter.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.tablecloth.js"></script>
+		<script type="text/javascript" src="assets/js/attract.js"></script>
+		
 	</head>
 	<body>
 		<div class="container">
@@ -27,9 +35,12 @@
 						<table class="paginated">
 							<thead>
 								<tr>
-									<th>Name</th>
+									<th>Number</th>
+									<th>Description</th>
+									<th>Duration</th>
 									<th>Status</th>
-									<th>Duraion</th>
+									<th>Notes</th>
+									<th>Owner</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -38,40 +49,53 @@
 							$sql=mysql_query("select * from shots");
 							while($row=mysql_fetch_array($sql)){
 								$id=$row['id'];
-								$shot_number=$row['shot_number'];
-								$shot_desc=$row['shot_desc'];
-								$shot_duration=$row['shot_duration'];
+								$number=$row['number'];
+								$description=$row['description'];
+								$duration=$row['duration'];
+								$status=$row['status'];
+								$status=$row['notes'];
+								$status=$row['owner'];
 								?>
 								<tr id="<?php echo $id; ?>" class="edit_tr">
 									<td class="edit_td">
-										<span id="first_<?php echo $id; ?>" class="text"><?php echo $shot_number; ?></span>
-										<input type="text" value="<?php echo $shot_number; ?>" class="editbox" id="first_input_<?php echo $id; ?>" />
+										<span id="number_<?php echo $id; ?>" class="text"><?php echo $number; ?></span>
+										<input type="text" value="<?php echo $number; ?>" class="editbox" id="number_input_<?php echo $id; ?>" />
 									</td>
 									
 									<td class="edit_td">
-										<span id="last_<?php echo $id; ?>" class="text"><?php echo $shot_desc; ?></span>
-										<input type="text" value="<?php echo $shot_desc; ?>" class="editbox" id="last_input_<?php echo $id; ?>"/>
+										<span id="description_<?php echo $id; ?>" class="text"><?php echo $description; ?></span>
+										<input type="text" value="<?php echo $description; ?>" class="editbox" id="description_input_<?php echo $id; ?>"/>
 									</td>
 									
 									<td class="edit_td">
-										<span class="text"><?php echo $shot_duration; ?></span>
+										<span class="text"><?php echo $duration; ?></span>
+									</td>
+									
+									<td class="edit_td">
+										<span class="text"><?php echo $status; ?></span>
+									</td>
+									
+									<td class="edit_td">
+										<span class="text"><?php echo $notes; ?></span>
+									</td>
+									
+									<td class="edit_td">
+										<span class="text"><?php echo $owner; ?></span>
 									</td>
 								</tr>
 							<?php }	?>
 							</tbody>
 						</table>
-						<span class="prev">Previous</span><span class="next">Next</span>
+						<a class="btn prev" href="">Previous</a>
+						<a class="btn next" href="">Next</a>
 					</div>
 				</div>
 			</section>
+			<footer class="footer">
+				<p class="pull-right"><a href="#">Back to top</a></p>
+				<p>Attract designed by <a target="_blank" href="http://www.fsiddi.com">fsiddi</a> build with <a target="_blank" href="#">bootstrap</a> and <a target="_blank" href="#">others</a>.</p>
+				<p>Code licensed under the <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.</p>
+		      </footer>
 		</div> <!-- container -->
-		
-		
-		<script src="assets/js/jquery-1.7.2.min.js"></script>
-		<script src="assets/js/bootstrap.js"></script>
-		<script src="assets/js/jquery.metadata.js"></script>
-		<script src="assets/js/jquery.tablesorter.min.js"></script>
-		<script src="assets/js/jquery.tablecloth.js"></script>
-		<script type="text/javascript" src="attract.js"></script>
 	</body>
 </html>
