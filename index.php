@@ -58,29 +58,30 @@
 								?>
 								<tr id="<?php echo $id; ?>" class="edit_tr">
 									<td class="edit_td">
-										<span id="number_<?php echo $id; ?>" class="text"><?php echo $number; ?></span>
+										<span id="number_<?php echo $id; ?>" class="number text"><?php echo $number; ?></span>
 										<input type="text" value="<?php echo $number; ?>" class="editbox" id="number_input_<?php echo $id; ?>" />
 									</td>
 									
 									<td class="edit_td">
-										<span id="description_<?php echo $id; ?>" class="text"><?php echo $description; ?></span>
+										<span id="description_<?php echo $id; ?>" class="description text"><?php echo $description; ?></span>
 										<input type="text" value="<?php echo $description; ?>" class="editbox" id="description_input_<?php echo $id; ?>"/>
 									</td>
 									
 									<td class="edit_td">
-										<span class="text"><?php echo $duration; ?></span>
+										<span id="duration_<?php echo $id; ?>" class="duration text"><?php echo $duration; ?></span>
+										<input type="text" value="<?php echo $duration; ?>" class="editbox" id="duration_input_<?php echo $id; ?>"/>
 									</td>
 									
 									<td class="edit_td">
-										<span class="text"><?php echo $status; ?></span>
+										<span class="status text"><?php echo $status; ?></span>
 									</td>
 									
 									<td class="edit_td">
-										<span class="text"><?php echo $notes; ?></span>
+										<span class="notes text"><?php echo $notes; ?></span>
 									</td>
 									
 									<td class="edit_td">
-										<span class="text"><?php echo $owner; ?></span>
+										<span class="owner text"><?php echo $owner; ?></span>
 									</td>
 								</tr>
 							<?php }	?>

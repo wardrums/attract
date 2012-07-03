@@ -85,49 +85,51 @@ $(document).ready(function() {
 	
 	});	
 	*/
-			
+		
 	
-	function editThis(aaa) {
-		console.log("test");
-		console.log(aaa);
+	function selectThis(row_id, cell) {
+		// Simple log print
+		console.log("We are selecting the " + cell + " in row " + row_id);
+		var item = $("#" + cell + "_" + row_id);
+		var item_input = $("#" + cell + "_" + "input" + "_" + row_id);
+		$(item).hide();
+		$(item_input).show();
 	}
 	
-	
-	$(".edit_td").click(function(){
-		var ID = $(this).attr('class');
-		editThis(ID);
-	});
-	
-
-
-	$(".edit_tr").click(function() {
-		var ID = $(this).attr('id');
-		$("#number_"+ID).hide();
-		$("#description_"+ID).hide();
-		$("#number_input_"+ID).show();
-		$("#description_input_"+ID).show();
-	}).change(function(){
-		var ID = $(this).attr('id');
-		var number = $("#number_input_"+ID).val();
-		var description = $("#description_input_"+ID).val();
-		var dataString = 'id='+ ID +'&number='+number+'&description='+description;
-		$("#number_"+ID).html('<img src="/assets/img/ajax-loader.gif" />'); // Loading image
-		
-		if(number.length > 0 && description.length>0) {
+	function editThis(row_id, cell) {
+		// Simple log print
+		console.log("We are editing the " + cell + " in row " + row_id);
+		var value = $("#" + cell + "_" + "input" + "_" + row_id).val();
+		var dataString = 'id=' + row_id + '&cell=' + cell + '&value=' + value;
+		// We make the actual query
+		if(value.length > 0) {
 			$.ajax({
 				type: "POST",
 				url: "table_edit_ajax.php",
 				data: dataString,
 				cache: false,
 				success: function(html){
-					$("#number_"+ID).html(number);
-					$("#description_"+ID).html(description);
+					$("#" + cell + "_" + row_id).html(value);
 					}
 			});
 		} else {
 			alert('Enter something.');
 		}
+	}
+	
+	//sendAjaxQuery(6, "number", "");
+	
+	
+	$(".edit_td").click(function(){
+		var row_id = $(this).parent().attr('id');
+		var cell = $(this).children().attr('class').split(' ')[0];
+		selectThis(row_id, cell);
+	}).change(function(){
+		var row_id = $(this).parent().attr('id');
+		var cell = $(this).children().attr('class').split(' ')[0];
+		editThis(row_id, cell);
 	});
+	
 		
 	// Edit input box click action
 	$(".editbox").mouseup(function() {
