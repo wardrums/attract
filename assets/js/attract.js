@@ -9,10 +9,32 @@ $(document).ready(function() {
 	
 	
 	
-	function displayVals() {
-      var maxRows = $('#dd_menu').val();
-      console.log(maxRows);
-    }
+	function showStatus(status) {
+		// Simple log print
+		
+		// We make the actual query
+		if(status.length > 0) {
+			$.ajax({
+				type: "POST",
+				url: "table_query_ajax.php",
+				data: {status: status},
+				cache: false,
+				success: function(html){
+					$("table").html(html);
+					}
+			});
+		} else {
+			alert('Enter something.');
+		}
+	}
+	
+	$("#status").click(function(){
+		return;
+	}).change(function(){
+		var value = $(this).val();
+		showStatus(value);
+	});
+
     
     
     /*

@@ -27,24 +27,23 @@
 				</div>
 				<div class="row">
 					<div class="span12">
-					<select id="dd_menu">
-						<option value="all">View all</option>
-						<option value="10">10</option>
+					<select id="status">
+						<option value="todo">View all</option>
+						<option value="fix">10</option>
 						<option value="50">50</option>
 						<option value="100">100</option>
 					</select> 
 						<table class="paginated">
 							<thead>
 								<tr>
-									<th width="80px">Number</th>
-									<th>Description</th>
-									<th>Duration</th>
-									<th width="200px">Status</th>
-									<th>Notes</th>
-									<th>Owner</th>
+									<th class="{sorter: false}" width="80px">Number</th>
+									<th class="{sorter: false}">Description</th>
+									<th class="{sorter: false}">Duration</th>
+									<th class="{sorter: false} width="200px">Status</th>
+									<th class="{sorter: false}">Notes</th>
+									<th class="{sorter: false}">Owner</th>
 								</tr>
 							</thead>
-							<tbody>
 							<?php
 							include('db.php');
 							$sql_scenes = mysql_query("SELECT * FROM scenes");
@@ -52,8 +51,13 @@
 							while($scene_row = mysql_fetch_array($sql_scenes)){
 								$scene_id = $scene_row['id'];
 								$scene_number = $scene_row['number'];
-								$scene_description = $scene_row['description'];
-													
+								$scene_description = $scene_row['description']; ?>
+								<thead>
+									<tr>
+										<th colspan="6"><?php echo($scene_number." ".strtoupper($scene_description)); ?></th>
+									</tr>
+								</thead>
+								<?php					
 								$shot_query = sprintf("SELECT * FROM shots WHERE scene_id='%s'",
 								mysql_real_escape_string($scene_id));
 								
@@ -74,6 +78,7 @@
 									$notes = $shot_row['notes'];
 									$owner = $shot_row['owner'];
 								?>
+							<tbody>
 								<tr id="<?php echo $id; ?>" class="edit_tr">
 									<td>
 										<span id="number_<?php echo $id; ?>" class="number text"><?php echo $number; ?></span>
