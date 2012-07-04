@@ -11,6 +11,19 @@ input {
 	line-height: 22px;
 }
 
+select.editbox {
+	margin: 0px;
+	padding: 0px;
+	line-height: 10px;
+	height: 17px;
+	width: 80px;
+	font-size: 11px;
+}
+
+select.editbox option {
+	outline: none;
+}
+
 
 .footer {
     border-top: 1px solid #E5E5E5;

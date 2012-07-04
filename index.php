@@ -8,7 +8,8 @@
 		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="assets/css/tablecloth.css" rel="stylesheet">
 		<link href="assets/css/prettify.css" rel="stylesheet"> 
-		<link href="assets/css/attract.css" rel="stylesheet"> 
+		<link href="assets/css/attract.css" rel="stylesheet">
+		<link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon" /> 
 		
 		<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
@@ -35,10 +36,10 @@
 						<table class="paginated">
 							<thead>
 								<tr>
-									<th>Number</th>
+									<th width="80px">Number</th>
 									<th>Description</th>
 									<th>Duration</th>
-									<th>Status</th>
+									<th width="200px">Status</th>
 									<th>Notes</th>
 									<th>Owner</th>
 								</tr>
