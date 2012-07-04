@@ -53,11 +53,11 @@
 								$description=$row['description'];
 								$duration=$row['duration'];
 								$status=$row['status'];
-								$status=$row['notes'];
-								$status=$row['owner'];
+								$notes=$row['notes'];
+								$owner=$row['owner'];
 								?>
 								<tr id="<?php echo $id; ?>" class="edit_tr">
-									<td class="edit_td">
+									<td>
 										<span id="number_<?php echo $id; ?>" class="number text"><?php echo $number; ?></span>
 										<input type="text" value="<?php echo $number; ?>" class="editbox" id="number_input_<?php echo $id; ?>" />
 									</td>
@@ -74,17 +74,24 @@
 									
 									<td class="edit_td">
 										<span id="status_<?php echo $id; ?>" class="status text"><?php echo $status; ?></span>
-										<span class="status text"><?php echo $status; ?></span>
+										<select class="editbox" id="status_input_<?php echo $id; ?>">
+											<option value="todo">TODO</option>
+											<option value="fix">Fix</option>
+											<option value="in_progress">In progress </option>
+											<option value="rendering">Rendering</option>
+											<option value="review">Review</option>
+											<option value="done">Done</option>
+										</select> 
 									</td>
 									
 									<td class="edit_td">
 										<span id="notes_<?php echo $id; ?>" class="notes text"><?php echo $notes; ?></span>
-										<span class="notes text"><?php echo $notes; ?></span>
+										<input type="text" value="<?php echo $notes; ?>" class="editbox" id="notes_input_<?php echo $id; ?>"/>
 									</td>
 									
 									<td class="edit_td">
 										<span id="owner_<?php echo $id; ?>" class="owner text"><?php echo $owner; ?></span>
-										<span class="owner text"><?php echo $owner; ?></span>
+										<input type="text" value="<?php echo $owner; ?>" class="editbox" id="owner_input_<?php echo $id; ?>"/>
 									</td>
 								</tr>
 							<?php }	?>

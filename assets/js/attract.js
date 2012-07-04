@@ -111,10 +111,10 @@ $(document).ready(function() {
 				cache: false,
 				success: function(html){
 					$("#" + cell + "_" + row_id).html(value);
+					$(item).show();
+					$(item_input).hide();
 					}
 			});
-		$(item).show();
-		$(item_input).hide();
 		} else {
 			alert('Enter something.');
 		}
@@ -139,7 +139,6 @@ $(document).ready(function() {
 	
 	// Pressing escape key interrupts the action
 	$(document).keypress(function(event){
-		console.log("key pressed");
 		var keycode = (event.keyCode ? event.keyCode : event.which);
 		if(keycode == '27' ){ //13 is code for Enter key
 			$(".editbox").hide();
