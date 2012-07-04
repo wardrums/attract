@@ -81,7 +81,7 @@
 											<option value="in_progress">In progress </option>
 											<option value="rendering">Rendering</option>
 											<option value="review">Review</option>
-											<option value="done">Done</option>
+											<option value="final1">Final 1</option>
 										</select> 
 									</td>
 									
@@ -97,6 +97,11 @@
 								</tr>
 							<?php }	?>
 							</tbody>
+							<thead>
+					        	<tr class="colhead {sorter: false}">
+						        	<th colspan="6" class="headerSortable headerSortUp">ALLSTATE SUGAR BOWL</th>
+					            </tr>
+					        </thead>
 						</table>
 						<a class="btn prev" href="">Previous</a>
 						<a class="btn next" href="">Next</a>
