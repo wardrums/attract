@@ -47,15 +47,32 @@
 							<tbody>
 							<?php
 							include('db.php');
-							$sql=mysql_query("select * from shots");
-							while($row=mysql_fetch_array($sql)){
-								$id=$row['id'];
-								$number=$row['number'];
-								$description=$row['description'];
-								$duration=$row['duration'];
-								$status=$row['status'];
-								$notes=$row['notes'];
-								$owner=$row['owner'];
+							$sql_scenes = mysql_query("SELECT * FROM scenes");
+							
+							while($scene_row = mysql_fetch_array($sql_scenes)){
+								$scene_id = $scene_row['id'];
+								$scene_number = $scene_row['number'];
+								$scene_description = $scene_row['description'];
+													
+								$shot_query = sprintf("SELECT * FROM shots WHERE scene_id='%s'",
+								mysql_real_escape_string($scene_id));
+								
+								$shot_query_result = mysql_query($shot_query);
+								
+								if (!$shot_query_result) {
+								    $message  = 'Invalid query: ' . mysql_error() . "\n";
+								    $message .= 'Whole query: ' . $query;
+								    die($message);
+								}
+								
+								while($shot_row = mysql_fetch_array($shot_query_result)){
+									$id = $shot_row['id'];
+									$number = $shot_row['number'];
+									$description = $shot_row['description'];
+									$duration = $shot_row['duration'];
+									$status = $shot_row['status'];
+									$notes = $shot_row['notes'];
+									$owner = $shot_row['owner'];
 								?>
 								<tr id="<?php echo $id; ?>" class="edit_tr">
 									<td>
@@ -95,7 +112,8 @@
 										<input type="text" value="<?php echo $owner; ?>" class="editbox" id="owner_input_<?php echo $id; ?>"/>
 									</td>
 								</tr>
-							<?php }	?>
+								<?php }
+								}	?>
 							</tbody>
 							<thead>
 					        	<tr class="colhead {sorter: false}">
