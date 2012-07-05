@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$('#myModal').modal({
+	$('#statsModal').modal({
 		show: false
 	});
 
