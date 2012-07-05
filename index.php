@@ -138,6 +138,7 @@
 											<option value="ian">Ian</option>
 											<option value="jeremy">Jeremy</option>
 											<option value="kjartan">Kjartan</option>
+											<option value="rob">Rob</option>
 											<option value="roman">Roman</option>
 											<option value="sebastian">Sebastian</option>
 										</select>
