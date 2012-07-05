@@ -94,15 +94,27 @@
 				</div>
 				<div class="row">
 					<div class="span6">
-						<select id="status">
-							<option value="any">View all</option>
-							<option value="todo">TODO</option>
-							<option value="fix">Fix</option>
-							<option value="in_progress">In progress </option>
-							<option value="rendering">Rendering</option>
-							<option value="review">Review</option>
-							<option value="final1">Final 1</option>
-						</select>
+						<div id="querymachine">
+							<select id="status">
+								<option value="any">View all</option>
+								<option value="todo">To do</option>
+								<option value="fix">Fix</option>
+								<option value="in_progress">In progress </option>
+								<option value="rendering">Rendering</option>
+								<option value="review">Review</option>
+								<option value="final1">Final 1</option>
+							</select>
+							<select id="owner">
+								<option value="andy">Andy</option>
+								<option value="francesco">Francesco</option>
+								<option value="ian">Ian</option>
+								<option value="jeremy">Jeremy</option>
+								<option value="kjartan">Kjartan</option>
+								<option value="rob">Rob</option>
+								<option value="roman">Roman</option>
+								<option value="sebastian">Sebastian</option>
+							</select>
+						</div>
 						<div class="btn-toolbar">
 							<div class="btn-group">
 							    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -114,11 +126,7 @@
 							    </ul>
 							</div>
 							<div class="btn-group"><a class="btn prev" href="">Reset</a> </div>
-							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal" >Stats of steel</a></div>
-							
-							
-							
-														
+							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal" >Stats of steel</a></div>					
 							
 						</div>
 					</div>
