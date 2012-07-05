@@ -3,9 +3,13 @@ include("db.php");
 if($_POST['status']) {
 	$status = $_POST['status'];
 	
-	$shot_query = sprintf("SELECT * FROM shots WHERE status='%s'",
+	if($status == "any") {
+		$shot_query = sprintf("SELECT * FROM shots");
+	} else {
+		$shot_query = sprintf("SELECT * FROM shots WHERE status='%s'",
 		mysql_real_escape_string($status));
-		
+	}
+				
 	$shot_query_result = mysql_query($shot_query);
 	
 	
@@ -59,7 +63,7 @@ if($_POST['status']) {
 				<input type="text" value="<?php echo $duration; ?>" class="editbox" id="duration_input_<?php echo $id; ?>"/>
 			</td>
 			
-			<td class="edit_td">
+			<td class="edit_td <?php echo $status; ?>">
 				<span id="status_<?php echo $id; ?>" class="status text"><?php echo $status; ?></span>
 				<select class="editbox" id="status_input_<?php echo $id; ?>">
 					<option value="todo">TODO</option>

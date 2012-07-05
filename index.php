@@ -28,11 +28,15 @@
 				<div class="row">
 					<div class="span12">
 					<select id="status">
-						<option value="todo">View all</option>
-						<option value="fix">10</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select> 
+						<option value="any">View all</option>
+						<option value="todo">TODO</option>
+						<option value="fix">Fix</option>
+						<option value="in_progress">In progress </option>
+						<option value="rendering">Rendering</option>
+						<option value="review">Review</option>
+						<option value="final1">Final 1</option>
+					</select>
+					<a class="btn prev" href="">Reset</a> 
 						<table class="paginated">
 							<thead>
 								<tr>
@@ -95,7 +99,7 @@
 										<input type="text" value="<?php echo $duration; ?>" class="editbox" id="duration_input_<?php echo $id; ?>"/>
 									</td>
 									
-									<td class="edit_td">
+									<td class="edit_td <?php echo $status; ?>">
 										<span id="status_<?php echo $id; ?>" class="status text"><?php echo $status; ?></span>
 										<select class="editbox" id="status_input_<?php echo $id; ?>">
 											<option value="todo">TODO</option>
@@ -120,11 +124,6 @@
 								<?php }
 								}	?>
 							</tbody>
-							<thead>
-					        	<tr class="colhead {sorter: false}">
-						        	<th colspan="6" class="headerSortable headerSortUp">ALLSTATE SUGAR BOWL</th>
-					            </tr>
-					        </thead>
 						</table>
 						<a class="btn prev" href="">Previous</a>
 						<a class="btn next" href="">Next</a>
@@ -134,7 +133,7 @@
 			<footer class="footer">
 				<p class="pull-right"><a href="#">Back to top</a></p>
 				<p>Attract designed by <a target="_blank" href="http://www.fsiddi.com">fsiddi</a> build with <a target="_blank" href="#">bootstrap</a> and <a target="_blank" href="#">others</a>.</p>
-				<p>Code licensed under the <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.</p>
+				<p>Code available at <a target="_blank" href="https://github.com/fsiddi/attract">GitHub</a>.</p>
 		      </footer>
 		</div> <!-- container -->
 	</body>
