@@ -103,8 +103,8 @@
 											</tr>
 											<tr>
 												<td>Final</td>
-												<td><?php echo($num_final1	); ?></td>
-												<td><?php echo($sum_final1	); ?> sec</td>
+												<td><?php echo($num_final1); ?></td>
+												<td><?php echo($sum_final1); ?> sec</td>
 											</tr>
 										</tbody>
 									</table>
@@ -119,6 +119,17 @@
 						</div>
 					</div>
 					<div class="span6">
+						<?php 
+							//we count seconds and NOT shots
+							$total_percent = $sum_total/100;
+							$in_total_and_final = intval(($sum_in_progress + $sum_final1) / $total_percent);
+							$only_final = ($sum_final1) / $total_percent;
+						?>
+						<h3>Final seconds of the movie: <?php echo(($sum_in_progress + $sum_final1)."/".$sum_total)?></h3>
+						<p>We are working on <?php echo($num_total); ?> shots in total!</p>
+						<div class="progress progress-striped">
+						    <div class="bar" style="width: <?php echo($in_total_and_final); ?>%;"></div>
+						</div>
 											
 					</div>
 				</div>
