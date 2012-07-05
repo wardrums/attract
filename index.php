@@ -105,6 +105,7 @@
 								<option value="final1">Final 1</option>
 							</select>
 							<select id="owner">
+								<option value="any">View all users</option>
 								<option value="andy">Andy</option>
 								<option value="francesco">Francesco</option>
 								<option value="ian">Ian</option>

@@ -20,7 +20,7 @@ $(document).ready(function() {
 	});
 	
 	
-	function showStatus(status) {
+	function queryShots(status, owner) {
 		// Simple log print
 		
 		// We make the actual query
@@ -28,7 +28,7 @@ $(document).ready(function() {
 			$.ajax({
 				type: "POST",
 				url: "table_query_ajax.php",
-				data: {status: status},
+				data: {status: status, owner: owner},
 				cache: false,
 				success: function(html){
 					$("#shotlist").html(html);
@@ -39,11 +39,12 @@ $(document).ready(function() {
 		}
 	}
 	
-	$("#status").click(function(){
+	$("#querymachine").click(function(){
 		return;
 	}).change(function(){
-		var value = $(this).val();
-		showStatus(value);
+		var status = $("#status").val();
+		var owner = $("#owner").val();
+		queryShots(status, owner);
 	});
 
     

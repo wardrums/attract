@@ -1,13 +1,26 @@
 <?php
 include("db.php");
-if($_POST['status']) {
+if($_POST['status'] || $_POST['owner']) {
 	$status = $_POST['status'];
+	$owner = $_POST['owner'];
 	
 	if($status == "any") {
-		$shot_query = sprintf("SELECT * FROM shots");
+		if ($owner == "any") {
+			$shot_query = sprintf("SELECT * FROM shots");
+		} else {
+			$shot_query = sprintf("SELECT * FROM shots WHERE owner='%s'",
+			mysql_real_escape_string($owner));
+		}
+		
 	} else {
-		$shot_query = sprintf("SELECT * FROM shots WHERE status='%s'",
-		mysql_real_escape_string($status));
+		if ($owner == "any") {
+			$shot_query = sprintf("SELECT * FROM shots WHERE status='%s'",
+			mysql_real_escape_string($status));
+		} else {
+			$shot_query = sprintf("SELECT * FROM shots WHERE status='%s' AND owner='%s'",
+			mysql_real_escape_string($status),
+			mysql_real_escape_string($owner));
+		}
 	}
 				
 	$shot_query_result = mysql_query($shot_query);
