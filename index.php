@@ -48,40 +48,78 @@
 							    </ul>
 							</div>
 							<div class="btn-group"><a class="btn prev" href="">Reset</a> </div>
+							<div class="btn-group"><a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a></div>
+							
+							
+							
+							<div class="modal hide" id="myModal">
+						    	<div class="modal-header">
+						    		<h3>Stats of steel</h3>
+						    	</div>
+							    <div class="modal-body">
+							    	<?php
+										$result = mysql_query('SELECT SUM(duration) AS value_sum FROM shots'); 
+										$row = mysql_fetch_assoc($result); 
+										$result = mysql_query('SELECT * FROM shots');
+										$num_total = mysql_num_rows($result);
+										$sum_total = $row['value_sum'];
+										
+										$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='in_progress'"); 
+										$row = mysql_fetch_assoc($result);
+										$result = mysql_query("SELECT * FROM shots WHERE status='in_progress'");
+										$num_in_progress = mysql_num_rows($result);
+										$sum_in_progress = $row['value_sum'];
+										
+										$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='final1'"); 
+										$row = mysql_fetch_assoc($result);
+										$result = mysql_query("SELECT * FROM shots WHERE status='final1'"); 
+										$num_final1 = mysql_num_rows($result);
+										$sum_final1 = $row['value_sum'];
+										
+										$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='fix'"); 
+										$row = mysql_fetch_assoc($result); 
+										$result = mysql_query("SELECT * FROM shots WHERE status='fix'");
+										$num_fix = mysql_num_rows($result);
+										$sum_fix = $row['value_sum'];
+									?>
+									<table id="stats">
+										<thead>
+											<tr>
+												<th>Status</th>
+												<th>Number of shots</th>
+												<th>Seconds</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Total</td>
+												<td><?php echo($num_total); ?></td>
+												<td><?php echo($sum_total); ?> sec</td>
+											</tr>
+											<tr>
+												<td>In progress</td>
+												<td><?php echo($num_in_progress); ?></td>
+												<td><?php echo($sum_in_progress); ?> sec</td>
+											</tr>
+											<tr>
+												<td>Final</td>
+												<td><?php echo($num_final1	); ?></td>
+												<td><?php echo($sum_final1	); ?> sec</td>
+											</tr>
+										</tbody>
+									</table>
+
+							    </div>
+							    <div class="modal-footer">
+								    <a href="#" class="btn" data-dismiss="modal">Close</a>
+								</div>
+						    </div>
+							
 							
 						</div>
 					</div>
 					<div class="span6">
-						<?php
-							$result = mysql_query('SELECT SUM(duration) AS value_sum FROM shots'); 
-							$row = mysql_fetch_assoc($result); 
-							$sum_total = $row['value_sum'];
-							
-							$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='in_progress'"); 
-							$row = mysql_fetch_assoc($result); 
-							$sum_in_progress = $row['value_sum'];
-							
-							$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='final1'"); 
-							$row = mysql_fetch_assoc($result); 
-							$sum_final1 = $row['value_sum'];
-						?>
-						<table id="stats">
-							<tbody>
-								<tr>
-									<td>Total</td>
-									<td><?php echo($sum_total); ?></td>
-								</tr>
-								<tr>
-									<td>In progress</td>
-									<td><?php echo($sum_in_progress); ?></td>
-								</tr>
-								<tr>
-									<td>Final</td>
-									<td><?php echo($sum_final1); ?></td>
-								</tr>
-							</tbody>
-						</table>
-					
+											
 					</div>
 				</div>
 				<div class="row">

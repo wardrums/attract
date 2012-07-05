@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	$('#myModal').modal({
+		show: false
+	});
+
 	$("#shotlist").tablecloth({
 		theme: "paper",
 		striped: true,
