@@ -31,6 +31,27 @@ select.editbox option {
 	background: #a2e9a2;
 }
 
+.table-paper.table-striped tbody tr:nth-child(2n) td.in_progress,
+.table-paper.table-striped tbody tr:nth-child(2n+1) td.in_progress  {
+	background: #e4e8a3;
+}
+
+.table-paper.table-striped tbody tr:nth-child(2n) td.review,
+.table-paper.table-striped tbody tr:nth-child(2n+1) td.review  {
+	background: #e4a3e8;
+}
+
+.table-paper.table-striped tbody tr:nth-child(2n) td.fix,
+.table-paper.table-striped tbody tr:nth-child(2n+1) td.fix  {
+	background: #e8a3a3;
+}
+
+.table-paper.table-striped tbody tr:nth-child(2n) td.rendering,
+.table-paper.table-striped tbody tr:nth-child(2n+1) td.rendering  {
+	background: #a3d0e8;
+}
+
+
 
 
 

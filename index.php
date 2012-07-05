@@ -57,7 +57,7 @@
 									<th class="{sorter: false}" width="80px">Number</th>
 									<th class="{sorter: false}">Description</th>
 									<th class="{sorter: false}">Duration</th>
-									<th class="{sorter: false} width="200px">Status</th>
+									<th class="{sorter: false}" width="100px">Status</th>
 									<th class="{sorter: false}">Notes</th>
 									<th class="{sorter: false}">Owner</th>
 								</tr>
@@ -72,7 +72,7 @@
 								$scene_description = $scene_row['description']; ?>
 								<thead>
 									<tr>
-										<th colspan="6"><?php echo($scene_number." ".strtoupper($scene_description)); ?></th>
+										<th class="{sorter: false}" colspan="6"><?php echo($scene_number." ".strtoupper($scene_description)); ?></th>
 									</tr>
 								</thead>
 								<?php					
