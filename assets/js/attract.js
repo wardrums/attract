@@ -1,12 +1,19 @@
 $(document).ready(function() {
 
-	$("table").tablecloth({
+	$("#shotlist").tablecloth({
 		theme: "paper",
 		striped: true,
 		sortable: true,
 		condensed: true
 	});
 	
+	
+	$("#stats").tablecloth({
+		theme: "paper",
+		striped: true,
+		sortable: true,
+		condensed: true
+	});
 	
 	
 	function showStatus(status) {
@@ -20,7 +27,7 @@ $(document).ready(function() {
 				data: {status: status},
 				cache: false,
 				success: function(html){
-					$("table").html(html);
+					$("#shotlist").html(html);
 					}
 			});
 		} else {

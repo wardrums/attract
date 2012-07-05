@@ -20,38 +20,74 @@
 		
 	</head>
 	<body>
+		<?php include('db.php'); ?>
 		<div class="container">
 			<section>
 				<div class="page-header">
 					<h1>Render tracking of steel <small>where we keep track of the tears</small></h1>
 				</div>
 				<div class="row">
-					<div class="span12">
-					<select id="status">
-						<option value="any">View all</option>
-						<option value="todo">TODO</option>
-						<option value="fix">Fix</option>
-						<option value="in_progress">In progress </option>
-						<option value="rendering">Rendering</option>
-						<option value="review">Review</option>
-						<option value="final1">Final 1</option>
-					</select>
-					<div class="btn-toolbar">
-						<div class="btn-group">
-						    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						    Action
-						    <span class="caret"></span>
-						    </a>
-						    <ul class="dropdown-menu">
-						    <!-- dropdown menu links -->
-						    </ul>
+					<div class="span6">
+						<select id="status">
+							<option value="any">View all</option>
+							<option value="todo">TODO</option>
+							<option value="fix">Fix</option>
+							<option value="in_progress">In progress </option>
+							<option value="rendering">Rendering</option>
+							<option value="review">Review</option>
+							<option value="final1">Final 1</option>
+						</select>
+						<div class="btn-toolbar">
+							<div class="btn-group">
+							    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							    Action
+							    <span class="caret"></span>
+							    </a>
+							    <ul class="dropdown-menu">
+							    <!-- dropdown menu links -->
+							    </ul>
+							</div>
+							<div class="btn-group"><a class="btn prev" href="">Reset</a> </div>
+							
 						</div>
-						<div class="btn-group"><a class="btn prev" href="">Reset</a> </div>
-						
 					</div>
+					<div class="span6">
+						<?php
+							$result = mysql_query('SELECT SUM(duration) AS value_sum FROM shots'); 
+							$row = mysql_fetch_assoc($result); 
+							$sum_total = $row['value_sum'];
+							
+							$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='in_progress'"); 
+							$row = mysql_fetch_assoc($result); 
+							$sum_in_progress = $row['value_sum'];
+							
+							$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='final1'"); 
+							$row = mysql_fetch_assoc($result); 
+							$sum_final1 = $row['value_sum'];
+						?>
+						<table id="stats">
+							<tbody>
+								<tr>
+									<td>Total</td>
+									<td><?php echo($sum_total); ?></td>
+								</tr>
+								<tr>
+									<td>In progress</td>
+									<td><?php echo($sum_in_progress); ?></td>
+								</tr>
+								<tr>
+									<td>Final</td>
+									<td><?php echo($sum_final1); ?></td>
+								</tr>
+							</tbody>
+						</table>
 					
-					
-						<table class="paginated">
+					</div>
+				</div>
+				<div class="row">
+					<div class="span12">
+
+						<table id="shotlist" class="paginated">
 							<thead>
 								<tr>
 									<th class="{sorter: false}" width="80px">Number</th>
@@ -63,8 +99,9 @@
 								</tr>
 							</thead>
 							<?php
-							include('db.php');
+									
 							$sql_scenes = mysql_query("SELECT * FROM scenes");
+							
 							
 							while($scene_row = mysql_fetch_array($sql_scenes)){
 								$scene_id = $scene_row['id'];

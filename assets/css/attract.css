@@ -33,7 +33,7 @@ select.editbox option {
 
 .table-paper.table-striped tbody tr:nth-child(2n) td.in_progress,
 .table-paper.table-striped tbody tr:nth-child(2n+1) td.in_progress  {
-	background: #e4e8a3;
+	background: #fde383;
 }
 
 .table-paper.table-striped tbody tr:nth-child(2n) td.review,
