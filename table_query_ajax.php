@@ -25,9 +25,9 @@ if($_POST['status']) {
 			<th width="80px">Number</th>
 			<th>Description</th>
 			<th>Duration</th>
-			<th width="200px">Status</th>
+			<th width="100px">Status</th>
 			<th>Notes</th>
-			<th>Owner</th>
+			<th width="100px">Owner</th>
 		</tr>
 	</thead>
 	

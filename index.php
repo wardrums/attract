@@ -59,7 +59,7 @@
 									<th class="{sorter: false}">Duration</th>
 									<th class="{sorter: false}" width="100px">Status</th>
 									<th class="{sorter: false}">Notes</th>
-									<th class="{sorter: false}">Owner</th>
+									<th class="{sorter: false}" width="100px">Owner</th>
 								</tr>
 							</thead>
 							<?php
@@ -132,7 +132,15 @@
 									
 									<td class="edit_td">
 										<span id="owner_<?php echo $id; ?>" class="owner text"><?php echo $owner; ?></span>
-										<input type="text" value="<?php echo $owner; ?>" class="editbox" id="owner_input_<?php echo $id; ?>"/>
+										<select class="editbox" id="owner_input_<?php echo $id; ?>">
+											<option value="andy">Andy</option>
+											<option value="francesco">Francesco</option>
+											<option value="ian">Ian</option>
+											<option value="jeremy">Jeremy</option>
+											<option value="kjartan">Kjartan</option>
+											<option value="roman">Roman</option>
+											<option value="sebastian">Sebastian</option>
+										</select>
 									</td>
 								</tr>
 								<?php }
