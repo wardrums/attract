@@ -9,7 +9,11 @@
 		<link href="assets/css/tablecloth.css" rel="stylesheet">
 		<link href="assets/css/prettify.css" rel="stylesheet"> 
 		<link href="assets/css/attract.css" rel="stylesheet">
-		<link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon" /> 
+		<link type="image/x-icon" href="assets/favicon/favicon.ico" rel="shortcut icon">
+		<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-57x57-precomposed.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-touch-icon-72x72-precomposed.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-touch-icon-114x114-precomposed.png" />
+
 		
 		<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
