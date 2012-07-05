@@ -36,7 +36,21 @@
 						<option value="review">Review</option>
 						<option value="final1">Final 1</option>
 					</select>
-					<a class="btn prev" href="">Reset</a> 
+					<div class="btn-toolbar">
+						<div class="btn-group">
+						    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						    Action
+						    <span class="caret"></span>
+						    </a>
+						    <ul class="dropdown-menu">
+						    <!-- dropdown menu links -->
+						    </ul>
+						</div>
+						<div class="btn-group"><a class="btn prev" href="">Reset</a> </div>
+						
+					</div>
+					
+					
 						<table class="paginated">
 							<thead>
 								<tr>
