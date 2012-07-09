@@ -122,17 +122,8 @@
 							</select>
 						</div>
 						<div class="btn-toolbar">
-							<div class="btn-group">
-							    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-							    Action
-							    <span class="caret"></span>
-							    </a>
-							    <ul class="dropdown-menu">
-							    <!-- dropdown menu links -->
-							    </ul>
-							</div>
 							<div class="btn-group"><a class="btn prev" href="">Reset</a> </div>
-							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal" >Stats of steel</a></div>					
+							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal">Stats of steel</a></div>					
 							
 						</div>
 					</div>
@@ -217,16 +208,23 @@
 										<input type="text" value="<?php echo $duration; ?>" class="editbox" id="duration_input_<?php echo $id; ?>"/>
 									</td>
 									
-									<td class="edit_td <?php echo $status; ?>">
-										<span id="status_<?php echo $id; ?>" class="status text"><?php echo $status; ?></span>
-										<select class="editbox" id="status_input_<?php echo $id; ?>">
-											<option value="todo">TODO</option>
-											<option value="fix">Fix</option>
-											<option value="in_progress">In progress </option>
-											<option value="rendering">Rendering</option>
-											<option value="review">Review</option>
-											<option value="final1">Final 1</option>
-										</select> 
+									<td>
+										<div class="status btn-group">
+										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $status; ?>" data-toggle="dropdown" href="#">
+										    <?php 
+										    	echo ucfirst($status); 
+										    ?>
+										    <span class="caret"></span>
+										    </a>
+										    <ul class="dropdown-menu">
+											    <li><a href="#todo">TODO</a></li>
+												<li><a href="#fix">Fix</a></li>
+												<li><a href="#in_progress">In progress</a></li>
+												<li><a href="#rendering">Rendering</a></li>
+												<li><a href="#review">Review</a></li>
+												<li><a href="#final1">Final 1</a></li>
+										    </ul>
+										</div>
 									</td>
 									
 									<td class="edit_td">
