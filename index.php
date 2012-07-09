@@ -101,7 +101,7 @@
 				<div class="row">
 					<div class="span6">
 						<div id="querymachine">
-							<select id="status" data-placeholder="Select owner..." style="width:250px;" class="chzn-select">
+							<select id="status" data-placeholder="Select status" style="width:250px;" multiple="multiple" class="chzn-select">
 								<option value="any">View all</option>
 								<option value="todo">To do</option>
 								<option value="fix">Fix</option>
@@ -110,7 +110,7 @@
 								<option value="review">Review</option>
 								<option value="final1">Final 1</option>
 							</select>
-							<select id="owner" data-placeholder="Select owner..." style="width:250px;" multiple="multiple" class="chzn-select">
+							<select id="owner" data-placeholder="Select owner" style="width:250px;" multiple="multiple" class="chzn-select">
 								<option value="andy">Andy</option>
 								<option value="francesco">Francesco</option>
 								<option value="ian">Ian</option>

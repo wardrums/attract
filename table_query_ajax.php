@@ -1,11 +1,12 @@
 <?php
 include("db.php");
 if($_POST['status'] || $_POST['owner']) {
-	$status = $_POST['status'];
-	$owners = $_POST['owner'];	
+	$statuses = $_POST['status'];
+	$owners = $_POST['owner'];
+	$statuses_list_for_query = "'" . str_replace(",", "','", $statuses) . "'";	
 	$owners_list_for_query = "'" . str_replace(",", "','", $owners) . "'";
 	
-	if($status == "any") {
+	if($statuses == "any") {
 		if ($owners == "any") {
 			$shot_query = sprintf("SELECT * FROM shots");
 		} else {
@@ -15,11 +16,11 @@ if($_POST['status'] || $_POST['owner']) {
 		
 	} else {
 		if ($owners == "any") {
-			$shot_query = sprintf("SELECT * FROM shots WHERE status='%s'",
-			mysql_real_escape_string($status));
+			$shot_query = sprintf("SELECT * FROM shots WHERE status IN (%s)",
+			$statuses_list_for_query);
 		} else {
-			$shot_query = sprintf("SELECT * FROM shots WHERE status='%s' AND owner IN (%s)",
-			mysql_real_escape_string($status),
+			$shot_query = sprintf("SELECT * FROM shots WHERE status IN (%s) AND owner IN (%s)",
+			$statuses_list_for_query,
 			$owners_list_for_query);
 		}
 	}

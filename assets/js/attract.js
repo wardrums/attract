@@ -44,7 +44,10 @@ $(document).ready(function() {
 	$("#querymachine").click(function(){
 		return;
 	}).change(function(){
-		var status = $("#status").val();
+		var status = $("#status").val() || [];
+		status = status.join();
+		if (status === "") {status = "any";}
+		
 		var owner = $("#owner").val() || [];
 		owner = owner.join();
 		if (owner === "") {owner = "any";}
