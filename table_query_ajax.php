@@ -2,24 +2,25 @@
 include("db.php");
 if($_POST['status'] || $_POST['owner']) {
 	$status = $_POST['status'];
-	$owner = $_POST['owner'];
+	$owners = $_POST['owner'];	
+	$owners_list_for_query = "'" . str_replace(",", "','", $owners) . "'";
 	
 	if($status == "any") {
-		if ($owner == "any") {
+		if ($owners == "any") {
 			$shot_query = sprintf("SELECT * FROM shots");
 		} else {
-			$shot_query = sprintf("SELECT * FROM shots WHERE owner='%s'",
-			mysql_real_escape_string($owner));
+			$shot_query = sprintf("SELECT * FROM shots WHERE owner IN (%s)",
+			$owners_list_for_query);
 		}
 		
 	} else {
-		if ($owner == "any") {
+		if ($owners == "any") {
 			$shot_query = sprintf("SELECT * FROM shots WHERE status='%s'",
 			mysql_real_escape_string($status));
 		} else {
-			$shot_query = sprintf("SELECT * FROM shots WHERE status='%s' AND owner='%s'",
+			$shot_query = sprintf("SELECT * FROM shots WHERE status='%s' AND owner IN (%s)",
 			mysql_real_escape_string($status),
-			mysql_real_escape_string($owner));
+			$owners_list_for_query);
 		}
 	}
 				
@@ -40,7 +41,7 @@ if($_POST['status'] || $_POST['owner']) {
 			<th>Duration</th>
 			<th width="100px">Status</th>
 			<th>Notes</th>
-			<th width="100px">Owner</th>
+			<th width="100px">owner</th>
 		</tr>
 	</thead>
 	

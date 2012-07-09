@@ -8,6 +8,7 @@
 		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="assets/css/tablecloth.css" rel="stylesheet">
 		<link href="assets/css/prettify.css" rel="stylesheet"> 
+		<link href="assets/css/chosen.css" rel="stylesheet">
 		<link href="assets/css/attract.css" rel="stylesheet">
 		<link type="image/x-icon" href="assets/favicon/favicon.ico" rel="shortcut icon">
 		<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-57x57-precomposed.png" />
@@ -20,6 +21,7 @@
 		<script type="text/javascript" src="assets/js/jquery.metadata.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.tablesorter.min.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.tablecloth.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.chosen.min.js"></script>
 		<script type="text/javascript" src="assets/js/attract.js"></script>
 		
 	</head>
@@ -99,7 +101,7 @@
 				<div class="row">
 					<div class="span6">
 						<div id="querymachine">
-							<select id="status">
+							<select id="status" data-placeholder="Select owner..." style="width:250px;" class="chzn-select">
 								<option value="any">View all</option>
 								<option value="todo">To do</option>
 								<option value="fix">Fix</option>
@@ -108,8 +110,7 @@
 								<option value="review">Review</option>
 								<option value="final1">Final 1</option>
 							</select>
-							<select id="owner">
-								<option value="any">View all users</option>
+							<select id="owner" data-placeholder="Select owner..." style="width:250px;" multiple="multiple" class="chzn-select">
 								<option value="andy">Andy</option>
 								<option value="francesco">Francesco</option>
 								<option value="ian">Ian</option>

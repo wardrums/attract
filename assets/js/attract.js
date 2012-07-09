@@ -19,10 +19,12 @@ $(document).ready(function() {
 		condensed: true
 	});
 	
+	$(".chzn-select").chosen({no_results_text: "Select owner..."}); 
+	
 	
 	function queryShots(status, owner) {
 		// Simple log print
-		
+		// console.log(owner);
 		// We make the actual query
 		if(status.length > 0) {
 			$.ajax({
@@ -43,7 +45,9 @@ $(document).ready(function() {
 		return;
 	}).change(function(){
 		var status = $("#status").val();
-		var owner = $("#owner").val();
+		var owner = $("#owner").val() || [];
+		owner = owner.join();
+		if (owner === "") {owner = "any";}
 		queryShots(status, owner);
 	});
 
