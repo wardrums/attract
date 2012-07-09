@@ -11,6 +11,15 @@ input {
 	line-height: 22px;
 }
 
+.chzn-choices {
+	border-radius: 4px;
+}
+
+.chzn-container-active .chzn-choices {
+	border-radius: 4px 4px 0 0;
+	box-shadow: none;
+}
+
 select.editbox {
 	margin: 0px;
 	padding: 0px;
