@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Attract - TOS</title>		
+		<title>Attract</title>		
 		<link href="assets/css/bootstrap.css" rel="stylesheet">
 		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="assets/css/tablecloth.css" rel="stylesheet">
@@ -96,7 +96,7 @@
 		
 			<section>
 				<div class="page-header">
-					<h1>Render tracking of steel <small>where we keep track of the tears</small></h1>
+					<h1>Attract <small>task tracking of steel</small></h1>
 				</div>
 				<div class="row">
 					<div class="span6">
@@ -211,7 +211,7 @@
 									<td>
 										<div class="status btn-group">
 										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $status; ?>" data-toggle="dropdown" href="#">
-										    <?php 
+										    <?php
 										    	echo ucfirst($status); 
 										    ?>
 										    <span class="caret"></span>
