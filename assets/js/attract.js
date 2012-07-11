@@ -45,9 +45,9 @@ $(document).ready(function() {
 		}
 	}
 	
-	$("#querymachine").click(function(){
+	$("#querymachine").on("click", function(){
 		return;
-	}).change(function(){
+	}).on("change", function(){
 		var status = $("#status").val() || [];
 		status = status.join();
 		if (status === "") {status = "any";}
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	$("ul.dropdown-menu li a").click(function(){
+	$("ul.dropdown-menu li a").on("click", function(){
 	    var href = $(this).attr("href");
 	    var dropdown_label = $(this).parent().parent().prev();
 	    var value = href.substring(1);
