@@ -232,18 +232,28 @@
 										<input type="text" value="<?php echo $notes; ?>" class="editbox" id="notes_input_<?php echo $id; ?>"/>
 									</td>
 									
-									<td class="edit_td">
-										<span id="owner_<?php echo $id; ?>" class="owner text"><?php echo $owner; ?></span>
-										<select class="editbox" id="owner_input_<?php echo $id; ?>">
-											<option value="andy">Andy</option>
-											<option value="francesco">Francesco</option>
-											<option value="ian">Ian</option>
-											<option value="jeremy">Jeremy</option>
-											<option value="kjartan">Kjartan</option>
-											<option value="rob">Rob</option>
-											<option value="roman">Roman</option>
-											<option value="sebastian">Sebastian</option>
-										</select>
+									<td>								
+										<div class="owner btn-group">
+										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $owner; ?>" data-toggle="dropdown" href="#">
+										    <?php
+										    	echo ucfirst($owner); 
+										    ?>
+										    <span class="caret"></span>
+										    </a>
+										    <ul class="dropdown-menu">
+											    <li><a href="#andy">Andy</a></li>
+												<li><a href="#francesco">Francesco</a></li>
+												<li><a href="#ian">Ian</a></li>
+												<li><a href="#jeremy">Jeremy</a></li>
+												<li><a href="#kjartan">Kjartan</a></li>
+												<li><a href="#rob">Rob</a></li>
+												<li><a href="#roman">Roman</a></li>
+												<li><a href="#sebastian">Sebastian</a></li>
+										    </ul>
+										</div>
+										
+										 
+									
 									</td>
 								</tr>
 								<?php }
