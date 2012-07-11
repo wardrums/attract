@@ -64,6 +64,7 @@ select.editbox option {
 .btn-group .dropdown-toggle {
 	text-align: left;
 	width: 85px;
+	margin-top: 1px;
 }
 
 .btn-group .dropdown-toggle span {
