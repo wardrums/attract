@@ -36,12 +36,13 @@ $(document).ready(function() {
 				url: "table_query_ajax.php",
 				data: {status: status, owner: owner},
 				cache: false,
+				context: document.body,
 				success: function(html){
 					$("#shotlist").html(html);
-					}
+				}
 			});
 		} else {
-			alert('Enter something.');
+			console.log("No status or owner provided");
 		}
 	}
 	
@@ -82,21 +83,18 @@ $(document).ready(function() {
 		var item_input = $("#" + cell + "_" + "input" + "_" + row_id);
 		var value = $("#" + cell + "_" + "input" + "_" + row_id).val();
 		// We make the actual query
-		if(value.length > 0) {
-			$.ajax({
-				type: "POST",
-				url: "table_edit_ajax.php",
-				data: {id: row_id, cell: cell, value: value},
-				cache: false,
-				success: function(html){
-					$("#" + cell + "_" + row_id).html(value);
-					$(item).show();
-					$(item_input).hide();
-					}
-			});
-		} else {
-			alert('Enter something.');
-		}
+		$.ajax({
+			type: "POST",
+			url: "table_edit_ajax.php",
+			data: {id: row_id, cell: cell, value: value},
+			cache: false,
+			success: function(html){
+				$("#" + cell + "_" + row_id).html(value);
+				$(item).show();
+				$(item_input).hide();
+			}
+		});
+		
 	}
 	
 	function editStatus(row_id, cell, value) {
