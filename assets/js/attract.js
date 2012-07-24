@@ -82,6 +82,7 @@ $(document).ready(function() {
 		var item = $("#" + cell + "_" + row_id);
 		var item_input = $("#" + cell + "_" + "input" + "_" + row_id);
 		var value = $("#" + cell + "_" + "input" + "_" + row_id).val();
+		
 		// We make the actual query
 		$.ajax({
 			type: "POST",
@@ -94,6 +95,7 @@ $(document).ready(function() {
 				$(item_input).hide();
 			}
 		});
+		
 		
 	}
 	
@@ -118,14 +120,20 @@ $(document).ready(function() {
 	    var row_id = $(this).closest("tr").attr("id");
 	    var cell = $(this).closest("div").attr("class").split(' ')[0];
 	    var btn_lastclass = $(this).parent().parent().prev().attr("class").split(' ')[3];
+	    var stage = $(this).closest("td").next().children("div");
 	    
-	    console.log(btn_lastclass);
+	    // console.log(btn_lastclass);
 	    
 	    $(this).parent().parent().prev().removeClass(btn_lastclass).addClass("btn-"+value);
 	    
 	    console.log(row_id + " " + cell + " " + value);
 	    
-	    
+	    if(value === "in_progress") {
+			console.log(stage);
+			stage.fadeIn(300);
+		} else {
+			stage.fadeOut(300);
+		}
 	    
 	    dropdown_label.html(label_text + "<span class=\"caret\"></span>");
 	    

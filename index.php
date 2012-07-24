@@ -153,6 +153,7 @@
 									<th class="{sorter: false}">Description</th>
 									<th class="{sorter: false}">Duration</th>
 									<th class="{sorter: false}" width="100px">Status</th>
+									<th class="{sorter: false}" width="100px">Stage</th>
 									<th class="{sorter: false}">Notes</th>
 									<th class="{sorter: false}" width="100px">Owner</th>
 								</tr>
@@ -168,7 +169,7 @@
 								$scene_description = $scene_row['description']; ?>
 								<thead>
 									<tr>
-										<th class="{sorter: false}" colspan="6"><?php echo($scene_number." ".strtoupper($scene_description)); ?></th>
+										<th class="{sorter: false}" colspan="7"><?php echo($scene_number." ".strtoupper($scene_description)); ?></th>
 									</tr>
 								</thead>
 								<?php					
@@ -189,6 +190,7 @@
 									$description = $shot_row['description'];
 									$duration = $shot_row['duration'];
 									$status = $shot_row['status'];
+									$stage = $shot_row['stage'];
 									$notes = $shot_row['notes'];
 									$owner = $shot_row['owner'];
 								?>
@@ -224,6 +226,25 @@
 												<li><a href="#rendering">Rendering</a></li>
 												<li><a href="#review">Review</a></li>
 												<li><a href="#final1">Final 1</a></li>
+										    </ul>
+										</div>
+									</td>
+									
+									<td>
+										<div class="stage btn-group" <?php if($status != "in_progress") {echo("style =\"display: none;\"");} ?>>
+										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $stage; ?>" data-toggle="dropdown" href="#">
+										    <?php
+										    	echo ucfirst($stage); 
+										    ?>
+										    <span class="caret"></span>
+										    </a>
+										    <ul class="dropdown-menu">
+											    <li><a href="#tracking">Tracking</a></li>
+												<li><a href="#masking">Masking</a></li>
+												<li><a href="#layout">Layout</a></li>
+												<li><a href="#animation">Animation</a></li>
+												<li><a href="#lighting">Lighting</a></li>
+												<li><a href="#compositing">Compositing</a></li>
 										    </ul>
 										</div>
 									</td>

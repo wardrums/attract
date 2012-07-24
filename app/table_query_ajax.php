@@ -41,6 +41,7 @@ if($_POST['status'] || $_POST['owner']) {
 			<th>Description</th>
 			<th>Duration</th>
 			<th width="100px">Status</th>
+			<th width="100px">Stage</th>
 			<th>Notes</th>
 			<th width="100px">owner</th>
 		</tr>
@@ -56,6 +57,7 @@ if($_POST['status'] || $_POST['owner']) {
 		$description = $shot_row['description'];
 		$duration = $shot_row['duration'];
 		$status = $shot_row['status'];
+		$status = $shot_row['stage'];
 		$notes = $shot_row['notes'];
 		$owner = $shot_row['owner'];	
 		
@@ -95,6 +97,10 @@ if($_POST['status'] || $_POST['owner']) {
 						<li><a href="#final1">Final 1</a></li>
 				    </ul>
 				</div>
+			</td>
+			
+			<td class="edit_td">
+				<span id="stage_<?php echo $stage; ?>" class="stage text"><?php echo $stage; ?></span>
 			</td>
 			
 			<td class="edit_td">
