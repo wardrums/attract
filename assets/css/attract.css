@@ -7,6 +7,10 @@ input {
 	margin: 0px;
 }
 
+input.duration {
+	width: 25px;
+}
+
 .table th, .table td {
 	line-height: 22px;
 }

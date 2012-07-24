@@ -75,7 +75,7 @@ if($_POST['status'] || $_POST['owner']) {
 			
 			<td class="edit_td">
 				<span id="duration_<?php echo $id; ?>" class="duration text"><?php echo $duration; ?></span>
-				<input type="text" value="<?php echo $duration; ?>" class="editbox" id="duration_input_<?php echo $id; ?>"/>
+				<input type="text" value="<?php echo $duration; ?>" class="duration editbox" id="duration_input_<?php echo $id; ?>"/>
 			</td>
 			
 			<td>
