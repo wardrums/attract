@@ -119,7 +119,7 @@
 								<option value="rob">Rob</option>
 								<option value="roman">Roman</option>
 								<option value="sebastian">Sebastian</option>
-								<option value="free">Free</option>
+								<option value="none">None</option>
 							</select>
 						</div>
 						<div class="btn-toolbar">
@@ -250,7 +250,7 @@
 												<li><a href="#rob">Rob</a></li>
 												<li><a href="#roman">Roman</a></li>
 												<li><a href="#sebastian">Sebastian</a></li>
-												<li><a href="#free">Free</a></li>
+												<li><a href="#none">None</a></li>
 										    </ul>
 										</div>
 										
