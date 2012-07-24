@@ -26,7 +26,7 @@
 		
 	</head>
 	<body>
-		<?php include('db.php'); ?>
+		<?php include('app/db.php'); ?>
 		<div class="container">
 		
 			<div class="modal hide" id="statsModal">

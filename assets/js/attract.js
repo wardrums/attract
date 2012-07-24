@@ -33,7 +33,7 @@ $(document).ready(function() {
 		if(status.length > 0) {
 			$.ajax({
 				type: "POST",
-				url: "table_query_ajax.php",
+				url: "app/table_query_ajax.php",
 				data: {status: status, owner: owner},
 				cache: false,
 				context: document.body,
@@ -85,7 +85,7 @@ $(document).ready(function() {
 		// We make the actual query
 		$.ajax({
 			type: "POST",
-			url: "table_edit_ajax.php",
+			url: "app/table_edit_ajax.php",
 			data: {id: row_id, cell: cell, value: value},
 			cache: false,
 			success: function(html){
@@ -100,7 +100,7 @@ $(document).ready(function() {
 	function editStatus(row_id, cell, value) {
 		$.ajax({
 			type: "POST",
-			url: "table_edit_ajax.php",
+			url: "app/table_edit_ajax.php",
 			data: {id: row_id, cell: cell, value: value},
 			cache: false,
 			success: function(html){
