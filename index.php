@@ -154,7 +154,7 @@
 									<th class="{sorter: false}">Duration</th>
 									<th class="{sorter: false}" width="100px">Status</th>
 									<th class="{sorter: false}" width="100px">Stage</th>
-									<th class="{sorter: false}">Notes</th>
+									<th class="{sorter: false}" width="35%">Notes</th>
 									<th class="{sorter: false}" width="100px">Owner</th>
 								</tr>
 							</thead>
