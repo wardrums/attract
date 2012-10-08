@@ -26,7 +26,12 @@
 		
 	</head>
 	<body>
-		<?php include('app/db.php'); ?>
+		<?php
+		if ((include 'app/db.php') !== 1) {
+		    die('<div class="container"><section><div class="page-header"><h1>Could not locate database <small>Make sure that the app/dp.php file exists!</small></h1></div></section></div>
+	</body>');
+		}
+		?>
 		<div class="container">
 		
 			<div class="modal hide" id="statsModal">
