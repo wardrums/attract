@@ -40,28 +40,28 @@
 		    	</div>
 			    <div class="modal-body">
 			    	<?php
-						$result = mysql_query('SELECT SUM(duration) AS value_sum FROM shots'); 
-						$row = mysql_fetch_assoc($result); 
-						$result = mysql_query('SELECT * FROM shots');
-						$num_total = mysql_num_rows($result);
+						$result = $dbh->query('SELECT SUM(duration) AS value_sum FROM shots'); 
+						$row = $result->fetch(PDO::FETCH_ASSOC); 
+						$result = $dbh->query('SELECT * FROM shots');
+						$num_total = $result->rowCount();;
 						$sum_total = $row['value_sum'];
 						
-						$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='in_progress'"); 
-						$row = mysql_fetch_assoc($result);
-						$result = mysql_query("SELECT * FROM shots WHERE status='in_progress'");
-						$num_in_progress = mysql_num_rows($result);
+						$result = $dbh->query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='in_progress'"); 
+						$row = $result->fetch(PDO::FETCH_ASSOC);
+						$result = $dbh->query("SELECT * FROM shots WHERE status='in_progress'");
+						$num_in_progress = $result->rowCount();;
 						$sum_in_progress = $row['value_sum'];
 						
-						$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='final1'"); 
-						$row = mysql_fetch_assoc($result);
-						$result = mysql_query("SELECT * FROM shots WHERE status='final1'"); 
-						$num_final1 = mysql_num_rows($result);
+						$result = $dbh->query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='final1'"); 
+						$row = $result->fetch(PDO::FETCH_ASSOC);
+						$result = $dbh->query("SELECT * FROM shots WHERE status='final1'"); 
+						$num_final1 = $result->rowCount();;
 						$sum_final1 = $row['value_sum'];
 						
-						$result = mysql_query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='fix'"); 
-						$row = mysql_fetch_assoc($result); 
-						$result = mysql_query("SELECT * FROM shots WHERE status='fix'");
-						$num_fix = mysql_num_rows($result);
+						$result = $dbh->query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='fix'"); 
+						$row = $result->fetch(PDO::FETCH_ASSOC); 
+						$result = $dbh->query("SELECT * FROM shots WHERE status='fix'");
+						$num_fix = $result->rowCount();;
 						$sum_fix = $row['value_sum'];
 					?>
 					<table id="stats">
@@ -165,10 +165,10 @@
 							</thead>
 							<?php
 									
-							$sql_scenes = mysql_query("SELECT * FROM scenes");
+							$sql_scenes = $dbh->query("SELECT * FROM scenes");
 							
 							
-							while($scene_row = mysql_fetch_array($sql_scenes)){
+							while($scene_row = $sql_scenes->fetch(PDO::FETCH_ASSOC)){
 								$scene_id = $scene_row['id'];
 								$scene_number = $scene_row['number'];
 								$scene_description = $scene_row['description']; ?>
@@ -181,7 +181,7 @@
 								$shot_query = sprintf("SELECT * FROM shots WHERE scene_id='%s'",
 								mysql_real_escape_string($scene_id));
 								
-								$shot_query_result = mysql_query($shot_query);
+								$shot_query_result = $dbh->query($shot_query);
 								
 								if (!$shot_query_result) {
 								    $message  = 'Invalid query: ' . mysql_error() . "\n";
@@ -189,7 +189,7 @@
 								    die($message);
 								}
 								
-								while($shot_row = mysql_fetch_array($shot_query_result)){
+								while($shot_row = $shot_query_result->fetch(PDO::FETCH_ASSOC)){
 									$id = $shot_row['id'];
 									$number = $shot_row['number'];
 									$description = $shot_row['description'];
@@ -215,7 +215,6 @@
 										<span id="duration_<?php echo $id; ?>" class="duration text"><?php echo $duration; ?></span>
 										<input type="text" value="<?php echo $duration; ?>" class="duration editbox" id="duration_input_<?php echo $id; ?>"/>
 									</td>
-									
 									<td>
 										<div class="status btn-group">
 										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $status; ?>" data-toggle="dropdown" href="#">

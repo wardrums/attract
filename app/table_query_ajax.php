@@ -25,7 +25,7 @@ if($_POST['status'] || $_POST['owner']) {
 		}
 	}
 				
-	$shot_query_result = mysql_query($shot_query);
+	$shot_query_result = $dbh->query($shot_query);
 	
 	
 	if (!$shot_query_result) {
@@ -37,13 +37,13 @@ if($_POST['status'] || $_POST['owner']) {
 	
 	<thead>
 		<tr>
-			<th width="80px">Number</th>
-			<th>Description</th>
-			<th>Duration</th>
-			<th width="100px">Status</th>
-			<th width="100px">Stage</th>
-			<th>Notes</th>
-			<th width="100px">owner</th>
+			<th class="{sorter: false}" width="80px">Number</th>
+			<th class="{sorter: false}">Description</th>
+			<th class="{sorter: false}">Duration</th>
+			<th class="{sorter: false}" width="100px">Status</th>
+			<th class="{sorter: false}" width="100px">Stage</th>
+			<th class="{sorter: false}" width="35%">Notes</th>
+			<th class="{sorter: false}" width="100px">Owner</th>		
 		</tr>
 	</thead>
 	
@@ -51,13 +51,13 @@ if($_POST['status'] || $_POST['owner']) {
 	<?php
 	
 	
-	while($shot_row = mysql_fetch_array($shot_query_result)){
+	while($shot_row = $shot_query_result->fetch(PDO::FETCH_ASSOC)){
 		$id = $shot_row['id'];
 		$number = $shot_row['number'];
 		$description = $shot_row['description'];
 		$duration = $shot_row['duration'];
 		$status = $shot_row['status'];
-		$status = $shot_row['stage'];
+		$stage = $shot_row['stage'];
 		$notes = $shot_row['notes'];
 		$owner = $shot_row['owner'];	
 		
@@ -79,7 +79,6 @@ if($_POST['status'] || $_POST['owner']) {
 				<span id="duration_<?php echo $id; ?>" class="duration text"><?php echo $duration; ?></span>
 				<input type="text" value="<?php echo $duration; ?>" class="duration editbox" id="duration_input_<?php echo $id; ?>"/>
 			</td>
-			
 			<td>
 				<div class="status btn-group">
 				    <a class="btn dropdown-toggle btn-mini btn-<?php echo $status; ?>" data-toggle="dropdown" href="#">
@@ -99,8 +98,23 @@ if($_POST['status'] || $_POST['owner']) {
 				</div>
 			</td>
 			
-			<td class="edit_td">
-				<span id="stage_<?php echo $stage; ?>" class="stage text"><?php echo $stage; ?></span>
+			<td>
+				<div class="stage btn-group" <?php if($status != "in_progress") {echo("style =\"display: none;\"");} ?>>
+				    <a class="btn dropdown-toggle btn-mini btn-<?php echo $stage; ?>" data-toggle="dropdown" href="#">
+				    <?php
+				    	echo ucfirst($stage); 
+				    ?>
+				    <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+					    <li><a href="#tracking">Tracking</a></li>
+						<li><a href="#masking">Masking</a></li>
+						<li><a href="#layout">Layout</a></li>
+						<li><a href="#animation">Animation</a></li>
+						<li><a href="#lighting">Lighting</a></li>
+						<li><a href="#compositing">Compositing</a></li>
+				    </ul>
+				</div>
 			</td>
 			
 			<td class="edit_td">
