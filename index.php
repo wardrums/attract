@@ -128,7 +128,7 @@
 							</select>
 						</div>
 						<div class="btn-toolbar">
-							<div class="btn-group"><a class="btn prev" href="">Reset</a> </div>
+							<div class="btn-group"><a class="btn prev" href="">Reload</a> </div>
 							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal">Stats of steel</a></div>					
 							
 						</div>
