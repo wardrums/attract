@@ -1,0 +1,141 @@
+		body { 
+			margin:0; 
+			padding:0; 
+			font-size:15px; 
+			font-family:Helvetica, Arial, sans-serif;
+			background-color: #EEE;
+		}
+		
+		
+		p { 
+			margin:0; 
+			padding:0;
+		}
+		h1 { 
+			color:white; 
+			font-size:24pt; 
+			margin:60px 0; 
+		}
+		h2 { 
+			color:#606060; 
+			font-size:12pt; 
+			margin:0;
+		}
+		hr {
+			border:0; 
+			height:1px; 
+			margin:20px 20px; 
+			background:#CCC;
+		}
+		a {
+			color:#555; 
+			font-weight:bold; 
+			text-decoration:none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		#container { 
+			width: 450px; 
+			position: relative; 
+			margin: 0 auto;
+			text-align: justify;
+			background-color: #EEE;
+		}
+
+		#header { 
+			height:80px; 
+			margin-bottom:20px;
+		}
+		
+		#container img {
+			margin-left: 10px;
+		}
+		
+		.blurb { 
+			color:#606060; 
+			margin-top:5px; 
+			font-size:11pt; 
+			line-height:16pt;
+			padding: 10px;
+		}
+		#body { 
+			margin-top:15px; 
+			width:100%; 
+			padding-top:12px; 
+			padding-bottom: 1px;
+		}
+		#body ul { 
+			margin:0 0 0 10px; 
+			padding:10px; 
+		}
+		#body li { 
+			padding:3px 0; 
+			font-size:14pt; 
+			color:#707b65; 
+		}
+		.left {float:left; width:320px; padding:0 5px 5px; margin-left:10px; }
+		.right { float:right; width:254px; }
+		#footer { float:left; width:100%; margin-top:100px; text-align:center;}
+		#footer p {color:#bbb; }
+		
+		tr {
+			height: 26px;
+		}
+		
+		td {
+			font-size:12px;
+			color:#333;		
+			}
+			
+		td.note {
+			color:#999;
+			padding-bottom:15px;
+			padding-left:15px;
+		}
+		td h2 {
+			
+			margin-top:20px;
+		}
+		.label {
+			text-align:right;
+			vertical-align:top;
+			padding-top:8px;
+			 
+		}
+		
+		input {
+			font-size: 10pt;
+			padding: 3px;
+			/*background: #FFF;*/
+			margin: 3px 10px;
+			border: 1px solid #666; 
+		}
+		
+
+		
+		select {
+			margin-left: 10px;
+		}
+		
+		.radio{
+			margin:4px 4px 0 0px;
+			padding:2px;
+		}
+		.warning {
+			border:1px solid red;
+			background: #fff6f6;
+			padding:10px;
+			margin:25px 0 15px 0;
+		}
+		#installform { 
+			margin:0 auto;
+			width:450px;
+			 }
+		#installform td img {margin-bottom:5px; }
+		.submit {
+			border:auto;
+			float: left;
+			margin: 0 0 0 20px;
+		}
+

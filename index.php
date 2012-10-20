@@ -1,3 +1,8 @@
+<?php 
+if (!file_exists("app/db.php")) {
+	echo '<meta http-equiv="Refresh" content="0;URL=install/">';
+}
+?>
 <!DOCTYPE html>  
 <html lang="en">  
 	<head>
