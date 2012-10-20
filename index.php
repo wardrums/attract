@@ -300,7 +300,7 @@ if (!file_exists("app/db.php")) {
 			<footer class="footer">
 				<p class="pull-right"><a href="#">Back to top</a></p>
 				<p>Attract designed by <a target="_blank" href="http://www.fsiddi.com">fsiddi</a> build with <a target="_blank" href="#">bootstrap</a> and <a target="_blank" href="#">others</a>.</p>
-				<p>Code available at <a target="_blank" href="https://github.com/fsiddi/attract">GitHub</a>.</p>
+				<p>Source code available at <a target="_blank" href="https://github.com/fsiddi/attract">GitHub</a>.</p>
 		      </footer>
 		</div> <!-- container -->
 	</body>
