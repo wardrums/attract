@@ -1,8 +1,3 @@
-<?php 
-if (!file_exists("app/db.php")) {
-	echo '<meta http-equiv="Refresh" content="0;URL=install/">';
-}
-?>
 <!DOCTYPE html>  
 <html lang="en">  
 	<head>
@@ -32,9 +27,12 @@ if (!file_exists("app/db.php")) {
 	</head>
 	<body>
 		<?php
+		# TODO: this code should be changed, just keeping for making a template later
 		if ((include 'app/db.php') !== 1) {
-		    die('<div class="container"><section><div class="page-header"><h1>Could not locate database <small>Make sure that the app/dp.php file exists!</small></h1></div></section></div>
+		   die('<div class="container"><section><div class="page-header"><h1>Could not locate database <small>Make sure that the app/dp.php file exists!</small></h1></div></section>If this is the first time you start the application you might want to <a href="install/index.php">install Attract</a>.</div>
 	</body>');
+		} else {
+			include 'app/models.php';
 		}
 		?>
 		<div class="container">
@@ -44,31 +42,6 @@ if (!file_exists("app/db.php")) {
 		    		<h3>Stats of steel</h3>
 		    	</div>
 			    <div class="modal-body">
-			    	<?php
-						$result = $dbh->query('SELECT SUM(duration) AS value_sum FROM shots'); 
-						$row = $result->fetch(PDO::FETCH_ASSOC); 
-						$result = $dbh->query('SELECT * FROM shots');
-						$num_total = $result->rowCount();;
-						$sum_total = $row['value_sum'];
-						
-						$result = $dbh->query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='in_progress'"); 
-						$row = $result->fetch(PDO::FETCH_ASSOC);
-						$result = $dbh->query("SELECT * FROM shots WHERE status='in_progress'");
-						$num_in_progress = $result->rowCount();;
-						$sum_in_progress = $row['value_sum'];
-						
-						$result = $dbh->query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='final1'"); 
-						$row = $result->fetch(PDO::FETCH_ASSOC);
-						$result = $dbh->query("SELECT * FROM shots WHERE status='final1'"); 
-						$num_final1 = $result->rowCount();;
-						$sum_final1 = $row['value_sum'];
-						
-						$result = $dbh->query("SELECT SUM(duration) AS value_sum FROM shots WHERE status='fix'"); 
-						$row = $result->fetch(PDO::FETCH_ASSOC); 
-						$result = $dbh->query("SELECT * FROM shots WHERE status='fix'");
-						$num_fix = $result->rowCount();;
-						$sum_fix = $row['value_sum'];
-					?>
 					<table id="stats">
 						<thead>
 							<tr>
@@ -182,6 +155,7 @@ if (!file_exists("app/db.php")) {
 										<th class="{sorter: false}" colspan="7"><?php echo($scene_number." ".strtoupper($scene_description)); ?></th>
 									</tr>
 								</thead>
+								<tbody>
 								<?php					
 								$shot_query = sprintf("SELECT * FROM shots WHERE scene_id='%s'",
 								mysql_real_escape_string($scene_id));
@@ -204,7 +178,7 @@ if (!file_exists("app/db.php")) {
 									$notes = $shot_row['notes'];
 									$owner = $shot_row['owner'];
 								?>
-							<tbody>
+							
 								<tr id="<?php echo $id; ?>" class="edit_tr">
 									<td>
 										<span id="number_<?php echo $id; ?>" class="number text"><?php echo $number; ?></span>
