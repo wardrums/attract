@@ -27,9 +27,9 @@ $num_fix = $result->rowCount();
 $sum_fix = $row['value_sum'];
 
 
-# Get owners
+# Get owners? If I query database here, how can I make the data accessible in the other page?
+# It does not seem to work at the moment
+# $result = $dbh->query("SELECT * FROM users"); 
 
-$result = $dbh->query("SELECT * FROM users"); 
-$row = $result->fetch(PDO::FETCH_ASSOC);
 
 ?>

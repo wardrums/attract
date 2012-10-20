@@ -94,14 +94,13 @@
 								<option value="final1">Final 1</option>
 							</select>
 							<select id="owner" data-placeholder="Select owner" style="width:250px;" multiple="multiple" class="chzn-select">
-								<option value="andy">Andy</option>
-								<option value="francesco">Francesco</option>
-								<option value="ian">Ian</option>
-								<option value="jeremy">Jeremy</option>
-								<option value="kjartan">Kjartan</option>
-								<option value="rob">Rob</option>
-								<option value="roman">Roman</option>
-								<option value="sebastian">Sebastian</option>
+								<?php
+						    		$users_query_result = $dbh->query("SELECT * FROM users");
+									while($user_row = $users_query_result->fetch(PDO::FETCH_ASSOC)) {
+										$user_username = $user_row['username'];
+										echo('<option value="'.$user_username.'">'.ucfirst($user_username).'</option>');
+									}
+								?>
 								<option value="none">None</option>
 							</select>
 						</div>
@@ -246,14 +245,16 @@
 										    <span class="caret"></span>
 										    </a>
 										    <ul class="dropdown-menu">
-											    <li><a href="#andy">Andy</a></li>
-												<li><a href="#francesco">Francesco</a></li>
-												<li><a href="#ian">Ian</a></li>
-												<li><a href="#jeremy">Jeremy</a></li>
-												<li><a href="#kjartan">Kjartan</a></li>
-												<li><a href="#rob">Rob</a></li>
-												<li><a href="#roman">Roman</a></li>
-												<li><a href="#sebastian">Sebastian</a></li>
+										    
+										    
+										    	<?php
+										    	// TODO: make this query centralized! How do I put the result in an array available everywhwere?
+										    	$users_query_result = $dbh->query("SELECT * FROM users");
+													while($user_row = $users_query_result->fetch(PDO::FETCH_ASSOC)) {
+														$user_username = $user_row['username'];
+														echo('<li><a href="#'.$user_username.'">'.ucfirst($user_username).'</a></li>');
+													}
+												?>
 												<li><a href="#none">None</a></li>
 										    </ul>
 										</div>
