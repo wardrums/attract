@@ -186,6 +186,9 @@ $(document).ready(function() {
 		var surname = $('#new_user_surname').val();
 		if (username.length > 0) {
 			addUser(username, name, surname);
+			$('#new_user_username').val('');
+			$('#new_user_name').val('');
+			$('#new_user_surname').val('');
 		} else {
 			console.log("Error: please specify at least a username!");
 		}
