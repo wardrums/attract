@@ -37,6 +37,9 @@ select.editbox option {
 	outline: none;
 }
 
+#users input {
+	width: auto;
+}
 
 
 .table-paper.table-striped tbody tr:nth-child(2n) td.final1,

@@ -1,10 +1,11 @@
 <?php
 include("db.php");
-if($_POST['id']) {
+if($_POST['table']) {
+	$table = $_POST['table'];
 	$id = $_POST['id'];
 	$cell = $_POST['cell'];
 	$value = $_POST['value'];
-	$query = "UPDATE shots SET ".$cell."='$value' WHERE id='$id'";
+	$query = "UPDATE $table SET ".$cell."='$value' WHERE id='$id'";
 	
 	// Run the query on the dbh object
 	$dbh->query($query);

@@ -74,6 +74,63 @@
 				    <a href="#" class="btn" data-dismiss="modal">Close</a>
 				</div>
 		    </div>
+		    
+		    <div class="modal hide" id="manageUsersModal">
+		    	<div class="modal-header">
+		    		<h3>Manage Users</h3>
+		    	</div>
+			    <div class="modal-body">
+			    	  	
+			    	
+			    	<table id="users" class="users">
+						<thead>
+							<tr>
+								<th>Username</th>
+								<th>Name</th>
+								<th>Surname</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="user_input_form">
+								<td><input type="text" value="" class="" id="new_user_username"/></td>
+								<td><input type="text" value="" class="" id="new_user_name"/></td>
+								<td><input type="text" value="" class="" id="new_user_surname"/></td>
+								<td><a class="btn btn-mini" href="#" id="addUser"><i class="icon-plus-sign"></i></a></td>
+							</tr>
+						
+						
+						<?php while($user_row = $users_query_result->fetch(PDO::FETCH_ASSOC)) {
+							$user_id = $user_row['id'];
+							$user_username = $user_row['username'];
+							$user_name = $user_row['name'];
+							$user_surname = $user_row['surname']; ?>
+							<tr id="<?php echo $user_id; ?>" class="edit_tr">
+								<td>
+									<span id="username_<?php echo $user_id; ?>" class="username text"><?php echo $user_username; ?></span>
+									<input type="text" value="<?php echo $user_username; ?>" class="editbox" id="username_input_<?php echo $user_id; ?>" />
+								</td>
+								<td class="edit_td">
+									<span id="name_<?php echo $user_id; ?>" class="name text"><?php echo $user_name; ?></span>
+									<input type="text" value="<?php echo $user_name; ?>" class="editbox" id="name_input_<?php echo $user_id; ?>" />
+								</td>
+								<td class="edit_td">
+									<span id="surname_<?php echo $user_id; ?>" class="surname text"><?php echo $user_surname; ?></span>
+									<input type="text" value="<?php echo $user_surname; ?>" class="editbox" id="surname_input_<?php echo $user_id; ?>" />
+								</td>
+								<td><a class="btn btn-mini" href="#"><i class="icon-remove-sign"></i></a></td>
+							</tr>
+						<?php } ?>
+			    	
+						</tbody>
+					</table>
+			    	
+	
+			    </div>
+			    <div class="modal-footer">
+				    <a href="#" class="btn" data-dismiss="modal">Close</a>
+				</div>
+		    </div>
 
 		
 		
@@ -106,7 +163,8 @@
 						</div>
 						<div class="btn-toolbar">
 							<div class="btn-group"><a class="btn prev" href="">Reload</a> </div>
-							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal">Stats of steel</a></div>					
+							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal">Stats of steel</a></div>
+							<div class="btn-group"><a class="btn" data-toggle="modal" href="#manageUsersModal">Manage users</a></div>					
 							
 						</div>
 					</div>
@@ -128,7 +186,7 @@
 				<div class="row">
 					<div class="span12">
 
-						<table id="shotlist" class="paginated">
+						<table id="shotlist" class="shots paginated">
 							<thead>
 								<tr>
 									<th class="{sorter: false}" width="80px">Number</th>

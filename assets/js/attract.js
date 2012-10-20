@@ -5,6 +5,10 @@ $(document).ready(function() {
 	$('#statsModal').modal({
 		show: false
 	});
+	
+	$('#manageUsersModal').modal({
+		show: true
+	});
 
 	$("#shotlist").tablecloth({
 		theme: "paper",
@@ -15,6 +19,13 @@ $(document).ready(function() {
 	
 	
 	$("#stats").tablecloth({
+		theme: "paper",
+		striped: true,
+		sortable: true,
+		condensed: true
+	});
+	
+	$("#users").tablecloth({
 		theme: "paper",
 		striped: true,
 		sortable: true,
@@ -67,18 +78,18 @@ $(document).ready(function() {
 
 
     
-	function selectThis(row_id, cell) {
+	function selectThis(table, row_id, cell) {
 		// Simple log print
-		console.log("We are selecting the " + cell + " in row " + row_id);
+		console.log("We are selecting the " + cell + " in row " + row_id+ " in the table " + table);
 		var item = $("#" + cell + "_" + row_id);
 		var item_input = $("#" + cell + "_" + "input" + "_" + row_id);
 		$(item).hide();
 		$(item_input).show().focus();
 	}
 	
-	function editThis(row_id, cell) {
+	function editThis(table, row_id, cell) {
 		// Simple log print
-		console.log("We are editing the " + cell + " in row " + row_id);
+		console.log("We are editing the " + cell + " in row " + row_id + " in the table " + table);
 		var item = $("#" + cell + "_" + row_id);
 		var item_input = $("#" + cell + "_" + "input" + "_" + row_id);
 		var value = $("#" + cell + "_" + "input" + "_" + row_id).val();
@@ -87,7 +98,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST",
 			url: "app/table_edit_ajax.php",
-			data: {id: row_id, cell: cell, value: value},
+			data: {table: table, id: row_id, cell: cell, value: value},
 			cache: false,
 			success: function(html){
 				$("#" + cell + "_" + row_id).html(value);
@@ -143,19 +154,49 @@ $(document).ready(function() {
 	
 	
 	$(".edit_td").click(function(){
+		var table = $(this).closest("table").attr("class").split(' ')[0];
 		var row_id = $(this).parent().attr('id');
 		var cell = $(this).children().attr('class').split(' ')[0];
-		selectThis(row_id, cell);
+		selectThis(table, row_id, cell);
 	}).change(function(){
+		var table = $(this).closest("table").attr("class").split(' ')[0];
 		var row_id = $(this).parent().attr('id');
 		var cell = $(this).children().attr('class').split(' ')[0];
-		editThis(row_id, cell);
+		editThis(table, row_id, cell);
 	});
+	
+	
+	
+	function addUser(username, name, surname) {
+		$.ajax({
+			type: "POST",
+			url: "app/ajax/add_user.php",
+			data: {username: username, name: name, surname: surname},
+			cache: false,
+			success: function(){
+				$('#user_input_form').after('<tr><td>' + username + '</td><td>' + name + '</td><td>' + surname + '</td><td></td></tr>')
+			}
+		});
+	}
+	
+	
+	$("#addUser").click(function(){
+		var username = $('#new_user_username').val();
+		var name = $('#new_user_name').val();
+		var surname = $('#new_user_surname').val();
+		if (username.length > 0) {
+			addUser(username, name, surname);
+		} else {
+			console.log("Error: please specify at least a username!");
+		}
+	});
+	
+	
 	
 		
 	// Edit input box click action
 	$(".editbox").mouseup(function() {
-		return false
+		return false;
 	});
 	
 	// Pressing escape key interrupts the action
