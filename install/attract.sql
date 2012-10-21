@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2012 at 12:55 AM
+-- Generation Time: Oct 22, 2012 at 12:41 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.6
 
@@ -30,7 +30,7 @@ CREATE TABLE `scenes` (
   `number` varchar(6) NOT NULL DEFAULT '',
   `description` varchar(128) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 -- --------------------------------------------------------
 
@@ -51,6 +51,20 @@ CREATE TABLE `shots` (
   PRIMARY KEY (`id`),
   KEY `scene_id` (`scene_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=136 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(128) NOT NULL DEFAULT '',
+  `name` varchar(128) DEFAULT NULL,
+  `surname` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Constraints for dumped tables
