@@ -106,9 +106,24 @@ $(document).ready(function() {
 				$(item_input).hide();
 			}
 		});
-		
-		
 	}
+	
+	function deleteRow(table, row_id) {
+		// Simple log print
+		console.log("We are deleting row " + row_id + " in the table " + table);
+				
+		// We make the actual query
+		$.ajax({
+			type: "POST",
+			url: "app/ajax/delete_row.php",
+			data: {table: table, id: row_id},
+			cache: false,
+			success: function(html){
+				return;
+			}
+		});
+	}
+	
 	
 	function editStatus(row_id, cell, value) {
 		$.ajax({
@@ -165,6 +180,14 @@ $(document).ready(function() {
 		editThis(table, row_id, cell);
 	});
 	
+	$(".delete_row").click(function(){
+		var table = $(this).closest('table').attr('class').split(' ')[0];
+		var row = $(this).closest('tr');
+		var row_id = row.attr('id').split('_')[1];
+		deleteRow(table, row_id);
+		row.hide();
+	});
+	
 	
 	
 	function addUser(username, name, surname) {
@@ -174,7 +197,10 @@ $(document).ready(function() {
 			data: {username: username, name: name, surname: surname},
 			cache: false,
 			success: function(){
-				$('#user_input_form').after('<tr><td>' + username + '</td><td>' + name + '</td><td>' + surname + '</td><td></td></tr>')
+				$('#user_input_form').after('<tr><td>' + username + '</td><td>' + name + '</td><td>' + surname + '</td><td></td></tr>');
+				$('#new_user_username').val('');
+				$('#new_user_name').val('');
+				$('#new_user_surname').val('');
 			}
 		});
 	}
@@ -186,9 +212,6 @@ $(document).ready(function() {
 		var surname = $('#new_user_surname').val();
 		if (username.length > 0) {
 			addUser(username, name, surname);
-			$('#new_user_username').val('');
-			$('#new_user_name').val('');
-			$('#new_user_surname').val('');
 		} else {
 			console.log("Error: please specify at least a username!");
 		}

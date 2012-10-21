@@ -41,6 +41,18 @@ select.editbox option {
 	width: auto;
 }
 
+#users .row_controls a {
+	margin-left: 7px;
+}
+
+
+tr .row_controls a {
+	display: none;
+}
+
+tr:hover .row_controls a {
+	display: block;
+}
 
 .table-paper.table-striped tbody tr:nth-child(2n) td.final1,
 .table-paper.table-striped tbody tr:nth-child(2n+1) td.final1  {

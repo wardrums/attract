@@ -105,7 +105,7 @@
 							$user_username = $user_row['username'];
 							$user_name = $user_row['name'];
 							$user_surname = $user_row['surname']; ?>
-							<tr id="<?php echo $user_id; ?>" class="edit_tr">
+							<tr id="user_<?php echo $user_id; ?>" class="edit_tr">
 								<td>
 									<span id="username_<?php echo $user_id; ?>" class="username text"><?php echo $user_username; ?></span>
 									<input type="text" value="<?php echo $user_username; ?>" class="editbox" id="username_input_<?php echo $user_id; ?>" />
@@ -118,7 +118,7 @@
 									<span id="surname_<?php echo $user_id; ?>" class="surname text"><?php echo $user_surname; ?></span>
 									<input type="text" value="<?php echo $user_surname; ?>" class="editbox" id="surname_input_<?php echo $user_id; ?>" />
 								</td>
-								<td><a class="btn btn-mini" href="#"><i class="icon-remove-sign"></i></a></td>
+								<td class="row_controls"><a class="delete_row" href="#"><i class="icon-remove-sign"></i></a></td>
 							</tr>
 						<?php } ?>
 			    	
