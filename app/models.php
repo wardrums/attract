@@ -35,4 +35,6 @@ $sum_fix = $row['value_sum'];
 $users_query_result = $dbh->query("SELECT * FROM users");
 
 
+
+
 ?>

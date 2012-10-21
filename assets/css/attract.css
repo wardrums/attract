@@ -41,7 +41,8 @@ select.editbox option {
 	width: auto;
 }
 
-#users .row_controls a {
+#users .row_controls a,
+#scenes .row_controls a {
 	margin-left: 7px;
 }
 

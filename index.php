@@ -131,6 +131,56 @@
 				    <a href="#" class="btn" data-dismiss="modal">Close</a>
 				</div>
 		    </div>
+		    
+		    <div class="modal hide" id="manageScenesModal">
+		    	<div class="modal-header">
+		    		<h3>Manage Scenes</h3>
+		    	</div>
+			    <div class="modal-body">
+			    
+			    	<table id="scenes" class="scenes">
+						<thead>
+							<tr>
+								<th>Number</th>
+								<th>Description</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="scene_input_form">
+								<td><input type="text" value="" class="" id="new_scene_number"/></td>
+								<td><input type="text" value="" class="" id="new_scene_description"/></td>
+								<td><a class="btn btn-mini" href="#" id="addScene"><i class="icon-plus-sign"></i></a></td>
+							</tr>
+						
+						
+						<?php $scenes_query_result = $dbh->query("SELECT * FROM scenes");
+						while($scene_row = $scenes_query_result->fetch(PDO::FETCH_ASSOC)) {
+							$scene_id = $scene_row['id'];
+							$scene_number = $scene_row['number'];
+							$scene_description = $scene_row['description'];?>
+							<tr id="scene_<?php echo $scene_id; ?>" class="edit_tr">
+								<td class="edit_td">
+									<span id="scene_number_<?php echo $scene_id; ?>" class="scene_number text"><?php echo $scene_number; ?></span>
+									<input type="text" value="<?php echo $scene_number; ?>" class="editbox" id="scene_number_input_<?php echo $scene_id; ?>" />
+								</td>
+								<td class="edit_td">
+									<span id="scene_description_<?php echo $scene_id; ?>" class="scene_description text"><?php echo $scene_description; ?></span>
+									<input type="text" value="<?php echo $scene_description; ?>" class="editbox" id="scene_description_input_<?php echo $scene_id; ?>" />
+								</td>
+								<td class="row_controls"><a class="delete_row" href="#"><i class="icon-remove-sign"></i></a></td>
+							</tr>
+						<?php } ?>
+			    	
+						</tbody>
+					</table>
+			    	
+	
+			    </div>
+			    <div class="modal-footer">
+				    <a href="#" class="btn" data-dismiss="modal">Close</a>
+				</div>
+		    </div>
 
 		
 		
@@ -164,7 +214,13 @@
 						<div class="btn-toolbar">
 							<div class="btn-group"><a class="btn prev" href="">Reload</a> </div>
 							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal">Stats of steel</a></div>
-							<div class="btn-group"><a class="btn" data-toggle="modal" href="#manageUsersModal">Manage users</a></div>					
+						    <div class="btn-group">
+						    	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Manage<span class="caret"></span></a>
+						    	<ul class="dropdown-menu">
+							    	<li><a data-toggle="modal" href="#manageUsersModal">Manage users</a></li>
+							    	<li><a data-toggle="modal" href="#manageScenesModal">Manage scenes</a></li>
+							    </ul>
+						    </div>
 							
 						</div>
 					</div>
@@ -199,7 +255,7 @@
 								</tr>
 							</thead>
 							<?php
-									
+							// We get all the scenes		
 							$sql_scenes = $dbh->query("SELECT * FROM scenes");
 							
 							
@@ -236,7 +292,7 @@
 									$owner = $shot_row['owner'];
 								?>
 							
-								<tr id="<?php echo $id; ?>" class="edit_tr">
+								<tr id="shot_<?php echo $id; ?>" class="edit_tr">
 									<td>
 										<span id="number_<?php echo $id; ?>" class="number text"><?php echo $number; ?></span>
 										<input type="text" value="<?php echo $number; ?>" class="editbox" id="number_input_<?php echo $id; ?>" />
@@ -321,9 +377,13 @@
 									
 									</td>
 								</tr>
-								<?php }
+								<?php }?>
+								</tbody> <?php
 								}	?>
-							</tbody>
+								<!-- TODO: fix this hack to prevent javascript failure when shot database is empty -->
+								<tbody></tbody>
+							
+							
 						</table>
 					</div>
 				</div>

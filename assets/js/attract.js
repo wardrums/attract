@@ -7,6 +7,10 @@ $(document).ready(function() {
 	});
 	
 	$('#manageUsersModal').modal({
+		show: false
+	});
+	
+	$('#manageScenesModal').modal({
 		show: true
 	});
 
@@ -26,6 +30,13 @@ $(document).ready(function() {
 	});
 	
 	$("#users").tablecloth({
+		theme: "paper",
+		striped: true,
+		sortable: true,
+		condensed: true
+	});
+	
+	$("#scenes").tablecloth({
 		theme: "paper",
 		striped: true,
 		sortable: true,
@@ -137,7 +148,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	$("ul.dropdown-menu li a").on("click", function(){
+	$(".edit_tr ul.dropdown-menu li a").on("click", function(){
 	    var href = $(this).attr("href");
 	    var dropdown_label = $(this).parent().parent().prev();
 	    var value = href.substring(1);
@@ -170,12 +181,12 @@ $(document).ready(function() {
 	
 	$(".edit_td").click(function(){
 		var table = $(this).closest("table").attr("class").split(' ')[0];
-		var row_id = $(this).parent().attr('id');
+		var row_id = $(this).parent().attr('id').split('_')[1];
 		var cell = $(this).children().attr('class').split(' ')[0];
 		selectThis(table, row_id, cell);
 	}).change(function(){
 		var table = $(this).closest("table").attr("class").split(' ')[0];
-		var row_id = $(this).parent().attr('id');
+		var row_id = $(this).parent().attr('id').split('_')[1];;
 		var cell = $(this).children().attr('class').split(' ')[0];
 		editThis(table, row_id, cell);
 	});
