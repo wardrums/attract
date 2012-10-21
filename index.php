@@ -325,8 +325,6 @@
 								}	?>
 							</tbody>
 						</table>
-						<a class="btn prev" href="">Previous</a>
-						<a class="btn next" href="">Next</a>
 					</div>
 				</div>
 			</section>
