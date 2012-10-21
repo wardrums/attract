@@ -216,6 +216,20 @@ $(document).ready(function() {
 		});
 	}
 	
+	function addScene(number, description) {
+		$.ajax({
+			type: "POST",
+			url: "app/ajax/add_scene.php",
+			data: {number: number, description: description},
+			cache: false,
+			success: function(){
+				$('#scene_input_form').after('<tr><td>' + number + '</td><td>' + description + '</td></tr>');
+				$('#new_scene_number').val('');
+				$('#new_scene_description').val('');
+			}
+		});
+	}
+	
 	
 	$("#addUser").click(function(){
 		var username = $('#new_user_username').val();
@@ -225,6 +239,16 @@ $(document).ready(function() {
 			addUser(username, name, surname);
 		} else {
 			console.log("Error: please specify at least a username!");
+		}
+	});
+	
+	$("#addScene").click(function(){
+		var number = $('#new_scene_number').val();
+		var description = $('#new_scene_description').val();
+		if (number.length > 0) {
+			addScene(number, description);
+		} else {
+			console.log("Error: please specify at least the scene number!");
 		}
 	});
 	
