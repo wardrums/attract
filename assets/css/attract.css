@@ -37,8 +37,15 @@ select.editbox option {
 	outline: none;
 }
 
-#users input {
+#users input,
+#senes input,
+#shots input {
 	width: auto;
+}
+
+#shots #new_shot_number,
+#shots #new_shot_duration {
+	width: 40px;
 }
 
 #users .row_controls a,
@@ -266,6 +273,11 @@ tr:hover .row_controls a {
   background-color: #080808 \9;
 }
 
+
+
+#manageShotsModal .modal-body {
+	min-height: 360px;
+}
 
 
 

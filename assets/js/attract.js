@@ -11,7 +11,11 @@ $(document).ready(function() {
 	});
 	
 	$('#manageScenesModal').modal({
-		show: true
+		show: false
+	});
+	
+	$('#manageShotsModal').modal({
+		show: false,
 	});
 
 	$("#shotlist").tablecloth({
@@ -37,6 +41,13 @@ $(document).ready(function() {
 	});
 	
 	$("#scenes").tablecloth({
+		theme: "paper",
+		striped: true,
+		sortable: true,
+		condensed: true
+	});
+	
+	$("#shots").tablecloth({
 		theme: "paper",
 		striped: true,
 		sortable: true,
@@ -199,8 +210,7 @@ $(document).ready(function() {
 		row.hide();
 	});
 	
-	
-	
+
 	function addUser(username, name, surname) {
 		$.ajax({
 			type: "POST",
@@ -230,6 +240,24 @@ $(document).ready(function() {
 		});
 	}
 	
+	function addShot(scene, number, description, duration) {
+		$.ajax({
+			type: "POST",
+			url: "app/ajax/add_shot.php",
+			data: {scene: scene, number: number, description: description, duration: duration},
+			cache: false,
+			success: function(){
+				// We append a row to the new shot table in the modal
+				$('#shot_input_form').after('<tr><td></td><td>' + number + '</td><td>' + description + '</td><td>' + duration + '</td><td></td></tr>');
+				// Reset fields in the new shot creation form
+				$('#new_shot_scene').val('');
+				$('#new_shot_number').val('');
+				$('#new_shot_description').val('');
+				$('#new_shot_duration').val('');
+			}
+		});
+	}
+	
 	
 	$("#addUser").click(function(){
 		var username = $('#new_user_username').val();
@@ -249,6 +277,18 @@ $(document).ready(function() {
 			addScene(number, description);
 		} else {
 			console.log("Error: please specify at least the scene number!");
+		}
+	});
+	
+	$("#addShot").click(function(){
+		var scene = $('#new_shot_scene').val();
+		var number = $('#new_shot_number').val();
+		var description = $('#new_shot_description').val();
+		var duration = $('#new_shot_duration').val();
+		if (number.length > 0) {
+			addShot(scene, number, description, duration);
+		} else {
+			console.log("Error: please specify at least the shot number!");
 		}
 	});
 	

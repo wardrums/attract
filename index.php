@@ -182,7 +182,52 @@
 				</div>
 		    </div>
 
-		
+		    <div class="modal hide" id="manageShotsModal">
+		    	<div class="modal-header">
+		    		<h3>Manage Shots</h3>
+		    	</div>
+			    <div class="modal-body">
+			    	  	
+			    	
+			    	<table id="shots" class="shots">
+						<thead>
+							<tr>
+								<th>Scene</th>
+								<th>Number</th>
+								<th>Description</th>
+								<th>Duration (seconds)</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="shot_input_form">
+								<td>
+									<select id="new_shot_scene" data-placeholder="Select scene" style="width:190px;" class="chzn-select">
+										<?php										
+								    		$scenes_query_result = $dbh->query("SELECT * FROM scenes");
+											while($scene_row = $scenes_query_result->fetch(PDO::FETCH_ASSOC)) {
+												$scene_id = $scene_row['id'];
+												$scene_number = $scene_row['number'];
+												$scene_description = $scene_row['description'];
+												echo('<option value="'.$scene_id.'">'.ucfirst($scene_number).' '.ucfirst($scene_description).'</option>');
+											}
+										?>
+									</select>
+								</td>
+								<td><input type="text" value="" class="" id="new_shot_number"/></td>
+								<td><input type="text" value="" class="" id="new_shot_description"/></td>
+								<td><input type="text" value="" class="" id="new_shot_duration"/></td>
+								<td><a class="btn btn-mini" href="#" id="addShot"><i class="icon-plus-sign"></i></a></td>
+							</tr>			    	
+						</tbody>
+					</table>
+			    	
+	
+			    </div>
+			    <div class="modal-footer">
+				    <a href="#" class="btn" data-dismiss="modal">Close</a>
+				</div>
+		    </div>
 		
 			<section>
 				<div class="page-header">
@@ -219,6 +264,7 @@
 						    	<ul class="dropdown-menu">
 							    	<li><a data-toggle="modal" href="#manageUsersModal">Manage users</a></li>
 							    	<li><a data-toggle="modal" href="#manageScenesModal">Manage scenes</a></li>
+							    	<li><a data-toggle="modal" href="#manageShotsModal">Manage shots</a></li>
 							    </ul>
 						    </div>
 							

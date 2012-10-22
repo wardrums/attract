@@ -1,6 +1,8 @@
 <?php
 
-# Queries for the stats of steel
+# Queries for the stats of steel (requires db.php to work standalone)
+# Uncomment for debugging purposes
+# include 'db.php';
 
 $result = $dbh->query('SELECT SUM(duration) AS value_sum FROM shots'); 
 $row = $result->fetch(PDO::FETCH_ASSOC); 
@@ -33,8 +35,6 @@ $sum_fix = $row['value_sum'];
 
 
 $users_query_result = $dbh->query("SELECT * FROM users");
-
-
 
 
 ?>
