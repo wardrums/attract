@@ -31,9 +31,10 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>Welcome the Attract download page!</h2>
+        <h3>Welcome!</h3>
 
-<p>Attract was developed during the production of <a href="http://www.tearsofsteel.org/">Tears of Steel</a> and since then has been slowly improving to serve as a decent GTD application for CG/VFX movie makers.</p>
+<p>Attract was developed during the production of <a href="http://www.tearsofsteel.org/">Tears of Steel</a> and since then has been slowly improving to serve as a decent GTD application for CG/VFX movie makers.
+With Attract you can keep track of the shots of your production, group them in scenes, assign them to users and generate some useful stats about how many seconds of the film are complete or in progress.</p>
 
 <h3>Requirements</h3>
 
@@ -42,23 +43,32 @@
 <ul>
 <li>Apache server</li>
 <li>PHP 5.1</li>
-<li>MySQL
-I'm trying to make it possible to use also <code>sqlite</code> as a database, but I don't know how deal with foreign keys. Any help is appreciated!</li>
-</ul><h3>Install</h3>
+<li>MySQL</li>
+</ul><p>I'm trying to make it possible to use also <code>sqlite</code> as a database, but I don't know how deal with foreign keys. Any help is appreciated!</p>
+
+<h3>Download</h3>
 
 <p>As a first step download the latest version of Attract by picking up either the zip or tar.gz archive. Then copy it in a proper location where it's accessible to the Apache web server and set it up so that the Apache Root point to the <code>attract</code> folder.</p>
 
-<h3>Configure</h3>
+<h3>Install and Configure</h3>
 
-<p>Once this is done visit the <code>localhost</code> domain with the browser, and get informed that Attract is not installed (missing <code>db.php</code> file). Click on the link go get redirected to the install file.</p>
+<p>Once this is done visit the <code>localhost</code> domain with the browser, and get informed that Attract is not installed (missing <code>db.php</code> file). Click on the link go get redirected to the install page. In order to install Attract successfully you should have a database called <code>attract</code> in you MySQL.</p>
 
-<h3>Authors and Contributors</h3>
+<h3>First steps</h3>
+
+<p>When starting with a new project there are a couple of thing to keep in mind. Click on the Manage button and do the following operations:</p>
+
+<ul>
+<li>Create a user, otherwise the shots will be assigned to None</li>
+<li>Create a scene, otherwise the creation of shots will not be possible</li>
+<li>Create a shot</li>
+</ul><h3>Authors and Contributors</h3>
 
 <p>Attract was originally developed by Francesco Siddi (<a href="https://github.com/fsiddi" class="user-mention">@fsiddi</a>). Any contributor willing to help out and improve the software is welcome!</p>
 
 <h3>Support or Contact</h3>
 
-<p>Having trouble with Attract? Check out the</p>
+<p>Having trouble with Attract? Check out the <a href="https://github.com/fsiddi/attract/issues">issue tracker</a> on GitHub. At moment the software is quite usable but far from optimized, so if you have suggestions or find any issue let me know!</p>
       </section>
     </div>
 
@@ -70,7 +80,17 @@ I'm trying to make it possible to use also <code>sqlite</code> as a database, bu
       </footer>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-13043630-10");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
 
   </body>
 </html>
