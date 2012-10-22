@@ -178,7 +178,7 @@ try {
 error_reporting(0);
 ?>
 
-<p class="blurb">Welcome to the b<strong>render</strong> 0.5 installer. This script will create <strong>connect.php</strong> which is attract's config file. It will also configure your database, creating the tables required by the application. Be sure to provide an existing database name.</p>
+<p class="blurb">Welcome to the Attract installer. This script will create <strong>db.php</strong> which is attract's config file. It will also configure your database, creating the tables required by the application. Be sure to provide an existing database name.</p>
 
 	<div id="body">
 	<form action='index.php' method='post'>
