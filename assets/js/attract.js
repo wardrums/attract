@@ -147,11 +147,11 @@ $(document).ready(function() {
 	}
 	
 	
-	function editStatus(row_id, cell, value) {
+	function editStatus(table, row_id, cell, value) {
 		$.ajax({
 			type: "POST",
 			url: "app/table_edit_ajax.php",
-			data: {id: row_id, cell: cell, value: value},
+			data: {table: table, id: row_id, cell: cell, value: value},
 			cache: false,
 			success: function(html){
 				return;
@@ -165,12 +165,13 @@ $(document).ready(function() {
 	    var value = href.substring(1);
 	    var label_text = makeNiceLabel(value);
 	    
-	    var row_id = $(this).closest("tr").attr("id");
+	    var table = $(this).closest('table').attr('class').split(' ')[0];
+	    var row_id = $(this).closest('tr').attr('id').split('_')[1];;
 	    var cell = $(this).closest("div").attr("class").split(' ')[0];
 	    var btn_lastclass = $(this).parent().parent().prev().attr("class").split(' ')[3];
 	    var stage = $(this).closest("td").next().children("div");
 	    
-	    // console.log(btn_lastclass);
+	    // console.log(table);
 	    
 	    $(this).parent().parent().prev().removeClass(btn_lastclass).addClass("btn-"+value);
 	    
@@ -185,7 +186,7 @@ $(document).ready(function() {
 	    
 	    dropdown_label.html(label_text + "<span class=\"caret\"></span>");
 	    
-	    editStatus(row_id, cell, value);
+	    editStatus(table, row_id, cell, value);
 	    
 	});
 	
