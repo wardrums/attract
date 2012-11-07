@@ -2,11 +2,30 @@
 <html lang="en">  
 	<head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" href="install.css">	
+	<title>Install Attract</title>
+	<link href="../assets/css/bootstrap.css" rel="stylesheet">
+	<link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="../assets/css/tablecloth.css" rel="stylesheet">
+	<link href="../assets/css/prettify.css" rel="stylesheet"> 
+	<link href="../assets/css/chosen.css" rel="stylesheet">
+	<link href="../assets/css/attract.css" rel="stylesheet">
+	<link type="image/x-icon" href="../assets/favicon/favicon.ico" rel="shortcut icon">
+	<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon-57x57-precomposed.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="../assets/favicon/apple-touch-icon-72x72-precomposed.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="../assets/favicon/apple-touch-icon-114x114-precomposed.png" />
+
+	
+	<script type="text/javascript" src="../assets/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.metadata.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.tablecloth.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.chosen.min.js"></script>
+	<script type="text/javascript" src="../assets/js/attract.js"></script>
+
 	</head>
 	<body>
-	<div id="header"></div>
-<div id="container">
+		<div class="container">
 <?php
 
  	
@@ -87,9 +106,9 @@
 		mysql_query($query) or print(mysql_error());
 		echo("Disabling foreign key checks<br/>");
 	
-		$query="DROP TABLE `scenes`, `shots`";
+		$query="DROP TABLE `scenes`, `shots`, `users`";
 		mysql_query($query) or print(mysql_error());
-		echo("Dropping previous tables called `scenes` and `shots`<br/>");
+		echo("Dropping previous tables called <i>scenes</i>, <i>shots</i> and <i>users</i><br/>");
 		
 		$query="SET FOREIGN_KEY_CHECKS = 1";
 		mysql_query($query) or print(mysql_error());
@@ -178,54 +197,65 @@ try {
 error_reporting(0);
 ?>
 
-<p class="blurb">Welcome to the Attract installer. This script will create <strong>db.php</strong> which is attract's config file. It will also configure your database, creating the tables required by the application. Be sure to provide an existing database name.</p>
+<section>
+				<div class="page-header">
+					<h1>Attract <small>task tracking of steel</small></h1>
+				</div>
+<div class="row">
+<div class="span6 offset3">
 
-	<div id="body">
-	<form action='index.php' method='post'>
-	
-	<table id="installform" cellspacing="0" cellpadding="0" border="0">
-		
-		<tr>
-			<td class="label" width="200">Database Host <br />(write the IP):</td>
-			<td><input type="text" name="host" value="localhost" /></td>
-			<td class="label" width="100">Port</td>
-			<td><input type="text" name="port" value="3306" size="6"/></td>
-		</tr>
-		<tr>
-			<td class="label">Overwrite existing attract DB:</td> 
-			<td><input type="checkbox" name="database_overwrite" value="true" /></td>
-		</tr>
-		<tr>
-			<td class="label">Database Username:</td> 
-			<td><input type="text" name="attractUser" value="root" /></td>
-		</tr>
-		<tr>
-			<td class="label">Database Password:</td> 
-			<td><input type="password" name="attractPassword" value="" /></td>
-		</tr>
-		<!-- <tr><td></td><td class="note">* password not masked</td></tr> -->
-		<tr>
-			<td class="label"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr /></td>
-		</tr>
-		<tr>
-			<td style="padding-top:20px; text-align:center;">
-				<input type="hidden" name="stage2" value="true">
-				<input class="submit" type="submit" value="Install attract!" />
-			</td>
-		</tr>
-	</table>
-	
-	
-	</form>
-	</div>
+		<p>Welcome to the Attract installer. This script will create <strong>db.php</strong> which is attract's config file. It will also configure your database, creating the tables required by the application. Be sure to provide an existing database name.</p>
+
+
+		    <form class="form-horizontal" action="index.php" method="post">
+		    	<div class="control-group">
+			    	<label class="control-label" for="inputHost">Database Host (IP)</label>
+			    	<div class="controls">
+				    	<input type="text" id="inputHost" name="host" value="localhost">
+				    </div>
+				 </div>
+			    <div class="control-group">
+			    	<label class="control-label" for="inputPort">Port</label>
+		    		<div class="controls">
+			    		<input type="text" id="inputPort" name="port" placeholder="3306">
+			    	</div>
+			    </div>
+			    <div class="control-group">
+			    	<div class="controls">
+				    	<label class="checkbox">
+					    	<input type="checkbox" name="database_overwrite" value="true" /> Overwrite existing Attract DB
+					    </label>
+					    
+					</div>
+			    </div>
+			    <div class="control-group">
+			    	<label class="control-label" for="inputUsername">DB Username</label>
+		    		<div class="controls">
+			    		<input type="text" id="inputUsername" name="attractUser" value="root">
+			    	</div>
+			    </div>
+			    <div class="control-group">
+			    	<label class="control-label" for="inputPassword">DB Password</label>
+		    		<div class="controls">
+			    		<input type="password" id="inputPassword" name="attractPassword" value="root">
+			    	</div>
+			    </div>
+			    <div class="control-group">
+			    	<div class="controls">
+			    		<input type="hidden" name="stage2" value="true">
+			    		<button type="submit" class="btn">Install Attract!</button>
+			    	</div>
+			    </div>
+		    </form>		
+
 
 </div>
-
-
-</body>
+</div>
+</section>
+		</div>
+	
+	
+	</body>
 </html>
 
 <?php
