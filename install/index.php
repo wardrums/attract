@@ -207,7 +207,7 @@ error_reporting(0);
 		<p>Welcome to the Attract installer. This script will create <strong>db.php</strong> which is attract's config file. It will also configure your database, creating the tables required by the application. Be sure to provide an existing database name.</p>
 
 
-		    <form class="form-horizontal" action="index.php" method="post">
+		    <form class="form-horizontal install" action="index.php" method="post">
 		    	<div class="control-group">
 			    	<label class="control-label" for="inputHost">Database Host (IP)</label>
 			    	<div class="controls">
