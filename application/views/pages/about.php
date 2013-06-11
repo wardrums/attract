@@ -1,4 +1,0 @@
-<div>
-	A bout.
-	
-</div>

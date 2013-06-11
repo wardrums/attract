@@ -42,7 +42,7 @@
 // $route['404_override'] = '';
 
 $route['default_controller'] = 'home';
-$route['(:any)'] = 'pages/view/$1';
+//$route['(:any)'] = 'shots/view/$1';
 
 
 /* End of file routes.php */
