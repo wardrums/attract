@@ -1,444 +1,205 @@
-<!DOCTYPE html>  
-<html lang="en">  
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Attract</title>		
-		<link href="assets/css/bootstrap.css" rel="stylesheet">
-		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
-		<link href="assets/css/tablecloth.css" rel="stylesheet">
-		<link href="assets/css/prettify.css" rel="stylesheet"> 
-		<link href="assets/css/chosen.css" rel="stylesheet">
-		<link href="assets/css/attract.css" rel="stylesheet">
-		<link type="image/x-icon" href="assets/favicon/favicon.ico" rel="shortcut icon">
-		<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-57x57-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-touch-icon-72x72-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-touch-icon-114x114-precomposed.png" />
+<?php
 
-		
-		<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
-		<script type="text/javascript" src="assets/js/jquery.metadata.js"></script>
-		<script type="text/javascript" src="assets/js/jquery.tablesorter.min.js"></script>
-		<script type="text/javascript" src="assets/js/jquery.tablecloth.js"></script>
-		<script type="text/javascript" src="assets/js/jquery.chosen.min.js"></script>
-		<script type="text/javascript" src="assets/js/attract.js"></script>
-		
-	</head>
-	<body>
-		<?php
-		# TODO: this code should be changed, just keeping for making a template later
-		if ((include 'app/db.php') !== 1) {
-		   die('<div class="container"><section><div class="page-header"><h1>Could not locate database <small>Make sure that the app/dp.php file exists!</small></h1></div></section>If this is the first time you start the application you might want to <a href="install/index.php">install Attract</a>.</div>
-	</body>');
-		} else {
-			include 'app/models.php';
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ *
+ */
+	define('ENVIRONMENT', 'development');
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+
+if (defined('ENVIRONMENT'))
+{
+	switch (ENVIRONMENT)
+	{
+		case 'development':
+			error_reporting(E_ALL);
+		break;
+	
+		case 'testing':
+		case 'production':
+			error_reporting(0);
+		break;
+
+		default:
+			exit('The application environment is not set correctly.');
+	}
+}
+
+/*
+ *---------------------------------------------------------------
+ * SYSTEM FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" folder.
+ * Include the path if the folder is not in the same  directory
+ * as this file.
+ *
+ */
+	$system_path = 'system';
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * folder then the default one you can set its name here. The folder
+ * can also be renamed or relocated anywhere on your server.  If
+ * you do, use a full server path. For more info please see the user guide:
+ * http://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ *
+ */
+	$application_folder = 'application';
+
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here.  For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT:  If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller.  Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ *
+ */
+	// The directory name, relative to the "controllers" folder.  Leave blank
+	// if your controller is not in a sub-folder within the "controllers" folder
+	// $routing['directory'] = '';
+
+	// The controller class file name.  Example:  Mycontroller
+	// $routing['controller'] = '';
+
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
+
+
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ *
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
+
+
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
+
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
+
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
+
+	if (realpath($system_path) !== FALSE)
+	{
+		$system_path = realpath($system_path).'/';
+	}
+
+	// ensure there's a trailing slash
+	$system_path = rtrim($system_path, '/').'/';
+
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// The PHP file extension
+	// this global constant is deprecated.
+	define('EXT', '.php');
+
+	// Path to the system folder
+	define('BASEPATH', str_replace("\\", "/", $system_path));
+
+	// Path to the front controller (this file)
+	define('FCPATH', str_replace(SELF, '', __FILE__));
+
+	// Name of the "system folder"
+	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+
+
+	// The path to the "application" folder
+	if (is_dir($application_folder))
+	{
+		define('APPPATH', $application_folder.'/');
+	}
+	else
+	{
+		if ( ! is_dir(BASEPATH.$application_folder.'/'))
+		{
+			exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
 		}
-		?>
-		<div class="container">
-		
-			<div class="modal hide" id="statsModal">
-		    	<div class="modal-header">
-		    		<h3>Stats of steel</h3>
-		    	</div>
-			    <div class="modal-body">
-					<table id="stats">
-						<thead>
-							<tr>
-								<th>Status</th>
-								<th>Number of shots</th>
-								<th>Seconds</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Total</td>
-								<td><?php echo($num_total); ?></td>
-								<td><?php echo($sum_total); ?> sec</td>
-							</tr>
-							<tr>
-								<td>In progress</td>
-								<td><?php echo($num_in_progress); ?></td>
-								<td><?php echo($sum_in_progress); ?> sec</td>
-							</tr>
-							<tr>
-								<td>Final</td>
-								<td><?php echo($num_final1); ?></td>
-								<td><?php echo($sum_final1); ?> sec</td>
-							</tr>
-						</tbody>
-					</table>
-	
-			    </div>
-			    <div class="modal-footer">
-				    <a href="#" class="btn" data-dismiss="modal">Close</a>
-				</div>
-		    </div>
-		    
-		    <div class="modal hide" id="manageUsersModal">
-		    	<div class="modal-header">
-		    		<h3>Manage Users</h3>
-		    	</div>
-			    <div class="modal-body">
-			    	  	
-			    	
-			    	<table id="users" class="users">
-						<thead>
-							<tr>
-								<th>Username</th>
-								<th>Name</th>
-								<th>Surname</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="user_input_form">
-								<td><input type="text" value="" class="" id="new_user_username"/></td>
-								<td><input type="text" value="" class="" id="new_user_name"/></td>
-								<td><input type="text" value="" class="" id="new_user_surname"/></td>
-								<td><a class="btn btn-mini" href="#" id="addUser"><i class="icon-plus-sign"></i></a></td>
-							</tr>
-						
-						
-						<?php while($user_row = $users_query_result->fetch(PDO::FETCH_ASSOC)) {
-							$user_id = $user_row['id'];
-							$user_username = $user_row['username'];
-							$user_name = $user_row['name'];
-							$user_surname = $user_row['surname']; ?>
-							<tr id="user_<?php echo $user_id; ?>" class="edit_tr">
-								<td>
-									<span id="username_<?php echo $user_id; ?>" class="username text"><?php echo $user_username; ?></span>
-									<input type="text" value="<?php echo $user_username; ?>" class="editbox" id="username_input_<?php echo $user_id; ?>" />
-								</td>
-								<td class="edit_td">
-									<span id="name_<?php echo $user_id; ?>" class="name text"><?php echo $user_name; ?></span>
-									<input type="text" value="<?php echo $user_name; ?>" class="editbox" id="name_input_<?php echo $user_id; ?>" />
-								</td>
-								<td class="edit_td">
-									<span id="surname_<?php echo $user_id; ?>" class="surname text"><?php echo $user_surname; ?></span>
-									<input type="text" value="<?php echo $user_surname; ?>" class="editbox" id="surname_input_<?php echo $user_id; ?>" />
-								</td>
-								<td class="row_controls"><a class="delete_row" href="#"><i class="icon-remove-sign"></i></a></td>
-							</tr>
-						<?php } ?>
-			    	
-						</tbody>
-					</table>
-			    	
-	
-			    </div>
-			    <div class="modal-footer">
-				    <a href="#" class="btn" data-dismiss="modal">Close</a>
-				</div>
-		    </div>
-		    
-		    <div class="modal hide" id="manageScenesModal">
-		    	<div class="modal-header">
-		    		<h3>Manage Scenes</h3>
-		    	</div>
-			    <div class="modal-body">
-			    
-			    	<table id="scenes" class="scenes">
-						<thead>
-							<tr>
-								<th>Number</th>
-								<th>Description</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="scene_input_form">
-								<td><input type="text" value="" class="" id="new_scene_number"/></td>
-								<td><input type="text" value="" class="" id="new_scene_description"/></td>
-								<td><a class="btn btn-mini" href="#" id="addScene"><i class="icon-plus-sign"></i></a></td>
-							</tr>
-						
-						
-						<?php $scenes_query_result = $dbh->query("SELECT * FROM scenes");
-						while($scene_row = $scenes_query_result->fetch(PDO::FETCH_ASSOC)) {
-							$scene_id = $scene_row['id'];
-							$scene_number = $scene_row['number'];
-							$scene_description = $scene_row['description'];?>
-							<tr id="scene_<?php echo $scene_id; ?>" class="edit_tr">
-								<td class="edit_td">
-									<span id="scene_number_<?php echo $scene_id; ?>" class="scene_number text"><?php echo $scene_number; ?></span>
-									<input type="text" value="<?php echo $scene_number; ?>" class="editbox" id="scene_number_input_<?php echo $scene_id; ?>" />
-								</td>
-								<td class="edit_td">
-									<span id="scene_description_<?php echo $scene_id; ?>" class="scene_description text"><?php echo $scene_description; ?></span>
-									<input type="text" value="<?php echo $scene_description; ?>" class="editbox" id="scene_description_input_<?php echo $scene_id; ?>" />
-								</td>
-								<td class="row_controls"><a class="delete_row" href="#"><i class="icon-remove-sign"></i></a></td>
-							</tr>
-						<?php } ?>
-			    	
-						</tbody>
-					</table>
-			    	
-	
-			    </div>
-			    <div class="modal-footer">
-				    <a href="#" class="btn" data-dismiss="modal">Close</a>
-				</div>
-		    </div>
 
-		    <div class="modal hide" id="manageShotsModal">
-		    	<div class="modal-header">
-		    		<h3>Manage Shots</h3>
-		    	</div>
-			    <div class="modal-body">
-			    	  	
-			    	
-			    	<table id="shots" class="shots">
-						<thead>
-							<tr>
-								<th>Scene</th>
-								<th>Number</th>
-								<th>Description</th>
-								<th>Duration (seconds)</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="shot_input_form">
-								<td>
-									<select id="new_shot_scene" data-placeholder="Select scene" style="width:190px;" class="chzn-select">
-										<?php										
-								    		$scenes_query_result = $dbh->query("SELECT * FROM scenes");
-											while($scene_row = $scenes_query_result->fetch(PDO::FETCH_ASSOC)) {
-												$scene_id = $scene_row['id'];
-												$scene_number = $scene_row['number'];
-												$scene_description = $scene_row['description'];
-												echo('<option value="'.$scene_id.'">'.ucfirst($scene_number).' '.ucfirst($scene_description).'</option>');
-											}
-										?>
-									</select>
-								</td>
-								<td><input type="text" value="" class="" id="new_shot_number"/></td>
-								<td><input type="text" value="" class="" id="new_shot_description"/></td>
-								<td><input type="text" value="" class="" id="new_shot_duration"/></td>
-								<td><a class="btn btn-mini" href="#" id="addShot"><i class="icon-plus-sign"></i></a></td>
-							</tr>			    	
-						</tbody>
-					</table>
-			    	
-	
-			    </div>
-			    <div class="modal-footer">
-				    <a href="#" class="btn" data-dismiss="modal">Close</a>
-				</div>
-		    </div>
-		
-			<section>
-				<div class="page-header">
-					<h1>Attract <small>task tracking of steel</small></h1>
-				</div>
-				<div class="row">
-					<div class="span6">
-						<div id="querymachine">
-							<select id="status" data-placeholder="Select status" style="width:250px;" multiple="multiple" class="chzn-select">
-								<option value="any">View all</option>
-								<option value="todo">To do</option>
-								<option value="fix">Fix</option>
-								<option value="in_progress">In progress </option>
-								<option value="rendering">Rendering</option>
-								<option value="review">Review</option>
-								<option value="final1">Final 1</option>
-							</select>
-							<select id="owner" data-placeholder="Select owner" style="width:250px;" multiple="multiple" class="chzn-select">
-								<?php
-						    		$users_query_result = $dbh->query("SELECT * FROM users");
-									while($user_row = $users_query_result->fetch(PDO::FETCH_ASSOC)) {
-										$user_username = $user_row['username'];
-										echo('<option value="'.$user_username.'">'.ucfirst($user_username).'</option>');
-									}
-								?>
-								<option value="none">None</option>
-							</select>
-						</div>
-						<div class="btn-toolbar">
-							<div class="btn-group"><a class="btn prev" href="">Reload</a> </div>
-							<div class="btn-group"><a class="btn" data-toggle="modal" href="#statsModal">Stats of steel</a></div>
-						    <div class="btn-group">
-						    	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Manage<span class="caret"></span></a>
-						    	<ul class="dropdown-menu">
-							    	<li><a data-toggle="modal" href="#manageUsersModal">Manage users</a></li>
-							    	<li><a data-toggle="modal" href="#manageScenesModal">Manage scenes</a></li>
-							    	<li><a data-toggle="modal" href="#manageShotsModal">Manage shots</a></li>
-							    </ul>
-						    </div>
-							
-						</div>
-					</div>
-					<div class="span6">
-						<?php 
-							//we count seconds and NOT shots
-							$total_percent = $sum_total/100;
-							$in_total_and_final = intval(($sum_in_progress + $sum_final1) / $total_percent);
-							$only_final = ($sum_final1) / $total_percent;
-						?>
-						<h3>Almost final seconds of the movie: <?php echo(($sum_in_progress + $sum_final1)."/".$sum_total)?></h3>
-						<p>We are working on <?php echo($num_total); ?> shots in total!</p>
-						<div class="progress progress-striped">
-						    <div class="bar" style="width: <?php echo($in_total_and_final); ?>%;"></div>
-						</div>
-											
-					</div>
-				</div>
-				<div class="row">
-					<div class="span12">
+		define('APPPATH', BASEPATH.$application_folder.'/');
+	}
 
-						<table id="shotlist" class="shots paginated">
-							<thead>
-								<tr>
-									<th class="{sorter: false}" width="80px">Number</th>
-									<th class="{sorter: false}">Description</th>
-									<th class="{sorter: false}">Duration</th>
-									<th class="{sorter: false}" width="100px">Status</th>
-									<th class="{sorter: false}" width="100px">Stage</th>
-									<th class="{sorter: false}" width="35%">Notes</th>
-									<th class="{sorter: false}" width="100px">Owner</th>
-								</tr>
-							</thead>
-							<?php
-							// We get all the scenes		
-							$sql_scenes = $dbh->query("SELECT * FROM scenes");
-							
-							
-							while($scene_row = $sql_scenes->fetch(PDO::FETCH_ASSOC)){
-								$scene_id = $scene_row['id'];
-								$scene_number = $scene_row['number'];
-								$scene_description = $scene_row['description']; ?>
-								<thead>
-									<tr>
-										<th class="{sorter: false}" colspan="7"><?php echo($scene_number." ".strtoupper($scene_description)); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php					
-								$shot_query = sprintf("SELECT * FROM shots WHERE scene_id='%s'",
-								mysql_real_escape_string($scene_id));
-								
-								$shot_query_result = $dbh->query($shot_query);
-								
-								if (!$shot_query_result) {
-								    $message  = 'Invalid query: ' . mysql_error() . "\n";
-								    $message .= 'Whole query: ' . $query;
-								    die($message);
-								}
-								
-								while($shot_row = $shot_query_result->fetch(PDO::FETCH_ASSOC)){
-									$id = $shot_row['id'];
-									$number = $shot_row['number'];
-									$description = $shot_row['description'];
-									$duration = $shot_row['duration'];
-									$status = $shot_row['status'];
-									$stage = $shot_row['stage'];
-									$notes = $shot_row['notes'];
-									$owner = $shot_row['owner'];
-								?>
-							
-								<tr id="shot_<?php echo $id; ?>" class="edit_tr">
-									<td>
-										<span id="number_<?php echo $id; ?>" class="number text"><?php echo $number; ?></span>
-										<input type="text" value="<?php echo $number; ?>" class="editbox" id="number_input_<?php echo $id; ?>" />
-									</td>
-									
-									<td class="edit_td">
-										<span id="description_<?php echo $id; ?>" class="description text"><?php echo $description; ?></span>
-										<input type="text" value="<?php echo $description; ?>" class="editbox" id="description_input_<?php echo $id; ?>"/>
-									</td>
-									
-									<td class="edit_td">
-										<span id="duration_<?php echo $id; ?>" class="duration text"><?php echo $duration; ?></span>
-										<input type="text" value="<?php echo $duration; ?>" class="duration editbox" id="duration_input_<?php echo $id; ?>"/>
-									</td>
-									<td>
-										<div class="status btn-group">
-										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $status; ?>" data-toggle="dropdown" href="#">
-										    <?php
-										    	echo ucfirst($status); 
-										    ?>
-										    <span class="caret"></span>
-										    </a>
-										    <ul class="dropdown-menu">
-											    <li><a href="#todo">TODO</a></li>
-												<li><a href="#fix">Fix</a></li>
-												<li><a href="#in_progress">In progress</a></li>
-												<li><a href="#rendering">Rendering</a></li>
-												<li><a href="#review">Review</a></li>
-												<li><a href="#final1">Final 1</a></li>
-										    </ul>
-										</div>
-									</td>
-									
-									<td>
-										<div class="stage btn-group" <?php if($status != "in_progress") {echo("style =\"display: none;\"");} ?>>
-										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $stage; ?>" data-toggle="dropdown" href="#">
-										    <?php
-										    	echo ucfirst($stage); 
-										    ?>
-										    <span class="caret"></span>
-										    </a>
-										    <ul class="dropdown-menu">
-											    <li><a href="#tracking">Tracking</a></li>
-												<li><a href="#masking">Masking</a></li>
-												<li><a href="#layout">Layout</a></li>
-												<li><a href="#animation">Animation</a></li>
-												<li><a href="#lighting">Lighting</a></li>
-												<li><a href="#compositing">Compositing</a></li>
-										    </ul>
-										</div>
-									</td>
-									
-									<td class="edit_td">
-										<span id="notes_<?php echo $id; ?>" class="notes text"><?php echo $notes; ?></span>
-										<input type="text" value="<?php echo $notes; ?>" class="editbox" id="notes_input_<?php echo $id; ?>"/>
-									</td>
-									
-									<td>								
-										<div class="owner btn-group">
-										    <a class="btn dropdown-toggle btn-mini btn-<?php echo $owner; ?>" data-toggle="dropdown" href="#">
-										    <?php
-										    	echo ucfirst($owner); 
-										    ?>
-										    <span class="caret"></span>
-										    </a>
-										    <ul class="dropdown-menu">
-										    
-										    
-										    	<?php
-										    	// TODO: make this query centralized! How do I put the result in an array available everywhwere?
-										    	$users_query_result = $dbh->query("SELECT * FROM users");
-													while($user_row = $users_query_result->fetch(PDO::FETCH_ASSOC)) {
-														$user_username = $user_row['username'];
-														echo('<li><a href="#'.$user_username.'">'.ucfirst($user_username).'</a></li>');
-													}
-												?>
-												<li><a href="#none">None</a></li>
-										    </ul>
-										</div>
-										
-										 
-									
-									</td>
-								</tr>
-								<?php }?>
-								</tbody> <?php
-								}	?>
-								<!-- TODO: fix this hack to prevent javascript failure when shot database is empty -->
-								<tbody></tbody>
-							
-							
-						</table>
-					</div>
-				</div>
-			</section>
-			<footer class="footer">
-				<p class="pull-right"><a href="#">Back to top</a></p>
-				<p>Attract designed by <a target="_blank" href="http://www.fsiddi.com">fsiddi</a> build with <a target="_blank" href="#">bootstrap</a> and <a target="_blank" href="#">others</a>.</p>
-				<p>Source code available at <a target="_blank" href="https://github.com/fsiddi/attract">GitHub</a>.</p>
-		      </footer>
-		</div> <!-- container -->
-	</body>
-</html>
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ *
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
+
+/* End of file index.php */
+/* Location: ./index.php */
