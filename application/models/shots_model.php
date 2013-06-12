@@ -11,7 +11,7 @@ class Shots_model extends CI_Model {
 		if ($id === FALSE)
 		{
 					
-			$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description'); 
+			$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration'); 
 			$this->db->select('GROUP_CONCAT(shot_users.user_id SEPARATOR ",") as user_id', FALSE); 
 			$this->db->select('GROUP_CONCAT(users.first_name SEPARATOR ",") as user_first_name', FALSE);
 		    $this->db->from('shots');

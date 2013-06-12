@@ -15,6 +15,10 @@
 		<tr>
 			<th>Shot Name</th>
 			<th>Description</th>
+			<th>Duration</th>
+			<th>Status</th>
+			<th>Stage</th>
+			<th>Notes</th>
 			<th>Owners</th>
 		</tr>
 	</thead>
@@ -22,6 +26,10 @@
 	<?php foreach ($shots as $shot): ?>
     	<tr>
     		<td><a href="/shots/view/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
+    		<td><?php echo $shot['shot_description'] ?></td>
+    		<td><?php echo $shot['shot_duration'] ?></td>
+    		<td><?php echo $shot['shot_description'] ?></td>
+    		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['user_first_name']?></td>
     	</tr>
@@ -32,6 +40,10 @@
 		<tr>
 			<th>Shot Name</th>
 			<th>Description</th>
+			<th>Duration</th>
+			<th>Status</th>
+			<th>Stage</th>
+			<th>Notes</th>
 			<th>Owners</th>
 		</tr>
 	</tfoot>
