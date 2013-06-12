@@ -1,13 +1,42 @@
-        <div class="span9">
-          <div class="hero-unit">
-           <h2><?php echo $title ?></h2>
-			<ul>
-				<?php foreach ($shots as $shot): ?>
-			    	<li><a href="/shots/view/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a> - <?php echo $shot['shot_description'] ?> - <?php echo $shot['user_first_name']?></li>
-				<?php endforeach ?>
-			</ul>
-          </div>
-        </div><!--/span-->
+<div class="span9">
+
+<h2><?php echo $title ?></h2>
+
+<script>
+	$(document).ready(function() {
+	    $('#example').dataTable();
+	} );
+</script>
+
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+	<thead>
+		<tr>
+			<th>Shot Name</th>
+			<th>Description</th>
+			<th>Owners</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($shots as $shot): ?>
+    	<tr>
+    		<td><a href="/shots/view/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
+    		<td><?php echo $shot['shot_description'] ?></td>
+    		<td><?php echo $shot['user_first_name']?></td>
+    	</tr>
+	<?php endforeach ?>
+		
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>Shot Name</th>
+			<th>Description</th>
+			<th>Owners</th>
+		</tr>
+	</tfoot>
+</table>
+
+
+</div><!--/span-->
 
 
 

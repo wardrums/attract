@@ -25,7 +25,7 @@ class Shots_model extends CI_Model {
 			return $query->result_array();
 		}
 		
-		$query = $this->db->get_where('shots', array('id' => $id));
+		$query = $this->db->get_where('shots', array('shot_id' => $id));
 		return $query->row_array();
 	}
 }
