@@ -28,9 +28,9 @@
     		<td><a href="/shots/view/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
     		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['shot_duration'] ?></td>
-    		<td><?php echo $shot['shot_description'] ?></td>
-    		<td><?php echo $shot['shot_description'] ?></td>
-    		<td><?php echo $shot['shot_description'] ?></td>
+    		<td><?php echo $shot['shot_status_name'] ?></td>
+    		<td><?php echo $shot['shot_stage_name'] ?></td>
+    		<td><?php echo $shot['shot_notes'] ?></td>
     		<td><?php echo $shot['user_first_name']?></td>
     	</tr>
 	<?php endforeach ?>
