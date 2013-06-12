@@ -14,6 +14,7 @@ class Shots extends CI_Controller {
 		$data['title'] = 'Shots';
 	
 		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar');
 		$this->load->view('shots/index', $data);
 		$this->load->view('templates/footer');
 	}
@@ -29,6 +30,7 @@ class Shots extends CI_Controller {
 		}
 	
 		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar');
 		$this->load->view('shots/view', $data);
 		$this->load->view('templates/footer');
 	}
