@@ -1,3 +1,3 @@
-<strong>awesome footer &copy; 2011</strong>	
+<strong>So attractive in 2013</strong>	
 </body>
 </html>
