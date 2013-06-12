@@ -12,6 +12,7 @@ class Shots extends CI_Controller {
 	{
 		$data['shots'] = $this->shots_model->get_shots();
 		$data['title'] = 'Shots';
+		$data['use_sidebar'] = TRUE;
 	
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar');

@@ -1,4 +1,6 @@
-<div class="span9">
+<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+
+<div class="<?php echo $span_value ?>">
 
 <h2><?php echo $title ?></h2>
 
