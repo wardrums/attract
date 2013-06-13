@@ -13,11 +13,11 @@ class Shots_model extends CI_Model {
 					
 			$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration'); 
 			$this->db->select('shot_statuses.shot_status_name, shot_stages.shot_stage_name, shots.shot_notes'); 
-			$this->db->select('GROUP_CONCAT(shot_users.user_id SEPARATOR ",") as user_id', FALSE); 
+			$this->db->select('GROUP_CONCAT(shots_users.user_id SEPARATOR ",") as user_id', FALSE); 
 			$this->db->select('GROUP_CONCAT(users.first_name SEPARATOR ",") as user_first_name', FALSE);
 		    $this->db->from('shots');
-		   	$this->db->join('shot_users', 'shot_users.shot_id = shots.shot_id');
-			$this->db->join('users', 'users.id = shot_users.user_id', 'left');
+		   	$this->db->join('shots_users', 'shots_users.shot_id = shots.shot_id');
+			$this->db->join('users', 'users.id = shots_users.user_id', 'left');
 			$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
 			$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left');
 			$this->db->group_by('shots.shot_name'); 
@@ -29,7 +29,19 @@ class Shots_model extends CI_Model {
 			return $query->result_array();
 		}
 		
-		$query = $this->db->get_where('shots', array('shot_id' => $id));
+		$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration'); 
+		$this->db->select('shot_statuses.shot_status_name, shot_stages.shot_stage_name, shots.shot_notes'); 
+		$this->db->select('GROUP_CONCAT(shots_users.user_id SEPARATOR ",") as user_id', FALSE); 
+		$this->db->select('GROUP_CONCAT(users.first_name SEPARATOR ",") as user_first_name', FALSE);
+	    $this->db->from('shots');
+	   	$this->db->join('shots_users', 'shots_users.shot_id = shots.shot_id');
+		$this->db->join('users', 'users.id = shots_users.user_id', 'left');
+		$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
+		$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left');
+		$this->db->group_by('shots.shot_name'); 
+		$this->db->where('shots.shot_id', $id); 
+		$query = $this->db->get();
+		
 		return $query->row_array();
 	}
 }
