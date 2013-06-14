@@ -39,7 +39,7 @@
   	</div>
 </div>
 
-<!-- Select Basic -->
+<!-- Select Scene -->
 <div class="control-group">
 	<label class="control-label" for="scene_id">Scene</label>
 	<div class="controls">
@@ -50,6 +50,32 @@
 	    </select>
   	</div>
 </div>
+
+<!-- Select Status -->
+<div class="control-group">
+	<label class="control-label" for="status_id">Status</label>
+	<div class="controls">
+		<select id="status_id" name="status_id" class="input-xlarge">
+	      	<?php foreach ($statuses as $status): ?>
+				<option value="<?php echo $status['shot_status_id'] ?>"  <?php echo ($status['shot_status_id'] == $shot['shot_status_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $status['shot_status_name'] ?></option>
+			<?php endforeach ?>
+	    </select>
+  	</div>
+</div>
+
+<!-- Select Stage -->
+<div class="control-group">
+	<label class="control-label" for="scene_id">Stage</label>
+	<div class="controls">
+		<select id="scene_id" name="scene_id" class="input-xlarge">
+	      	<?php foreach ($scenes as $scene): ?>
+				<option value="<?php echo $scene['scene_id'] ?>"  <?php echo ($scene['scene_id'] == $shot['scene_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $scene['scene_name'] ?></option>
+			<?php endforeach ?>
+	    </select>
+  	</div>
+</div>
+
+
 
 <!-- Text input-->
 <div class="control-group">

@@ -30,7 +30,7 @@ class Shots_model extends CI_Model {
 		}
 		
 		$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration, scenes.scene_id'); 
-		$this->db->select('shot_statuses.shot_status_name, shot_stages.shot_stage_name, shots.shot_notes'); 
+		$this->db->select('shot_statuses.shot_status_id, shot_statuses.shot_status_name, shot_stages.shot_stage_name, shots.shot_notes'); 
 		$this->db->select('GROUP_CONCAT(shots_users.user_id SEPARATOR ",") as user_id', FALSE); 
 		$this->db->select('GROUP_CONCAT(users.first_name SEPARATOR ",") as user_first_name', FALSE);
 	    $this->db->from('shots');
@@ -66,6 +66,7 @@ class Shots_model extends CI_Model {
 				'scene_id' => $this->input->post('scene_id'),
 				'shot_name' => $this->input->post('shot_name'),
 				'shot_description' =>  $this->input->post('shot_description'),
+				'status_id' => $this->input->post('status_id'),
 				'shot_notes' =>  $this->input->post('shot_notes'),
 				'shot_duration' => $this->input->post('shot_duration')
 			);
