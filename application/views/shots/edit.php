@@ -65,11 +65,11 @@
 
 <!-- Select Stage -->
 <div class="control-group">
-	<label class="control-label" for="scene_id">Stage</label>
+	<label class="control-label" for="stage_id">Stage</label>
 	<div class="controls">
-		<select id="scene_id" name="scene_id" class="input-xlarge">
-	      	<?php foreach ($scenes as $scene): ?>
-				<option value="<?php echo $scene['scene_id'] ?>"  <?php echo ($scene['scene_id'] == $shot['scene_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $scene['scene_name'] ?></option>
+		<select id="stage_id" name="stage_id" class="input-xlarge">
+	      	<?php foreach ($stages as $stage): ?>
+				<option value="<?php echo $stage['shot_stage_id'] ?>"  <?php echo ($stage['shot_stage_id'] == $shot['shot_stage_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $stage['shot_stage_name'] ?></option>
 			<?php endforeach ?>
 	    </select>
   	</div>

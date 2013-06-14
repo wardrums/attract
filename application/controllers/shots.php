@@ -68,10 +68,12 @@ class Shots extends CI_Controller {
 	{
 		$this->load->model('scenes_model');
 		$this->load->model('shot_statuses_model');
+		$this->load->model('shot_stages_model');
 		
 		$data['shot'] = $this->shots_model->get_shots($id);
 		$data['scenes'] = $this->scenes_model->get_scenes();
 		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
+		$data['stages'] = $this->shot_stages_model->get_shot_stages();
 		$data['title'] = 'Edit Shot';
 		
 		if (empty($data['shot']))
