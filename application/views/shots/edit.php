@@ -10,9 +10,9 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Shot details</legend>
+<legend>Shot <?php echo $shot['scene_id'] ?> details</legend>
 
-<input type="hidden" name="shot_id" value="<?php echo $shot['shot_id'] ?>" />
+<?php form_hidden('shot_id', $shot['shot_id']); ?>
 
 <!-- Text input-->
 <div class="control-group">
@@ -69,12 +69,11 @@
 	<div class="controls">
 		<select id="stage_id" name="stage_id" class="input-xlarge">
 	      	<?php foreach ($stages as $stage): ?>
-				<option value="<?php echo $stage['shot_stage_id'] ?>"  <?php echo ($stage['shot_stage_id'] == $shot['shot_stage_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $stage['shot_stage_name'] ?></option>
+				<option value="<?php echo $stage['shot_stage_id'] ?>" <?php echo ($stage['shot_stage_id'] == $shot['shot_stage_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $stage['shot_stage_name'] ?></option>
 			<?php endforeach ?>
 	    </select>
   	</div>
 </div>
-
 
 
 <!-- Text input-->
@@ -86,16 +85,28 @@
   </div>
 </div>
 
+
 <!-- Select Multiple -->
 <div class="control-group">
-  <label class="control-label" for="shot_owners">Owners</label>
-  <div class="controls">
-    <select id="shot_owners" name="shot_owners" class="input-xlarge" multiple="multiple">
-	<?php foreach ($scenes as $scene): ?>
-		<option><?php echo $scene['scene_name'] ?></option>
-	<?php endforeach ?>
-    </select>
-  </div>
+	<label class="control-label" for="shot_owners">Owners</label>
+	<div class="controls">
+		<select id="shot_owners" name="shot_owners[]" class="input-xlarge" multiple="multiple">
+		<?php 
+			$shot_users_id = array();
+			
+			foreach ($shot_users as $shot_user):
+				array_push($shot_users_id, $shot_user['user_id']);
+			endforeach
+		?>	
+					
+		<?php foreach ($users as $user): ?>
+			<option value="<?php echo $user['id'] ?>" <?php echo (in_array($user['id'], $shot_users_id) ? "selected=\"selected\"" : ""); ?>>
+				<?php echo $user['first_name'] . ' ' . $user['last_name'] ?>
+			</option>
+		<?php endforeach ?>
+		</select>
+		<p class="help-block">Current owners are selected</p>
+  	</div>
 </div>
 
 

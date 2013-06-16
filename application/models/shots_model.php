@@ -29,21 +29,19 @@ class Shots_model extends CI_Model {
 			return $query->result_array();
 		}
 		
-		$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration, scenes.scene_id'); 
-		$this->db->select('shot_statuses.shot_status_id, shot_statuses.shot_status_name, shot_stages.shot_stage_id, shot_stages.shot_stage_name, shots.shot_notes'); 
-		$this->db->select('GROUP_CONCAT(shots_users.user_id SEPARATOR ",") as user_id', FALSE); 
-		$this->db->select('GROUP_CONCAT(users.first_name SEPARATOR ",") as user_first_name', FALSE);
+		// TODO: look into this http://stackoverflow.com/questions/13753739/mysql-query-group-concat-over-multiple-rows
+		$this->db->select('*'); 
 	    $this->db->from('shots');
-	   	$this->db->join('shots_users', 'shots_users.shot_id = shots.shot_id');
-		$this->db->join('users', 'users.id = shots_users.user_id', 'left');
 		$this->db->join('scenes', 'scenes.scene_id = shots.scene_id', 'left');		
 		$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
-		$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left');
-		$this->db->group_by('shots.shot_name'); 
+		$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left'); 
 		$this->db->where('shots.shot_id', $id); 
 		$query = $this->db->get();
 		
+		//print_r($query->row_array());
 		return $query->row_array();
+		
+		
 	}
 
 	public function set_shots($id = FALSE)

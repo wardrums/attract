@@ -64,16 +64,20 @@ class Shots extends CI_Controller {
 		}
 	}
 	
-	public function edit($id)
+	public function edit($shot_id)
 	{
 		$this->load->model('scenes_model');
 		$this->load->model('shot_statuses_model');
 		$this->load->model('shot_stages_model');
+		$this->load->model('shots_users_model');
+		$this->load->model('users_model');
 		
-		$data['shot'] = $this->shots_model->get_shots($id);
+		$data['shot'] = $this->shots_model->get_shots($shot_id);
 		$data['scenes'] = $this->scenes_model->get_scenes();
 		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
 		$data['stages'] = $this->shot_stages_model->get_shot_stages();
+		$data['users'] = $this->users_model->get_users();
+		$data['shot_users'] = $this->shots_users_model->get_users($shot_id);
 		$data['title'] = 'Edit Shot';
 		
 		if (empty($data['shot']))
@@ -97,8 +101,11 @@ class Shots extends CI_Controller {
 		}
 		else
 		{	
-			$this->shots_model->set_shots($id);
-			$data['shot'] = $this->shots_model->get_shots($id);
+			$this->shots_model->set_shots($shot_id);
+			$this->shots_users_model->set_users($shot_id);
+			// we reset the data array before reloading the page
+			$data['shot'] = $this->shots_model->get_shots($shot_id);
+			$data['shot_users'] = $this->shots_users_model->get_users($shot_id);
 			$this->load->view('templates/header', $data);	
 			$this->load->view('shots/edit', $data);
 			$this->load->view('templates/footer');
