@@ -12,7 +12,7 @@
 <!-- Form Name -->
 <legend>Shot <?php echo $shot['scene_id'] ?> details</legend>
 
-<?php form_hidden('shot_id', $shot['shot_id']); ?>
+<?php echo form_hidden('shot_id', $shot['shot_id']); ?>
 
 <!-- Text input-->
 <div class="control-group">
