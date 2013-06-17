@@ -117,15 +117,20 @@ class Shots extends Common_Auth_Controller {
 			
 		}
 		else
-		{	
+		{
+			
+				
 			$this->shots_model->set_shots($shot_id);
 			$this->shots_users_model->set_users($shot_id);
+			redirect('/shots/', 'refresh');
+			/*
 			// we reset the data array before reloading the page
 			$data['shot'] = $this->shots_model->get_shots($shot_id);
 			$data['shot_users'] = $this->shots_users_model->get_users($shot_id);
 			$this->load->view('templates/header', $data);	
 			$this->load->view('shots/edit', $data);
 			$this->load->view('templates/footer');
+			*/
 		}
 	}
 
