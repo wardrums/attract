@@ -42,8 +42,8 @@
     
     <script src="<?php echo assets_url(); ?>/js/jquery.min.js"></script>
     <script src="<?php echo assets_url(); ?>/js/bootstrap.min.js"></script>
-    <script src="<?php echo assets_url(); ?>/js/jquery.DataTables.min.js"></script>
-    <script src="<?php echo assets_url(); ?>/js/custom.DataTables.js"></script>
+    <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo assets_url(); ?>/js/custom.dataTables.js"></script>
     <script src="<?php echo assets_url(); ?>/js/jquery.attract.js"></script>
   </head>
 
