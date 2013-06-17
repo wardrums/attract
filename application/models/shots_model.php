@@ -6,7 +6,7 @@ class Shots_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function get_shots($id = FALSE)
+	function get_shots($id = FALSE)
 	{
 		if ($id === FALSE)
 		{
@@ -44,7 +44,7 @@ class Shots_model extends CI_Model {
 		
 	}
 
-	public function set_shots($id = FALSE)
+	function set_shots($id = FALSE)
 	{
 		if ($id === FALSE) 
 		{
@@ -52,10 +52,20 @@ class Shots_model extends CI_Model {
 				'shot_name' => $this->input->post('shot_name'),
 				'shot_description' =>  $this->input->post('shot_description'),
 				'scene_id' => $this->input->post('scene_id'),
-				'shot_duration' => $this->input->post('shot_duration')
+				'shot_duration' => $this->input->post('shot_duration'),
+				'status_id' => $this->input->post('status_id'),
+				'stage_id' => $this->input->post('stage_id'),
+				'shot_order' => $this->input->post('shot_order')
 			);
 			
-			return $this->db->insert('shots', $data);
+			$this->db->insert('shots', $data);
+			
+			$ownership_data = array(
+				'shot_id' => $this->db->insert_id(),
+				'user_id' => $this->input->post('user_id')
+			);
+			
+			return $ownership_data;
 		} 
 		else 
 		{
@@ -72,7 +82,39 @@ class Shots_model extends CI_Model {
 			$this->db->where('shot_id', $shot_id);
 			return $this->db->update('shots', $data);
 		}
-		
 	}
+
+
+	function get_shots_order()
+	{
+		$this->db->select('shots.shot_name, shots.shot_order'); 
+	    $this->db->from('shots');
+		$query = $this->db->get();
+		
+		//print_r($query->row_array());
+		return $query->row_array();
+
+	}
+	
+	function set_shot_order($shot_id)
+	{
+		$this->db->select('shots.shot_name, shots.shot_order'); 
+	    $this->db->from('shots');
+		$query = $this->db->get();
+		
+		//print_r($query->row_array());
+		return $query->row_array();
+
+	}
+	
+	function get_last_shot_position()
+	{
+		$this->db->select_max('shots.shot_order');
+		$query = $this->db->get('shots');
+				
+		//print_r($query->row_array());
+		return $query->row_array();
+	}
+
 }
 

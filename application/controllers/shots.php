@@ -11,11 +11,10 @@ class Shots extends Common_Auth_Controller {
 
 	function index()
 	{
-		//$user = $this->ion_auth->user()->row();
+	
 		$data['shots'] = $this->shots_model->get_shots();
 		$data['title'] = 'Shots';
 		$data['use_sidebar'] = TRUE;
-		//$data['username'] = $user->username;
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
@@ -43,8 +42,17 @@ class Shots extends Common_Auth_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->model('scenes_model');
+		$this->load->model('shot_statuses_model');
+		$this->load->model('shot_stages_model');
+		$this->load->model('shots_users_model');
 		
 		$data['title'] = 'Create a new shot';
+		$data['scenes'] = $this->scenes_model->get_scenes();
+		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
+		$data['stages'] = $this->shot_stages_model->get_shot_stages();
+		$last_shot_position = $this->shots_model->get_last_shot_position();
+		$data['shot_order'] = $last_shot_position['shot_order'] + 1;
 		
 		$this->form_validation->set_rules('shot_name', 'text', 'required');
 		$this->form_validation->set_rules('shot_description', 'text', 'required');
@@ -52,15 +60,22 @@ class Shots extends Common_Auth_Controller {
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/create');
+			$this->load->view('shots/create', $data);
 			$this->load->view('templates/footer');
 			
 		}
 		else
 		{
-			$this->shots_model->set_shots();
+			$shot_data = $this->shots_model->set_shots();
+			// TODO at the moment we assign to one hardcoded user, should be changed
+			$this->shots_users_model->set_user($shot_data['shot_id'], $shot_data['user_id']);
+			
+			// we reload some data
+			$last_shot_position = $this->shots_model->get_last_shot_position();
+			$data['shot_order'] = $last_shot_position['shot_order'] + 1;
+			
 			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/create');
+			$this->load->view('shots/create', $data);
 			$this->load->view('templates/footer');
 			
 		}

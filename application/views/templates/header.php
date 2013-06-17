@@ -64,6 +64,7 @@
             </p>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
+              <li><a href="/shots/create/">Add shot</a></li>
               <li><a href="#about">Tasks</a></li>
               <li><a href="#contact">Messages</a></li>
             </ul>
