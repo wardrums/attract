@@ -1,6 +1,6 @@
 <?php
 
-class Shots extends CI_Controller {
+class Shots extends Common_Auth_Controller {
 
 	public function __construct()
 	{
@@ -9,19 +9,21 @@ class Shots extends CI_Controller {
 		$this->load->model('shots_model');
 	}
 
-	public function index()
+	function index()
 	{
+		//$user = $this->ion_auth->user()->row();
 		$data['shots'] = $this->shots_model->get_shots();
 		$data['title'] = 'Shots';
 		$data['use_sidebar'] = TRUE;
-	
+		//$data['username'] = $user->username;
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('shots/index', $data);
 		$this->load->view('templates/footer');
 	}
 
-	public function view($id)
+	function view($id)
 	{
 		$data['shot'] = $this->shots_model->get_shots($id);
 		$data['title'] = 'Shot';
@@ -37,7 +39,7 @@ class Shots extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 	
-	public function create()
+	function create()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -64,7 +66,7 @@ class Shots extends CI_Controller {
 		}
 	}
 	
-	public function edit($shot_id)
+	function edit($shot_id)
 	{
 		$this->load->model('scenes_model');
 		$this->load->model('shot_statuses_model');

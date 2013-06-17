@@ -60,7 +60,7 @@
           <a class="brand" href="/">Attract</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">fsiddi</a>
+              Logged in as <a href="#" class="navbar-link"><?php echo $the_user->username ?></a>
             </p>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
