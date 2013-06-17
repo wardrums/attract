@@ -128,6 +128,12 @@ class Shots extends Common_Auth_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
+
+	function delete($shot_id)
+	{
+		$this->shots_model->delete_shot($shot_id);
+		redirect('/shots/', 'refresh');
+	}
 }
 
 /*

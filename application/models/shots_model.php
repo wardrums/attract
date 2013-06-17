@@ -115,6 +115,14 @@ class Shots_model extends CI_Model {
 		//print_r($query->row_array());
 		return $query->row_array();
 	}
+	
+	function delete_shot($shot_id)
+	{
+		$tables = array('shots', 'shots_users');
+		$this->db->where('shot_id', $shot_id);
+		$this->db->delete($tables);
+		return;
+	}
 
 }
 

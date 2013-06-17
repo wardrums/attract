@@ -117,6 +117,7 @@
   <label class="control-label" for="submit">Submit</label>
   <div class="controls">
     <button id="submit" name="submit" class="btn btn-inverse">Edit Shot</button>
+    <a href="<?php echo '/shots/delete/' . $shot['shot_id'] ?>" id="submit" name="submit" class="btn btn-danger">Delete Shot</a>
   </div>
 </div>
 
