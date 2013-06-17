@@ -1,6 +1,6 @@
 <?php
 
-class Scenes extends CI_Controller {
+class Scenes extends Common_Auth_Controller {
 
 	public function __construct()
 	{
