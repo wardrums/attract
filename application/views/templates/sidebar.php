@@ -5,7 +5,7 @@
               <li <?php echo ($title == "Shots" ? "class=\"active\"" : ""); ?>><a href="/shots">Shots</a></li>
               <li <?php echo ($title == "Scenes" ? "class=\"active\"" : ""); ?>><a href="/scenes">Scenes</a></li>
               <li><a href="#">Sequences</a></li>
-              <li><a href="#">Stats</a></li>
+              <li <?php echo ($title == "Stats" ? "class=\"active\"" : ""); ?>><a href="/stats">Stats</a></li>
               
               <?php if($is_admin == TRUE): ?>
               <li class="nav-header">Admin</li>

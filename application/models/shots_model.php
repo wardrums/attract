@@ -123,6 +123,20 @@ class Shots_model extends CI_Model {
 		$this->db->delete($tables);
 		return;
 	}
+	
+	function get_total_duration(){
+		$this->db->select_sum('shot_duration');
+		$query = $this->db->get('shots');
+		$result = $query->row_array();
+		return $result['shot_duration'];
+	}
+	
+	function get_statsues(){
+		$this->db->select_sum('shot_duration');
+		$query = $this->db->get('shots');
+		$result = $query->row_array();
+		return $result['shot_duration'];
+	}
 
 }
 
