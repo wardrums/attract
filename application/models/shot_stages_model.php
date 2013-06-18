@@ -27,7 +27,7 @@ class Shot_stages_model extends CI_Model {
 			'shot_stage_name' => $this->input->post('shot_stage_name')
 		);
 
-		$this->db->insert('shots', $data);
+		$this->db->insert('shot_stages', $data);
 		return;
 	}
 

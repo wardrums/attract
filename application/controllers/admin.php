@@ -50,6 +50,35 @@ class Admin extends Admin_Controller {
 		$this->load->view('templates/footer');
 	}
 	
+	function shot_stages_create()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
+		$this->load->model('shot_stages_model');
+		$data['title'] = 'Shot stages';
+		$data['use_sidebar'] = TRUE;
+		
+		$this->form_validation->set_rules('shot_stage_name', 'text', 'required');
+		
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header', $data);	
+			$this->load->view('admin/shot_stages_create', $data);
+			$this->load->view('templates/footer');
+			
+		}
+		else
+		{
+			$this->shot_stages_model->create_shot_stage();
+
+			$this->load->view('templates/header', $data);	
+			$this->load->view('admin/shot_stages_create', $data);
+			$this->load->view('templates/footer');
+			
+		}
+	}
+	
 	function create()
 	{
 		$this->load->helper('form');
