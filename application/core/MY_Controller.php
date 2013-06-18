@@ -10,6 +10,7 @@ class Admin_Controller extends CI_Controller {
 
         if($this->ion_auth->is_admin()) {
             $this->the_user = $this->ion_auth->user()->row();
+			$data = new stdClass;
             $data->the_user = $this->the_user;
             $this->load->vars($data);
         }
