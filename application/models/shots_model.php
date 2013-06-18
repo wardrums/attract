@@ -20,7 +20,7 @@ class Shots_model extends CI_Model {
 			$this->db->join('users', 'users.id = shots_users.user_id', 'left');
 			$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
 			$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left');
-			$this->db->group_by('shots.shot_name'); 
+			$this->db->group_by('shots.shot_id'); 
 			$this->db->order_by('shots.shot_order', 'asc');
 		    $query = $this->db->get(); 
 				

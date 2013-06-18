@@ -42,6 +42,7 @@ var make_status_dropdown = function(status) {
 		
 	$(document).ready(function() {
 	    $('#shots').dataTable( {
+	    	"iDisplayLength": 50,
 	        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 				$('td:eq(3)', nRow).html(make_status_dropdown(aData[3]));
 			}
