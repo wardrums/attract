@@ -10,6 +10,7 @@
               <?php if($is_admin == TRUE): ?>
               <li class="nav-header">Admin</li>
               <li <?php echo ($title == "Users" ? "class=\"active\"" : ""); ?>><a href="/admin/users">User management</a></li>
+              <li <?php echo ($title == "Shot stages" ? "class=\"active\"" : ""); ?>><a href="/admin/shot_stages">Shot stages</a></li>
               <li><a href="#">Show management</a></li>
               <?php endif ?>
 

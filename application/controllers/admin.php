@@ -36,19 +36,17 @@ class Admin extends Admin_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	function view($id)
+	function shot_stages()
 	{
-		$data['shot'] = $this->shots_model->get_shots($id);
-		$data['title'] = 'Shot';
+		$this->load->model('shot_stages_model');
+		$data['shot_stages'] = $this->shot_stages_model->get_shot_stages();
+		$data['title'] = 'Shot stages';
+		$data['use_sidebar'] = TRUE;
 		
-		if (empty($data['shot']))
-		{
-			show_404();
-		}
 	
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
-		$this->load->view('shots/view', $data);
+		$this->load->view('admin/shot_stages', $data);
 		$this->load->view('templates/footer');
 	}
 	
