@@ -1,6 +1,12 @@
 <h2>Create a shot</h2>
 
-<?php echo validation_errors(); ?>
+<?php $validation_errors = validation_errors(); ?>
+<?php if($validation_errors):?>
+<div class="alert">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<p><strong>Watch out! </strong><?php echo $validation_errors ?></p>
+</div>
+<?php endif ?>
 
 <?php 
 	$attributes = array('class' => 'form-horizontal');
@@ -29,7 +35,7 @@
 <div class="control-group">
   <label class="control-label" for="shot_description">Shot description</label>
   <div class="controls">                     
-    <textarea id="shot_description" name="shot_description"></textarea>
+    <textarea id="shot_description" name="shot_description" required=""></textarea>
   </div>
 </div>
 

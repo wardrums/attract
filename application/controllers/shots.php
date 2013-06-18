@@ -56,6 +56,7 @@ class Shots extends Common_Auth_Controller {
 		
 		$this->form_validation->set_rules('shot_name', 'text', 'required');
 		$this->form_validation->set_rules('shot_description', 'text', 'required');
+		$this->form_validation->set_rules('shot_duration', 'text', 'required');
 		
 		if ($this->form_validation->run() === FALSE)
 		{
