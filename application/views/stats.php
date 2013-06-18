@@ -4,7 +4,7 @@
 
 <h2><?php echo $title ?></h2>
 
-<h3>Fake global progress</h3>
+<h3>Global progress</h3>
 <div class="progress">
 	<div class="bar bar-success" style="width: <?php echo $shots_statuses['final_1'] ?>%;"></div>
 	<div class="bar bar-warning" style="width: <?php echo $shots_statuses['in_progress'] ?>%;"></div>
