@@ -132,10 +132,14 @@ class Shots_model extends CI_Model {
 	}
 	
 	function get_statsues(){
-		$this->db->select_sum('shot_duration');
-		$query = $this->db->get('shots');
-		$result = $query->row_array();
-		return $result['shot_duration'];
+		$this->db->select('shots.shot_id, shots.shot_name, shots.shot_duration'); 
+		$this->db->select('shot_statuses.shot_status_name'); 
+	    $this->db->from('shots');
+		$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
+		//$this->db->group_by('shots.shot_id'); 
+		//$this->db->order_by('shots.shot_order', 'asc');
+	    $query = $this->db->get(); 
+		return $query->result_array();
 	}
 
 }

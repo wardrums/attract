@@ -6,9 +6,9 @@
 
 <h3>Fake global progress</h3>
 <div class="progress">
-	<div class="bar bar-success" style="width: 35%;"></div>
-    <div class="bar bar-warning" style="width: 20%;"></div>
-    <div class="bar bar-danger" style="width: 10%;"></div>
+	<div class="bar bar-success" style="width: <?php echo $shots_statuses['final_1'] ?>%;"></div>
+	<div class="bar bar-warning" style="width: <?php echo $shots_statuses['in_progress'] ?>%;"></div>
+	<div class="bar bar-danger" style="width: <?php echo $shots_statuses['fix'] ?>%;"></div>
 </div>
 
 <div class="row-fluid">

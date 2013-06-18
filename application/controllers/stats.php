@@ -8,13 +8,72 @@ class Stats extends Common_Auth_Controller {
 		$this->load->database();
 		$this->load->model('shots_model');
 	}
+	
+	
 
 	function index()
 	{
-	
-		$data['shots'] = $this->shots_model->get_shots();
-		$data['total_duration_frames'] = $this->shots_model->get_total_duration();
-		$data['total_duration_time'] = gmdate("i:s", ($data['total_duration_frames']/24));;
+		// helper function to calculate percentage
+		// at the moment we use it only here
+		function percentage($val1, $val2, $precision = 2) 
+		{
+			if ($val1 == 0) {
+				return 0;
+			}
+			$division = $val1 / $val2;
+			$res = $division * 100;
+			$res = round($res, $precision);	
+			return $res;
+		}
+		
+		// the idea for this set of functions is: we get the shot statuses from the database,
+		// build and array using them as indexes for other arrays containing specific information
+		
+		// we get the statuses
+		$this->load->model('shot_statuses_model');
+		$shot_statuses = $this->shot_statuses_model->get_shot_statuses();
+		
+		// we get the total duration of the show (to expose in UI and use for percent calculation)
+		$total_show_duration = $this->shots_model->get_total_duration();
+		
+		// initialize an auxiliary array to extract some indexes from $shot_statuses
+		$shot_statuses_names = array();
+		
+		// in particular we extract the shot_status_name and build an array only with those values
+		foreach ($shot_statuses as $shot_status)
+		{
+			array_push($shot_statuses_names, $shot_status['shot_status_name']);
+		}
+		
+		// we assign the values of $shot_statuses_names as keys for the main array that we create.
+		// this array will contaiall the info (shot count and total durations)
+		$shots_container = array_fill_keys(
+			$shot_statuses_names, 
+			array('shots_count' => 0, 'shots_duration_frames' => 0)
+		);
+		
+		// only now we actually need to retrieve the shots from the database, and we get only a few
+		// info, such as the duration and the status. Then we use the value of the status fo the $shot
+		// array as a key for the main array, in order to place the shot count and shot duration values
+		// in the right array
+		$shots = $this->shots_model->get_statsues();
+		foreach ($shots as $shot)
+		{
+			$shots_container[$shot['shot_status_name']]['shots_count']++;
+			$shots_container[$shot['shot_status_name']]['shots_duration_frames'] += $shot['shot_duration'];
+		}
+		
+		// we create the array to expose these values in the view
+		$data['shots_statuses'] = array();
+		
+		// we add to that array the actual percentages
+		foreach ($shots_container as $shots_group => $value) {
+			$data['shots_statuses'][$shots_group] = percentage($value['shots_duration_frames'], $total_show_duration );
+		}
+		
+		
+		$data['total_duration_frames'] = $total_show_duration;
+		$data['total_duration_time'] = gmdate("i:s", ($total_show_duration/24));;
 		$data['title'] = 'Stats';
 		$data['use_sidebar'] = TRUE;
 		
