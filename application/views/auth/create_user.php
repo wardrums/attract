@@ -25,10 +25,10 @@
             <?php echo form_input($email);?>
       </p>
 
-      <p>
+      <!-- <p>
             <?php echo lang('create_user_phone_label', 'phone');?> <br />
             <?php echo form_input($phone1);?>-<?php echo form_input($phone2);?>-<?php echo form_input($phone3);?>
-      </p>
+      </p> -->
 
       <p>
             <?php echo lang('create_user_password_label', 'password');?> <br />
