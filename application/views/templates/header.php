@@ -59,9 +59,6 @@
           </button>
           <a class="brand" href="/">Attract</a>
           <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link"><?php echo $the_user->username ?></a>
-            </p>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
               <?php 
@@ -77,7 +74,21 @@
               <li><a href="#about">Tasks</a></li>
               <li><a href="#contact">Messages</a></li>
             </ul>
+            <ul class="nav pull-right">
+            <li id="fat-menu" class="dropdown">
+              <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $the_user->username ?> <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">More settings</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/auth/logout">Log out</a></li>
+              </ul>
+            </li>
+           </ul>
           </div><!--/.nav-collapse -->
+          
+                    
+                  
         </div>
       </div>
     </div>
