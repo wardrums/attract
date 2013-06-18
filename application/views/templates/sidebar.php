@@ -6,9 +6,12 @@
               <li <?php echo ($title == "Scenes" ? "class=\"active\"" : ""); ?>><a href="/scenes">Scenes</a></li>
               <li><a href="#">Sequences</a></li>
               <li><a href="#">Stats</a></li>
+              
+              <?php if($is_admin == TRUE): ?>
               <li class="nav-header">Admin</li>
-              <li><a href="#">User management</a></li>
+              <li <?php echo ($title == "Users" ? "class=\"active\"" : ""); ?>><a href="/admin/users">User management</a></li>
               <li><a href="#">Show management</a></li>
+              <?php endif ?>
 
             </ul>
           </div><!--/.well -->

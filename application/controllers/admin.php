@@ -26,7 +26,7 @@ class Admin extends Admin_Controller {
 	function users()
 	{
 		$data['users'] = $this->users_model->get_users();
-		$data['title'] = 'Shot';
+		$data['title'] = 'Users';
 		$data['use_sidebar'] = TRUE;
 		
 		

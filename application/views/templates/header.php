@@ -64,7 +64,16 @@
             </p>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="/shots/create/">Add shot</a></li>
+              <?php 
+              if ($is_admin)
+              {
+              		if ($title == "Shots") {
+						echo " <li><a href=\"/shots/create/\">Add shot</a></li>";
+					} else if ($title == "Users") {
+						echo " <li><a href=\"/user/create/\">Add user</a></li>";
+					}
+              }
+			  ?>
               <li><a href="#about">Tasks</a></li>
               <li><a href="#contact">Messages</a></li>
             </ul>

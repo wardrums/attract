@@ -5,7 +5,7 @@
 <h2><?php echo $title ?></h2>
 
 
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="shots">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="users">
 	<thead>
 		<tr>
 			<th>User ID</th>
@@ -21,7 +21,7 @@
 	<?php foreach ($users as $user): ?>
     	<tr>
     		<td><?php echo $user['id'] ?></td>
-    		<td><a href="/shots/edit/<?php echo $user['id'] ?>"><?php echo $user['username'] ?></a></td>
+    		<td><a href="/users/edit/<?php echo $user['id'] ?>"><?php echo $user['username'] ?></a></td>
     		<td><?php echo $user['first_name'] ?></td>
     		<td><?php echo $user['last_name'] ?></td>   
     		<td><?php echo $user['email'] ?></td>
