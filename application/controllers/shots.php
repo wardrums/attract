@@ -11,7 +11,10 @@ class Shots extends Common_Auth_Controller {
 
 	function index()
 	{
-	
+		$this->load->model('shot_statuses_model');
+		$this->load->model('shot_stages_model');
+		$data['shot_statuses'] = $this->shot_statuses_model->get_shot_statuses();
+		$data['shot_stages'] = $this->shot_stages_model->get_shot_stages();
 		$data['shots'] = $this->shots_model->get_shots();
 		$data['title'] = 'Shots';
 		$data['use_sidebar'] = TRUE;
@@ -139,6 +142,18 @@ class Shots extends Common_Auth_Controller {
 	{
 		$this->shots_model->delete_shot($shot_id);
 		redirect('/shots/', 'refresh');
+	}
+
+	function edit_single($shot_id, $property, $value)
+	{
+		print($shot_id + $property + $value);
+		$data['shot'] = $this->shots_model->get_shots($shot_id);
+		if (empty($data['shot']))
+		{
+			show_404();
+		}
+		$this->shots_model->set_shot_property($shot_id, $property, $value);
+		return;
 	}
 }
 

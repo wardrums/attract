@@ -9,13 +9,5 @@ $(document).ready(function() {
     });
     */
     
-    $(".dd_status").on('click', function(e) {
-	    console.log("savenewlang has been clicked");
-	});
-	
-	$(".dd_status").on({
-		click: function(){
-			console.log("savenewlang has been clicked");
-		}
-	});
 });
+

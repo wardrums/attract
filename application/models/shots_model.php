@@ -84,6 +84,15 @@ class Shots_model extends CI_Model {
 		}
 	}
 
+	function set_shot_property($shot_id, $property, $value)
+	{	
+		$data = array(
+			$property => $value
+		);
+		$this->db->where('shot_id', $shot_id);
+		return $this->db->update('shots', $data);
+	}
+
 
 	function get_shots_order()
 	{

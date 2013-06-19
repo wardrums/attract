@@ -13,3 +13,15 @@ input.dial {
 input.dial:focus {
 	box-shadow: none;
 }
+
+.btn-group-cell .btn {
+	/*width: 80px;*/
+}
+
+.btn-group-cell a.btn {
+	/*text-align: left;*/
+}
+
+.btn-group-cell a.btn span{
+	text-align: right;
+}
