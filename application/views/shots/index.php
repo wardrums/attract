@@ -31,7 +31,7 @@ var make_status_dropdown = function(status) {
 	} else if (status == "review") {
 		var btn_style = '';
 		var label = 'Review';
-	}    
+	} 
 	
 	var markup = '<div class="btn-group btn-group-cell">';
 	var markup = markup + '<a class="btn btn-mini dropdown-toggle dropdown-status ' + btn_style + '" data-toggle="dropdown" href="#">';
@@ -68,7 +68,9 @@ var make_stages_dropdown = function(status) {
 		var label = 'Lighting';
 	} else if (status == "animation") {
 		var label = 'Animation';
-	}    
+	} else if (status == "simulation") {
+		var label = 'Simulation';
+	}     
 	
 	var markup = '<div class="btn-group btn-group-cell">';
 	var markup = markup + '<a class="btn btn-mini dropdown-toggle dropdown-stage" data-toggle="dropdown" href="#">';
