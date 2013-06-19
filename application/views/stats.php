@@ -1,5 +1,29 @@
 <?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
 
+
+<script>
+	$(function() {
+	    $('.dial').knob({
+	    	'min':0,
+	        'max':100,
+	        'readOnly': true,
+	        //'value': 34,
+	        'width': 150,
+	        'height': 150,
+	        'fgColor': '#333',
+	        //'dynamicDraw': true,
+	        'thickness': 0.2,
+	        'tickColorizeValues': true,
+			'skin':'tron'
+	    });
+		$('.dial-lighting').val(<?php echo $shots_stages['lighting'] ?>).trigger('change');
+		$('.dial-animation').val(<?php echo $shots_stages['animation'] ?>).trigger('change');
+		$('.dial-layout').val(<?php echo $shots_stages['layout'] ?>).trigger('change');
+
+	});
+</script>
+
+
 <div class="<?php echo $span_value ?>">
 
 <h2><?php echo $title ?></h2>
@@ -11,18 +35,26 @@
 	<div class="bar bar-danger" style="width: <?php echo $shots_statuses['fix'] ?>%;"></div>
 </div>
 
-<div class="row-fluid">
+<hr>
+
+<p>The following values are calculated based on the 'in_progress' shots.</p>
+
+<div class="row-fluid stats-knobs">
 	<div class="span3">
 		<h4>Layout</h4>
+		<p><input type="text" class="dial dial-layout" ></p>
 	</div>
 	<div class="span3">
 		<h4>Animation</h4>
+		<p><input type="text" class="dial dial-animation"></p>
 	</div>
 	<div class="span3">
 		<h4>Lighting</h4>
+		<p><input type="text" class="dial dial-lighting" ></p>
 	</div>
 	<div class="span3">
 		<h4>Other</h4>
+		<input type="text" class="dial">
 	</div>
 </div>
 

@@ -1,0 +1,15 @@
+.stats-knobs div{
+	text-align:center;
+}
+
+input.dial {
+	box-shadow: none;
+	transition: none;
+	border-radius: auto;
+	height: auto;
+	cursor: default;
+}
+
+input.dial:focus {
+	box-shadow: none;
+}
