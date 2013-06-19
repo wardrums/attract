@@ -124,10 +124,10 @@ $(document).ready(function() {
 		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
 		var shotID = tableRow.attr("id").split("_")[1];
 		
+		shotsTable.fnUpdate(status_label, rowPosition ,3);
 		query = '/shots/edit_single/' + shotID + '/status_id/' + status_id;
 		$.getJSON(query, function() {
-			console.log('Shot status updated');
-			shotsTable.fnUpdate(status_label, rowPosition ,3);
+			console.log('Shot status updated');	
 		});
 		
 	});
