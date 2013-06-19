@@ -3,6 +3,10 @@
 
 <script>
 	$(function() {
+		$('.dial-lighting').val(<?php echo $shots_stages['lighting'] ?>).trigger('change');
+		$('.dial-animation').val(<?php echo $shots_stages['animation'] ?>).trigger('change');
+		$('.dial-layout').val(<?php echo $shots_stages['layout'] ?>).trigger('change');
+	    
 	    $('.dial').knob({
 	    	'min':0,
 	        'max':100,
@@ -11,14 +15,12 @@
 	        'width': 150,
 	        'height': 150,
 	        'fgColor': '#333',
-	        //'dynamicDraw': true,
+	        'dynamicDraw': true,
 	        'thickness': 0.2,
 	        'tickColorizeValues': true,
 			'skin':'tron'
 	    });
-		$('.dial-lighting').val(<?php echo $shots_stages['lighting'] ?>).trigger('change');
-		$('.dial-animation').val(<?php echo $shots_stages['animation'] ?>).trigger('change');
-		$('.dial-layout').val(<?php echo $shots_stages['layout'] ?>).trigger('change');
+		
 
 	});
 </script>
