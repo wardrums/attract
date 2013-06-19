@@ -139,10 +139,10 @@ $(document).ready(function() {
 		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
 		var shotID = tableRow.attr("id").split("_")[1];
 		
+		shotsTable.fnUpdate(stage_label, rowPosition ,4);
 		query = '/shots/edit_single/' + shotID + '/stage_id/' + stage_id;
 		$.getJSON(query, function() {
 			console.log('Shot status updated');
-			shotsTable.fnUpdate(stage_label, rowPosition ,4);
 		});
 		
 	});
