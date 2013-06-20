@@ -11,7 +11,7 @@ class Users_model extends CI_Model {
 		if ($id === FALSE)
 		{
 					
-			$this->db->select('*'); 
+			$this->db->select('users.id, users.first_name, users.last_name'); 
 		    $this->db->from('users');
 		    $query = $this->db->get();
 				

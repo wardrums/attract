@@ -13,6 +13,8 @@ class Shots extends Common_Auth_Controller {
 	{
 		$this->load->model('shot_statuses_model');
 		$this->load->model('shot_stages_model');
+		$this->load->model('users_model');
+		$data['users'] = $this->users_model->get_users();
 		$data['shot_statuses'] = $this->shot_statuses_model->get_shot_statuses();
 		$data['shot_stages'] = $this->shot_stages_model->get_shot_stages();
 		$data['shots'] = $this->shots_model->get_shots();
@@ -154,6 +156,29 @@ class Shots extends Common_Auth_Controller {
 		}
 		$this->shots_model->set_shot_property($shot_id, $property, $value);
 		return;
+	}
+	
+	function get_users_selector($shot_id)
+	{
+		$this->load->model('users_model');
+		$this->load->model('shots_users_model');
+		
+		$data['active_users'] = $this->shots_users_model->get_users($shot_id);
+		$data['users'] = $this->users_model->get_users();
+	
+		$this->load->view('users_selector', $data);
+		
+	}
+	
+	function assign_users($shot_id)
+	{
+		$this->load->model('users_model');
+		$this->load->model('shots_users_model');
+		
+		$this->shots_users_model->set_users($shot_id);
+	
+		return;
+		
 	}
 }
 

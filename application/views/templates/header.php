@@ -28,6 +28,7 @@
       }
     </style>
     <link href="<?php echo assets_url(); ?>/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="<?php echo assets_url(); ?>/css/chosen.min.css" rel="stylesheet">
     <link href="<?php echo assets_url(); ?>/css/attract.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -46,7 +47,8 @@
     <script src="<?php echo assets_url(); ?>/js/jquery.knob.js"></script>
     <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo assets_url(); ?>/js/custom.dataTables.js"></script>
-    <script src="<?php echo assets_url(); ?>/js/jquery.jeditable.js"></script>
+    <!-- <script src="<?php echo assets_url(); ?>/js/jquery.jeditable.js"></script> -->
+    <script src="<?php echo assets_url(); ?>/js/jquery.chosen.min.js"></script>
     <script src="<?php echo assets_url(); ?>/js/jquery.attract.js"></script>
   </head>
 

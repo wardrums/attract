@@ -57,8 +57,7 @@ class Shots_users_model extends CI_Model {
 	function set_users($shot_id)
 	{
 		
-		$new_users_id = $this->input->post('shot_owners');
-		
+		$new_users_id = $this->input->post('shot_owners');	
 		
 		if ($new_users_id == '')
 		{

@@ -148,7 +148,55 @@ $(document).ready(function() {
 		});
 		
 	});
+	
+	
+	
+	$(document).on("click", ".load-users", function() {
+		var tableRow = $(this).parents("tr");
+		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
+		var shotID = tableRow.attr("id").split("_")[1];
+		
+		$('td').removeClass('target');
+		
+		$(this).parents('td').addClass('target');
+		$.get('/shots/get_users_selector/' + shotID, function(data) {
+			$('.target').html(data);
+			$('.target').append('<a class="btn btn-mini btn-primary assign-users">Assign</a><a class="btn btn-mini cancel-assign-users">Cancel</a>');
+		});
+		
+	});
+	
+	$(document).on("click", ".assign-users", function() {
+		var tableRow = $(this).parents("tr");
+		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
+		var shotID = tableRow.attr("id").split("_")[1];
+		
+		var selectedValues = $(this).prev().val();
+		console.log(selectedValues);
+		
+		$.post("/shots/assign_users/" + shotID, { 'shot_owners[]': selectedValues });
+		
+		$(this).prev().hide();
+		/*
+		$(this).parents('td').addClass('target');
+		$.get('/shots/get_users_selector/' + shotID, function(data) {
+			$('.target').html(data);
+			$('.target').append('<a class="btn btn-mini btn-primary">Assign</a><a class="btn btn-mini">Cancel</a>');
+		});
+		*/
+		
+	});
+	
+	$(document).on("click", ".cancel-assign-users", function() {
+		console.log($(this).parent().children().hide());
+	});
+	
+
+	
+
 });
+
+
 
 </script>
 
@@ -182,7 +230,7 @@ $(document).ready(function() {
 		    
     		<td><?php echo $shot['shot_stage_name'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
-    		<td><?php echo $shot['user_first_name']?></td>
+    		<td><?php echo $shot['user_first_name']?> <a class="btn btn-mini load-users" href="#">Assign...</a></td>
     	</tr>
 	<?php endforeach ?>
 		
