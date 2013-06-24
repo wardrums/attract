@@ -12,14 +12,13 @@ class Shots_model extends CI_Model {
 		{
 					
 			$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration'); 
-			$this->db->select('shot_statuses.shot_status_name, shot_stages.shot_stage_name, shots.shot_notes'); 
-			$this->db->select('GROUP_CONCAT(shots_users.user_id SEPARATOR ",") as user_id', FALSE); 
-			$this->db->select('GROUP_CONCAT(users.first_name SEPARATOR ",") as user_first_name', FALSE);
+			$this->db->select('statuses.status_name, shots.shot_notes'); 
+			$this->db->select('GROUP_CONCAT(DISTINCT shots_users.user_id SEPARATOR ",") as user_id', FALSE); 
+			$this->db->select('GROUP_CONCAT(shots_tasks.shot_task_id SEPARATOR ",") as shot_task_id', FALSE);
 		    $this->db->from('shots');
-		   	$this->db->join('shots_users', 'shots_users.shot_id = shots.shot_id');
-			$this->db->join('users', 'users.id = shots_users.user_id', 'left');
-			$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
-			$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left');
+		   	$this->db->join('shots_users', 'shots_users.shot_id = shots.shot_id', 'left');
+			$this->db->join('statuses', 'statuses.status_id = shots.status_id', 'left');
+			$this->db->join('shots_tasks', 'shots_tasks.shot_id = shots.shot_id', 'left');
 			$this->db->group_by('shots.shot_id'); 
 			$this->db->order_by('shots.shot_order', 'asc');
 		    $query = $this->db->get(); 
@@ -33,8 +32,7 @@ class Shots_model extends CI_Model {
 		$this->db->select('*'); 
 	    $this->db->from('shots');
 		$this->db->join('scenes', 'scenes.scene_id = shots.scene_id', 'left');		
-		$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
-		$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left'); 
+		$this->db->join('statuses', 'statuses.status_id = shots.status_id', 'left');
 		$this->db->where('shots.shot_id', $id); 
 		$query = $this->db->get();
 		
@@ -54,7 +52,6 @@ class Shots_model extends CI_Model {
 				'scene_id' => $this->input->post('scene_id'),
 				'shot_duration' => $this->input->post('shot_duration'),
 				'status_id' => $this->input->post('status_id'),
-				'stage_id' => $this->input->post('stage_id'),
 				'shot_order' => $this->input->post('shot_order')
 			);
 			
@@ -75,7 +72,6 @@ class Shots_model extends CI_Model {
 				'shot_name' => $this->input->post('shot_name'),
 				'shot_description' =>  $this->input->post('shot_description'),
 				'status_id' => $this->input->post('status_id'),
-				'stage_id' => $this->input->post('stage_id'),
 				'shot_notes' =>  $this->input->post('shot_notes'),
 				'shot_duration' => $this->input->post('shot_duration')
 			);
@@ -156,10 +152,10 @@ class Shots_model extends CI_Model {
 	
 	function get_statuses_and_stages(){
 		$this->db->select('shots.shot_id, shots.shot_name, shots.shot_duration'); 
-		$this->db->select('shot_statuses.shot_status_name, shot_stages.shot_stage_name'); 
+		$this->db->select('shot_statuses.shot_status_name, tasks.task_name'); 
 	    $this->db->from('shots');
 		$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
-		$this->db->join('shot_stages', 'shot_stages.shot_stage_id = shots.stage_id', 'left');
+		$this->db->join('tasks', 'tasks.task_id = shots.stage_id', 'left');
 		//$this->db->group_by('shots.shot_id'); 
 		//$this->db->order_by('shots.shot_order', 'asc');
 	    $query = $this->db->get(); 

@@ -83,7 +83,7 @@ var make_stages_dropdown = function(status) {
 // here whe have some code generated with PHP, maybe not very elegant but it works
 
 var s = '';
-<?php foreach ($shot_stages as $shot_stage): ?>
+<?php foreach ($tasks as $shot_stage): ?>
 s = s + '<li><a href="#" stage_id="<?php echo $shot_stage['shot_stage_id'] ?>" stage_label="<?php echo $shot_stage['shot_stage_name'] ?>"><?php echo $shot_stage['shot_stage_name'] ?></a></li>';
 <?php endforeach ?>
 var stages_list = s;
@@ -173,9 +173,7 @@ $(document).ready(function() {
 		
 		var selectedValues = $(this).prev().val();
 		console.log(selectedValues);
-		
 		$.post("/shots/assign_users/" + shotID, { 'shot_owners[]': selectedValues });
-		
 		$(this).prev().hide();
 		/*
 		$(this).parents('td').addClass('target');
@@ -207,7 +205,7 @@ $(document).ready(function() {
 			<th>Description</th>
 			<th>Duration</th>
 			<th>Status</th>
-			<th>Stage</th>
+			<th>Tasks</th>
 			<th>Notes</th>
 			<th>Owners</th>
 		</tr>
@@ -218,7 +216,7 @@ $(document).ready(function() {
     		<td><a href="/shots/edit/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
     		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['shot_duration'] ?></td>
-    		<td><?php echo $shot['shot_status_name']?></td>   
+    		<td><?php echo $shot['status_name']?></td>   
     			<!-- <div class="btn-group dd_status">
 				    <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
 				    <?php echo $shot['shot_status_name'] ?>
@@ -228,9 +226,9 @@ $(document).ready(function() {
 				    </ul>
 			    </div> -->
 		    
-    		<td><?php echo $shot['shot_stage_name'] ?></td>
+    		<td><?php echo $shot['shot_task_id'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
-    		<td><?php echo $shot['user_first_name']?> <a class="btn btn-mini load-users" href="#">Assign...</a></td>
+    		<td><?php echo $shot['user_id']?> <a class="btn btn-mini load-users" href="#">Assign...</a></td>
     	</tr>
 	<?php endforeach ?>
 		
@@ -241,7 +239,7 @@ $(document).ready(function() {
 			<th>Description</th>
 			<th>Duration</th>
 			<th>Status</th>
-			<th>Stage</th>
+			<th>Tasks</th>
 			<th>Notes</th>
 			<th>Owners</th>
 		</tr>

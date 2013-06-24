@@ -19,7 +19,6 @@
 <legend>Shot details</legend>
 
 <!-- Hidden inputs-->
-<?php echo form_hidden('user_id', 3); ?>
 <?php echo form_hidden('shot_order', $shot_order); ?>
 
 <!-- Text input-->

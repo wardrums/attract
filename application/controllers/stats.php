@@ -34,16 +34,16 @@ class Stats extends Common_Auth_Controller {
 		$shot_statuses = $this->shot_statuses_model->get_shot_statuses();
 		
 		// we get the stages
-		$this->load->model('shot_stages_model');
-		$shot_stages = $this->shot_stages_model->get_shot_stages();
+		$this->load->model('tasks_model');
+		$tasks = $this->tasks_model->get_tasks();
 		
 		// we get the total duration of the show (to expose in UI and use for percent calculation)
 		$total_show_duration = $this->shots_model->get_shots_sum_duration();
 		$in_progress_show_duration = $this->shots_model->get_shots_sum_duration('in_progress');
 		
-		// initialize an auxiliary array to extract some indexes from $shot_statuses and $shot_stages
+		// initialize an auxiliary array to extract some indexes from $shot_statuses and $tasks
 		$shot_statuses_names = array();
-		$shot_stages_names = array();
+		$tasks_names = array();
 		
 		// in particular we extract the shot_status_name and build an array only with those values
 		foreach ($shot_statuses as $shot_status)
@@ -51,9 +51,9 @@ class Stats extends Common_Auth_Controller {
 			array_push($shot_statuses_names, $shot_status['shot_status_name']);
 		}
 		
-		foreach ($shot_stages as $shot_stage)
+		foreach ($tasks as $shot_stage)
 		{
-			array_push($shot_stages_names, $shot_stage['shot_stage_name']);
+			array_push($tasks_names, $shot_stage['shot_stage_name']);
 		}
 	
 		
@@ -64,9 +64,9 @@ class Stats extends Common_Auth_Controller {
 			array('shots_count' => 0, 'shots_duration_frames' => 0)
 		);
 		
-		// we do the same for shot_stages
-		$shot_stages_container = array_fill_keys(
-			$shot_stages_names, 
+		// we do the same for tasks
+		$tasks_container = array_fill_keys(
+			$tasks_names, 
 			array('shots_count' => 0, 'shots_duration_frames' => 0)
 		);
 		
@@ -81,11 +81,11 @@ class Stats extends Common_Auth_Controller {
 			$shot_statuses_container[$shot['shot_status_name']]['shots_count']++;
 			$shot_statuses_container[$shot['shot_status_name']]['shots_duration_frames'] += $shot['shot_duration'];
 			
-			// here we fill the shot_stages array, only with shots that are in progress for the moment
+			// here we fill the tasks array, only with shots that are in progress for the moment
 			if ($shot['shot_status_name'] == 'in_progress')
 			{
-				$shot_stages_container[$shot['shot_stage_name']]['shots_count']++;
-				$shot_stages_container[$shot['shot_stage_name']]['shots_duration_frames'] += $shot['shot_duration'];
+				$tasks_container[$shot['shot_stage_name']]['shots_count']++;
+				$tasks_container[$shot['shot_stage_name']]['shots_duration_frames'] += $shot['shot_duration'];
 			}
 		}
 		
@@ -98,7 +98,7 @@ class Stats extends Common_Auth_Controller {
 			$data['shots_statuses'][$shots_group] = percentage($value['shots_duration_frames'], $total_show_duration );
 		}
 		
-		foreach ($shot_stages_container as $shots_group => $value) {
+		foreach ($tasks_container as $shots_group => $value) {
 			$data['shots_stages'][$shots_group] = percentage($value['shots_duration_frames'], $in_progress_show_duration );
 		}
 		
@@ -122,13 +122,13 @@ class Stats extends Common_Auth_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('scenes_model');
 		$this->load->model('shot_statuses_model');
-		$this->load->model('shot_stages_model');
+		$this->load->model('tasks_model');
 		$this->load->model('shots_users_model');
 		
 		$data['title'] = 'Create a new shot';
 		$data['scenes'] = $this->scenes_model->get_scenes();
 		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
-		$data['stages'] = $this->shot_stages_model->get_shot_stages();
+		$data['stages'] = $this->tasks_model->get_tasks();
 		$last_shot_position = $this->shots_model->get_last_shot_position();
 		$data['shot_order'] = $last_shot_position['shot_order'] + 1;
 		
@@ -164,14 +164,14 @@ class Stats extends Common_Auth_Controller {
 	{
 		$this->load->model('scenes_model');
 		$this->load->model('shot_statuses_model');
-		$this->load->model('shot_stages_model');
+		$this->load->model('tasks_model');
 		$this->load->model('shots_users_model');
 		$this->load->model('users_model');
 		
 		$data['shot'] = $this->shots_model->get_shots($shot_id);
 		$data['scenes'] = $this->scenes_model->get_scenes();
 		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
-		$data['stages'] = $this->shot_stages_model->get_shot_stages();
+		$data['stages'] = $this->tasks_model->get_tasks();
 		$data['users'] = $this->users_model->get_users();
 		$data['shot_users'] = $this->shots_users_model->get_users($shot_id);
 		$data['title'] = 'Edit Shot';

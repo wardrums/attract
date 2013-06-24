@@ -7,7 +7,6 @@ class Admin extends Admin_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->model('users_model');
-		//$this->load->model('ion_auth_model');
 	}
 
 	function index()
@@ -25,7 +24,15 @@ class Admin extends Admin_Controller {
 
 	function users()
 	{
-		$data['users'] = $this->users_model->get_users();
+		$this->load->library('ion_auth');
+		$this->load->helper('language');
+		$this->load->model('models/ion_auth_model');
+		$data['users'] = $this->ion_auth->users()->result();
+		foreach ($data['users'] as $k => $user)
+		{
+			$data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+		}
+		//$data['users'] = $this->ion_auth_model->users();
 		$data['title'] = 'Users';
 		$data['use_sidebar'] = TRUE;
 		
@@ -36,169 +43,46 @@ class Admin extends Admin_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	function shot_stages()
+	function tasks()
 	{
-		$this->load->model('shot_stages_model');
-		$data['shot_stages'] = $this->shot_stages_model->get_shot_stages();
-		$data['title'] = 'Shot stages';
+		$this->load->model('tasks_model');
+		$data['tasks'] = $this->tasks_model->get_tasks();
+		$data['title'] = 'Tasks';
 		$data['use_sidebar'] = TRUE;
 		
 	
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
-		$this->load->view('admin/shot_stages', $data);
+		$this->load->view('admin/tasks', $data);
 		$this->load->view('templates/footer');
 	}
 	
-	function shot_stages_create()
+	function tasks_create()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
-		$this->load->model('shot_stages_model');
-		$data['title'] = 'Shot stages';
+		$this->load->model('tasks_model');
+		$data['title'] = 'Create task';
 		$data['use_sidebar'] = TRUE;
 		
-		$this->form_validation->set_rules('shot_stage_name', 'text', 'required');
+		$this->form_validation->set_rules('task_name', 'text', 'required');
 		
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header', $data);	
-			$this->load->view('admin/shot_stages_create', $data);
+			$this->load->view('admin/tasks_create', $data);
 			$this->load->view('templates/footer');
 			
 		}
 		else
 		{
-			$this->shot_stages_model->create_shot_stage();
+			$this->tasks_model->create_task();
 
 			$this->load->view('templates/header', $data);	
-			$this->load->view('admin/shot_stages_create', $data);
+			$this->load->view('admin/tasks_create', $data);
 			$this->load->view('templates/footer');
 			
 		}
-	}
-	
-	function create()
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$this->load->model('scenes_model');
-		$this->load->model('shot_statuses_model');
-		$this->load->model('shot_stages_model');
-		$this->load->model('shots_users_model');
-		
-		$data['title'] = 'Create a new shot';
-		$data['scenes'] = $this->scenes_model->get_scenes();
-		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
-		$data['stages'] = $this->shot_stages_model->get_shot_stages();
-		$last_shot_position = $this->shots_model->get_last_shot_position();
-		$data['shot_order'] = $last_shot_position['shot_order'] + 1;
-		
-		$this->form_validation->set_rules('shot_name', 'text', 'required');
-		$this->form_validation->set_rules('shot_description', 'text', 'required');
-		
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/create', $data);
-			$this->load->view('templates/footer');
-			
-		}
-		else
-		{
-			$shot_data = $this->shots_model->set_shots();
-			// TODO at the moment we assign to one hardcoded user, should be changed
-			$this->shots_users_model->set_user($shot_data['shot_id'], $shot_data['user_id']);
-			
-			// we reload some data
-			$last_shot_position = $this->shots_model->get_last_shot_position();
-			$data['shot_order'] = $last_shot_position['shot_order'] + 1;
-			
-			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/create', $data);
-			$this->load->view('templates/footer');
-			
-		}
-	}
-	
-	function edit($shot_id)
-	{
-		$this->load->model('scenes_model');
-		$this->load->model('shot_statuses_model');
-		$this->load->model('shot_stages_model');
-		$this->load->model('shots_users_model');
-		$this->load->model('users_model');
-		
-		$data['shot'] = $this->shots_model->get_shots($shot_id);
-		$data['scenes'] = $this->scenes_model->get_scenes();
-		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
-		$data['stages'] = $this->shot_stages_model->get_shot_stages();
-		$data['users'] = $this->users_model->get_users();
-		$data['shot_users'] = $this->shots_users_model->get_users($shot_id);
-		$data['title'] = 'Edit Shot';
-		
-		if (empty($data['shot']))
-		{
-			show_404();
-		}
-		
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
-		
-		$this->form_validation->set_rules('shot_name', 'text', 'required');
-		$this->form_validation->set_rules('shot_description', 'text', 'required');
-		
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/edit', $data);
-			$this->load->view('templates/footer');
-			
-		}
-		else
-		{
-			
-				
-			$this->shots_model->set_shots($shot_id);
-			$this->shots_users_model->set_users($shot_id);
-			redirect('/shots/', 'refresh');
-			/*
-			// we reset the data array before reloading the page
-			$data['shot'] = $this->shots_model->get_shots($shot_id);
-			$data['shot_users'] = $this->shots_users_model->get_users($shot_id);
-			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/edit', $data);
-			$this->load->view('templates/footer');
-			*/
-		}
-	}
-
-	function delete($shot_id)
-	{
-		$this->shots_model->delete_shot($shot_id);
-		redirect('/shots/', 'refresh');
-	}
+	}	
 }
-
-/*
-class Shots extends CI_Controller {
-
-	public function view($shot = 'home') {
-	
-		if ( ! file_exists('application/views/shots/'.$shot.'.php')) {
-			// Whoops, we don't have a page for that!
-			show_404();
-		}
-		
-		$data['title'] = ucfirst($shot); // Capitalize the first letter
-		
-		$this->load->view('templates/header', $data);
-		$this->load->view('shots/'.$shot, $data);
-		$this->load->view('templates/footer', $data);
-
-	}
-	
-}
- */
