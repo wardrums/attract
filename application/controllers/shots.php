@@ -87,7 +87,7 @@ class Shots extends Common_Auth_Controller {
 		}
 	}
 	
-	function edit($shot_id)
+	function edit($shot_id, $async = FALSE)
 	{
 		$this->load->model('scenes_model');
 		$this->load->model('statuses_model');
@@ -121,10 +121,16 @@ class Shots extends Common_Auth_Controller {
 		
 		if ($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/edit', $data);
-			$this->load->view('templates/footer');
-			
+			if ($async)
+			{
+				$this->load->view('shots/edit_ajax', $data);
+			}
+			else 
+			{
+				$this->load->view('templates/header', $data);	
+				$this->load->view('shots/edit', $data);
+				$this->load->view('templates/footer');	
+			}
 		}
 		else
 		{

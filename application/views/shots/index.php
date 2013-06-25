@@ -43,11 +43,6 @@ var make_status_dropdown = function(status) {
 
 // here whe have some code generated with PHP, maybe not very elegant but it works
 
-var s = '';
-<?php foreach ($shot_statuses as $shot_status): ?>
-s = s + '<li><a href="#" status_id="<?php echo $shot_status['shot_status_id'] ?>" status_label="<?php echo $shot_status['shot_status_name'] ?>"><?php echo $shot_status['shot_status_name'] ?></a></li>';
-<?php endforeach ?>
-var statuses_list = s;
 
 var make_stages_dropdown = function(status) {
 	
@@ -80,13 +75,6 @@ var make_stages_dropdown = function(status) {
 	return markup;
 };
 
-// here whe have some code generated with PHP, maybe not very elegant but it works
-
-var s = '';
-<?php foreach ($tasks as $shot_stage): ?>
-s = s + '<li><a href="#" stage_id="<?php echo $shot_stage['shot_stage_id'] ?>" stage_label="<?php echo $shot_stage['shot_stage_name'] ?>"><?php echo $shot_stage['shot_stage_name'] ?></a></li>';
-<?php endforeach ?>
-var stages_list = s;
 
 
 // DataTables functionality (we inizialize the table and call it shotsTable)
@@ -150,54 +138,50 @@ $(document).ready(function() {
 	});
 	
 	
-	
-	$(document).on("click", ".load-users", function() {
+	$(document).on("click", ".edit-shot", function() {
+		
+		//var stage_id = $(this).attr('stage_id');
+		//var stage_label = $(this).attr('stage_label');
 		var tableRow = $(this).parents("tr");
 		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
 		var shotID = tableRow.attr("id").split("_")[1];
 		
-		$('td').removeClass('target');
+		//shotsTable.fnUpdate(stage_label, rowPosition ,4);
 		
-		$(this).parents('td').addClass('target');
-		$.get('/shots/get_users_selector/' + shotID, function(data) {
-			$('.target').html(data);
-			$('.target').append('<a class="btn btn-mini btn-primary assign-users">Assign</a><a class="btn btn-mini cancel-assign-users">Cancel</a>');
+		query = '/shots/edit/' + shotID + '/1/';
+		$.get(query, function(data) {
+			$('#row_' + shotID).attr('colspan', '7').css('border', '1px solid #000').html('a');
+			//$('#test_load').html(data);
+			console.log('Shot status updated');
 		});
 		
-	});
-	
-	$(document).on("click", ".assign-users", function() {
-		var tableRow = $(this).parents("tr");
-		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
-		var shotID = tableRow.attr("id").split("_")[1];
-		
-		var selectedValues = $(this).prev().val();
-		console.log(selectedValues);
-		$.post("/shots/assign_users/" + shotID, { 'shot_owners[]': selectedValues });
-		$(this).prev().hide();
-		/*
-		$(this).parents('td').addClass('target');
-		$.get('/shots/get_users_selector/' + shotID, function(data) {
-			$('.target').html(data);
-			$('.target').append('<a class="btn btn-mini btn-primary">Assign</a><a class="btn btn-mini">Cancel</a>');
-		});
-		*/
+		console.log(shotID);
 		
 	});
-	
-	$(document).on("click", ".cancel-assign-users", function() {
-		console.log($(this).parent().children().hide());
-	});
-	
-
 	
 
 });
-
-
-
 </script>
+<div id="test_load">
+	a
+</div>
 
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	<h3 id="myModalLabel">Modal header</h3>
+	</div>
+	<div class="modal-body">
+	<p>One fine body…</p>
+	</div>
+	<div class="modal-footer">
+	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	<button class="btn btn-primary">Save changes</button>
+	</div>
+</div>
+
+<a class="btn" data-toggle="modal" href="/shots/edit/1/1/" data-target="#myModal">Launch modal</a>
+    
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="shots">
 	<thead>
 		<tr>
@@ -228,7 +212,7 @@ $(document).ready(function() {
 		    
     		<td><?php echo $shot['shot_task_id'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
-    		<td><?php echo $shot['user_id']?> <a class="btn btn-mini load-users" href="#">Assign...</a></td>
+    		<td><?php echo $shot['user_id']?> <a class="btn btn-mini edit-shot" href="#">Assign...</a></td>
     	</tr>
 	<?php endforeach ?>
 		
