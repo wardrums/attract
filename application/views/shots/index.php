@@ -149,8 +149,9 @@ $(document).ready(function() {
 		//shotsTable.fnUpdate(stage_label, rowPosition ,4);
 		
 		query = '/shots/edit/' + shotID + '/1/';
+		
 		$.get(query, function(data) {
-			$('#row_' + shotID).attr('colspan', '7').css('border', '1px solid #000').html('a');
+			$('#row_' + shotID).html('<td colspan=6">' + data + '<td>');
 			//$('#test_load').html(data);
 			console.log('Shot status updated');
 		});
@@ -162,25 +163,6 @@ $(document).ready(function() {
 
 });
 </script>
-<div id="test_load">
-	a
-</div>
-
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	<h3 id="myModalLabel">Modal header</h3>
-	</div>
-	<div class="modal-body">
-	<p>One fine body…</p>
-	</div>
-	<div class="modal-footer">
-	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	<button class="btn btn-primary">Save changes</button>
-	</div>
-</div>
-
-<a class="btn" data-toggle="modal" href="/shots/edit/1/1/" data-target="#myModal">Launch modal</a>
     
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="shots">
 	<thead>
