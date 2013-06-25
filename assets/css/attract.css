@@ -25,3 +25,15 @@ input.dial:focus {
 .btn-group-cell a.btn span{
 	text-align: right;
 }
+
+.expanded-edit input[type="text"]{
+	height: 14px;
+	font-size: 10px;
+	line-height: 14px;
+	width: 90%;
+}
+
+.expanded-edit textarea {
+	width: 90%;
+	height: 99px;
+}

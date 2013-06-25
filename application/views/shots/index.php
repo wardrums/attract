@@ -140,23 +140,66 @@ $(document).ready(function() {
 	
 	$(document).on("click", ".edit-shot", function() {
 		
-		//var stage_id = $(this).attr('stage_id');
-		//var stage_label = $(this).attr('stage_label');
 		var tableRow = $(this).parents("tr");
 		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
-		var shotID = tableRow.attr("id").split("_")[1];
-		
+		var shotID = tableRow.attr("id").split("_")[1];	
 		//shotsTable.fnUpdate(stage_label, rowPosition ,4);
 		
 		query = '/shots/edit/' + shotID + '/1/';
 		
 		$.get(query, function(data) {
-			$('#row_' + shotID).html('<td colspan=6">' + data + '<td>');
+			$('#row_' + shotID).hide();
+			$('#row_' + shotID).after('<tr class="expanded-edit"><td colspan=7">' + data + '<td><tr>');
+			// TODO investigate why another <td> appears and why we have to remove it
+			// with the following line
+			$('#row_' + shotID).next().children('td:last').remove();
 			//$('#test_load').html(data);
-			console.log('Shot status updated');
+			//console.log('Shot status updated');
 		});
 		
 		console.log(shotID);
+		
+	});
+	
+	$(document).on("click", ".edit-shot-cancel", function() {
+		
+		var editRow = $(this).parents("tr");
+		var originalRow = editRow.prev();
+		
+		$(editRow).remove();
+		$(originalRow).show();
+		
+		console.log('Canceled any edit');
+		
+	});
+	
+	$(document).on("click", ".edit-shot-submit", function() {
+		
+		// That's how we get the shot id
+		var editRow = $(this).parents("tr");
+		var originalRow = editRow.prev();
+		var rowPosition = shotsTable.fnGetPosition(originalRow[0]);
+		var shotID = originalRow.attr("id").split("_")[1];	
+		
+		console.log('Submitting edit for shot ' + shotID);
+		
+		// Here we get all the data to submit for post
+		var fields = $(".expanded-edit :input").serializeArray();
+		//console.log(fields);
+			
+		$.post("/shots/edit/" + shotID, fields)
+		.done(function(data) {
+		  	//console.log("Data Loaded: " + data);
+			console.log('success');
+		  	$(editRow).remove();
+			$(originalRow).show();
+		  
+		});
+		
+		//$(editRow).remove();
+		//$(originalRow).show();
+		
+		//console.log('Canceled any edit');
 		
 	});
 	
@@ -194,7 +237,7 @@ $(document).ready(function() {
 		    
     		<td><?php echo $shot['shot_task_id'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
-    		<td><?php echo $shot['user_id']?> <a class="btn btn-mini edit-shot" href="#">Assign...</a></td>
+    		<td><?php echo $shot['user_id']?> <a class="btn btn-mini edit-shot" href="#"><i class="icon-edit"></i> Edit</a></td>
     	</tr>
 	<?php endforeach ?>
 		

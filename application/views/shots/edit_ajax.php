@@ -71,9 +71,7 @@
 					shot_task_id = data;
 					$(target).after(multiselect_users(shot_task_id));		
 				});
-				
-				
-				
+
 				// we remove temporary classes and assign the normal one
 				$(this).parent().removeClass('task_id_new').addClass('task_id');
 				$(this).parent().next().removeClass('status_id_new').addClass('status_id');
@@ -125,51 +123,46 @@
 	});
 </script>
 
-<h2>Edit</h2>
-
-
-<!-- Form Name -->
-<legend>Shot <?php echo $shot['scene_id'] ?> details</legend>
-
 <!-- Hidden inputs-->
 <?php echo form_hidden('shot_id', $shot['shot_id']); ?>
 
-<!-- Text input-->
-<div class="control-group">
-	  <label class="control-label" for="shot_name">Name</label>
-	  <div class="controls">
-		    <input id="shot_name" name="shot_name" value="<?php echo $shot['shot_name']; ?>" class="input-xlarge" required="" type="text">
-		    <p class="help-block">Shot name, such as "a2s32"</p>
-	  </div>
+<div class="row-fluid">	
+	<!-- Text input-->
+	<div class="control-group span4">
+		<label class="control-label" for="shot_name">Name</label>
+		<div class="controls">
+			<input id="shot_name" name="shot_name" value="<?php echo $shot['shot_name']; ?>" class="input-xlarge" required="" type="text">
+			<p class="help-block">Shot name, such as "a2s32"</p>
+		</div>
+		
+		<!-- Select Scene -->
+		<label class="control-label" for="scene_id">Scene</label>
+		<div class="controls">
+			<select id="scene_id" name="scene_id" class="input-xlarge">
+		      	<?php foreach ($scenes as $scene): ?>
+					<option value="<?php echo $scene['scene_id'] ?>"  <?php echo ($scene['scene_id'] == $shot['scene_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $scene['scene_name'] ?></option>
+				<?php endforeach ?>
+		    </select>
+	  	</div>
+	</div>
+	
+	<!-- Textarea -->
+	<div class="control-group span4">
+	  	<label class="control-label" for="shot_description">Shot description</label>
+	  	<div class="controls">                     
+	    	<textarea id="shot_description" name="shot_description"><?php echo $shot['shot_description']; ?></textarea>
+	  	</div>
+	</div>
+	
+	<!-- Textarea -->
+	<div class="control-group span4">
+	  	<label class="control-label" for="shot_notes">Notes</label>
+	  	<div class="controls">                     
+	    	<textarea id="shot_notes" name="shot_notes"><?php echo $shot['shot_notes']; ?></textarea>
+	  	</div>
+	</div>
 </div>
 
-<!-- Textarea -->
-<div class="control-group">
-  	<label class="control-label" for="shot_description">Shot description</label>
-  	<div class="controls">                     
-    	<textarea id="shot_description" name="shot_description"><?php echo $shot['shot_description']; ?></textarea>
-  	</div>
-</div>
-
-<!-- Textarea -->
-<div class="control-group">
-  	<label class="control-label" for="shot_notes">Notes</label>
-  	<div class="controls">                     
-    	<textarea id="shot_notes" name="shot_notes"><?php echo $shot['shot_notes']; ?></textarea>
-  	</div>
-</div>
-
-<!-- Select Scene -->
-<div class="control-group">
-	<label class="control-label" for="scene_id">Scene</label>
-	<div class="controls">
-		<select id="scene_id" name="scene_id" class="input-xlarge">
-	      	<?php foreach ($scenes as $scene): ?>
-				<option value="<?php echo $scene['scene_id'] ?>"  <?php echo ($scene['scene_id'] == $shot['scene_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $scene['scene_name'] ?></option>
-			<?php endforeach ?>
-	    </select>
-  	</div>
-</div>
 
 <!-- Select Status -->
 <div class="control-group">
@@ -265,10 +258,11 @@
 
 <!-- Button -->
 <div class="control-group">
-  <label class="control-label" for="submit">Submit</label>
-  <div class="controls">
-    <button id="submit" name="submit" class="btn btn-inverse">Edit Shot</button>
-    <a href="<?php echo '/shots/delete/' . $shot['shot_id'] ?>" id="submit" name="submit" class="btn btn-danger">Delete Shot</a>
-  </div>
+	<label class="control-label" for="submit">Submit</label>
+	<div class="controls">
+		<a href="#" class="btn btn-inverse edit-shot-submit">Edit Shot</a>
+		<a href="#" class="btn edit-shot-cancel">Cancel</a>
+		<a href="<?php echo '/shots/delete/' . $shot['shot_id'] ?>" id="submit" name="submit" class="btn btn-danger">Delete Shot</a>
+	</div>
 </div>
 
