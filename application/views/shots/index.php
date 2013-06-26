@@ -87,6 +87,7 @@ $(document).ready(function() {
 			$('td:eq(3)', nRow).html(make_status_dropdown(aData[3]));
 			$('td:eq(4)', nRow).html(make_stages_dropdown(aData[4]));
 		}
+	//shotsTable.fnStandingRedraw();
     });
     
     // the next two functions populate dynamically the content of the dropdown menu
@@ -159,7 +160,17 @@ $(document).ready(function() {
 		
 		console.log(shotID);
 		
+		
+		var scrollVal = tableRow.offset().top - 40;
+		//console.log(scrollVal + 50);
+		
+		$('html, body').animate({
+			scrollTop: scrollVal
+		}, 500);
+				
+		
 	});
+	
 	
 	$(document).on("click", ".edit-shot-cancel", function() {
 		
@@ -170,7 +181,7 @@ $(document).ready(function() {
 		$(originalRow).show();
 		
 		console.log('Canceled any edit');
-		
+
 	});
 	
 	$(document).on("click", ".edit-shot-submit", function() {
