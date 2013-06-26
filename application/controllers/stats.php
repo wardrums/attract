@@ -6,10 +6,9 @@ class Stats extends Common_Auth_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->model('shots_model');
+		$this->load->model('shots_tasks_model');
 	}
-	
-	
+
 
 	function index()
 	{

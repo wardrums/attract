@@ -26,7 +26,6 @@ class Admin extends Admin_Controller {
 	{
 		$this->load->library('ion_auth');
 		$this->load->helper('language');
-		$this->load->model('models/ion_auth_model');
 		$data['users'] = $this->ion_auth->users()->result();
 		foreach ($data['users'] as $k => $user)
 		{

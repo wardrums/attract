@@ -203,6 +203,11 @@ $(document).ready(function() {
 		
 	});
 	
+	$(document).on("click", ".add-task", function() {
+		$(this).parent().before(dropdown_group());
+		console.log('adding dropdowns');
+	});
+	
 
 });
 </script>

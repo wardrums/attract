@@ -1,19 +1,21 @@
 <script>
 	// we generate dropdown menus from the $tasks and $statuses tables
 	
-	var dropdown_group = '<div class="controls">' +
-    	'<select class="task_id_new input-xlarge">' +
-    		<?php foreach ($tasks as $task): ?>
-				'<option value="<?php echo $task['task_id'] ?>"><?php echo $task['task_name'] ?></option>' +
-			<?php endforeach ?>
-		'</select>' +
-		'<select class="status_id_new input-xlarge">' +
-	      	<?php foreach ($statuses as $status): ?>
-				'<option value="<?php echo $status['status_id'] ?>"><?php echo $status['status_name'] ?></option>' +
-			<?php endforeach ?>
-	    '</select>' +
-	    '<a class="btn remove-task">Remove Task</a>' +
-	'</div>';
+	var dropdown_group = function() { 
+		return '<div class="controls">' +
+	    	'<select class="task_id_new input-xlarge">' +
+	    		<?php foreach ($tasks as $task): ?>
+					'<option value="<?php echo $task['task_id'] ?>"><?php echo $task['task_name'] ?></option>' +
+				<?php endforeach ?>
+			'</select>' +
+			'<select class="status_id_new input-xlarge">' +
+		      	<?php foreach ($statuses as $status): ?>
+					'<option value="<?php echo $status['status_id'] ?>"><?php echo $status['status_name'] ?></option>' +
+				<?php endforeach ?>
+		    '</select>' +
+		    '<a class="btn remove-task">Remove Task</a>' +
+		'</div>';
+	};
 	
 	var multiselect_users = function(shot_task_id) {
 		return '<select class="task_owners" name="task_owners[' + shot_task_id + '][]" class="input-xlarge" multiple="multiple">' +
@@ -36,11 +38,7 @@
 	    	console.log(task_id);
 			$(this).parent().remove();
 		});
-		
-		$(document).on("click", ".add-task", function() {
-			$(this).parent().before(dropdown_group);
-		});
-		
+			
 		$(document).on("click", ".task_id", function() {
 			old_id = $(this).val();
 		});
