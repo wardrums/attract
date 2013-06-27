@@ -11,7 +11,7 @@
 	    
 	    $('.dial').knob({
 	    	'min':0,
-	        //'max':100,
+	        'max':100,
 	        'readOnly': true,
 	        //'value': 34,
 	        'width': 120,
@@ -32,24 +32,34 @@
 <h2><?php echo $title ?></h2>
 
 <?php foreach ($tasks as $task_name => $value): ?>
-<?php $count = 0; ?>
-<h3><?php echo $task_name; ?></h3>
 
-<div class="row-fluid stats-knobs">
-	<?php foreach ($value['statuses'] as $status_name => $status): ?>
-	<div class="span2<?php $count == 0 ? print(" offset1") : print(""); ?>">
-		<h4><?php echo $status_name ?></h4>
-		<p><input type="text" data-max="<?php echo $value['tasks_count']; ?>" class="dial dial-<?php echo $task_name ?>-<?php echo $status_name ?>" ></p>
+	<h3><?php echo $task_name; ?></h3>
+	
+	<div class="row-fluid">
+		<div class="progress">
+		<?php foreach ($value['statuses'] as $status_name => $status): ?>
+			<?php if ($status_name != 'todo' AND $status > 0): ?>
+			<div class="bar bar-success" style="width: <?php echo $status ?>%;"><span><?php echo $status_name ?></span></div>
+			<?php endif ?>
+		<?php endforeach ?>
+		</div>
 	</div>
-	<?php $count++; ?>
-	<?php endforeach ?>
-</div>
+	
+	<!-- <div class="row-fluid stats-knobs">
+		<?php foreach ($value['statuses'] as $status_name => $status): ?>
+		<div class="span2<?php $count == 0 ? print(" offset1") : print(""); ?>">
+			<h4><?php echo $status_name ?></h4>
+			<p><input type="text"  class="dial dial-<?php echo $task_name ?>-<?php echo $status_name ?>" ></p>
+		</div>
+		<?php $count++; ?>
+		<?php endforeach ?>
+	</div> -->
 
 <?php endforeach ?>
 
 <h3>Global progress</h3>
 <div class="progress">
-	<div class="bar bar-success" style="width: 50%;"></div>
+	<div class="bar bar-success" style="width: 50%;"><span>test</span></div>
 	<div class="bar bar-warning" style="width: 10%;"></div>
 	<div class="bar bar-danger" style="width: 15%;"></div>
 </div>

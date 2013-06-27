@@ -120,6 +120,23 @@ class Stats extends Common_Auth_Controller {
 		// print_r($tasks_container);
 		// echo "<br>";
 		
+		// from the actual task count we now generate percentages (this can be muted if we want to output
+		// the original numbers in the interface)
+		
+		foreach ($tasks_container as $task_name => $value)
+		{
+			foreach ($value['statuses'] as $status_name => $status_count)
+			{
+				$status_count = percentage($status_count, $value['tasks_count']);
+				$tasks_container[$task_name]['statuses'][$status_name] = $status_count;
+			}
+		}
+		
+		// echo "<br> TASKS CONTAINER: ";
+		// print_r($tasks_container);
+		// echo "<br>";
+		
+		
 		//return;
 		
 		$data['tasks'] = $tasks_container;
