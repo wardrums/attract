@@ -33,25 +33,25 @@ class Stats extends Common_Auth_Controller {
 		$this->load->model('tasks_model');
 		$tasks = $this->tasks_model->get_tasks();
 		
-		echo "<br>";
-		print_r($tasks);
-		echo "<br>";
+		// echo "<br>";
+		// print_r($tasks);
+		// echo "<br>";
 		
 		// we get the statuses
 		$this->load->model('statuses_model');
 		$statuses = $this->statuses_model->get_statuses();
 		
-		echo "<br>";
-		print_r($statuses);
-		echo "<br>";
+		// echo "<br>";
+		// print_r($statuses);
+		// echo "<br>";
 		
 		// we get the total duration of the show (to expose in UI and use for percent calculation)
 		$total_show_duration = $this->shots_model->get_shots_sum_duration();
 		$in_progress_show_duration = $this->shots_model->get_shots_sum_duration('in_progress');
 		
-		echo "<br>";
-		print_r($total_show_duration);
-		echo "<br>";
+		// echo "<br>";
+		// print_r($total_show_duration);
+		// echo "<br>";
 		
 		// initialize an auxiliary array to extract some indexes from $tasks and $statuses
 		$tasks_names = array();
@@ -68,9 +68,9 @@ class Stats extends Common_Auth_Controller {
 			array_push($statuses_names, $status['status_name']);
 		}
 		
-		echo "<br>";
-		print_r($tasks_names);
-		echo "<br>";
+		// echo "<br>";
+		// print_r($tasks_names);
+		// echo "<br>";
 		
 				
 		// we assign the values of $shot_statuses_names as keys for the main array that we create.
@@ -85,9 +85,9 @@ class Stats extends Common_Auth_Controller {
 			array('tasks_count' => 0, 'shots_duration_frames' => 0, 'statuses' => $statuses_container)
 		);	
 		
-		echo "<br>";
-		print_r($tasks_container);
-		echo "<br>";
+		// echo "<br>";
+		// print_r($tasks_container);
+		// echo "<br>";
 		
 		
 		// only now we actually need to retrieve the shots from the database, and we get only a few
@@ -96,9 +96,9 @@ class Stats extends Common_Auth_Controller {
 		// in the right array
 		$shots_tasks = $this->shots_tasks_model->get_tasks();
 		
-		echo "<br> TASKS: ";
-		print_r($shots_tasks);
-		echo "<br>";
+		// echo "<br> TASKS: ";
+		// print_r($shots_tasks);
+		// echo "<br>";
 		
 		foreach ($shots_tasks as $task)
 		{
@@ -116,12 +116,15 @@ class Stats extends Common_Auth_Controller {
 			// }
 		}
 		
-		echo "<br> TASKS CONTAINER: ";
-		print_r($tasks_container);
-		echo "<br>";
+		// echo "<br> TASKS CONTAINER: ";
+		// print_r($tasks_container);
+		// echo "<br>";
 		
-		return;
+		//return;
 		
+		$data['tasks'] = $tasks_container;
+		
+		/*
 		// we create the array to expose these values in the view
 		$data['statuses'] = array();
 		$data['stages'] = array();
@@ -134,7 +137,7 @@ class Stats extends Common_Auth_Controller {
 		foreach ($tasks_container as $shots_group => $value) {
 			$data['shots_stages'][$shots_group] = percentage($value['shots_duration_frames'], $in_progress_show_duration );
 		}
-		
+		*/
 		
 		$data['total_duration_frames'] = $total_show_duration;
 		$data['total_duration_time'] = gmdate("i:s", ($total_show_duration/24));;

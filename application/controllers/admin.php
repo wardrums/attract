@@ -83,5 +83,15 @@ class Admin extends Admin_Controller {
 			$this->load->view('templates/footer');
 			
 		}
+	}
+
+	function calendar()
+	{
+		$data['title'] = 'Calendar';
+		$data['use_sidebar'] = TRUE;
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar', $data);	
+		$this->load->view('admin/calendar', $data);
+		$this->load->view('templates/footer');
 	}	
 }
