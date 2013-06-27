@@ -33,13 +33,13 @@
 
 <?php foreach ($tasks as $task_name => $value): ?>
 
-	<h3><?php echo $task_name; ?></h3>
+	<h3><?php echo $task_name; ?> - <?php echo $value['tasks_count']; ?> tasks</h3>
 	
 	<div class="row-fluid">
 		<div class="progress">
 		<?php foreach ($value['statuses'] as $status_name => $status): ?>
 			<?php if ($status_name != 'todo' AND $status > 0): ?>
-			<div class="bar bar-success" style="width: <?php echo $status ?>%;"><span><?php echo $status_name ?></span></div>
+			<div class="bar bar-<?php echo $status_name ?>" style="width: <?php echo $status ?>%;"><span><?php echo $status_name ?>: <?php echo $status ?>%</span></div>
 			<?php endif ?>
 		<?php endforeach ?>
 		</div>
