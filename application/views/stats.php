@@ -57,15 +57,8 @@
 
 <?php endforeach ?>
 
-<h3>Global progress</h3>
-<div class="progress">
-	<div class="bar bar-success" style="width: 50%;"><span>test</span></div>
-	<div class="bar bar-warning" style="width: 10%;"></div>
-	<div class="bar bar-danger" style="width: 15%;"></div>
-</div>
 
 <hr>
-
 
 
 <h3>Film duration</h3>

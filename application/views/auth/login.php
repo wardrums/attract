@@ -1,40 +1,96 @@
-<h1><?php echo lang('login_heading');?></h1>
-<p><?php echo lang('login_subheading');?></p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign in &middot; Attract</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<div id="infoMessage"><?php echo $message;?></div>
+    <!-- Le styles -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
 
-<?php echo form_open("auth/login");?>
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
 
-  <p>
-    <?php echo lang('login_identity_label', 'indentity');?>
-    <?php echo form_input($identity);?>
-  </p>
+    </style>
+    <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
 
-  <p>
-    <?php echo lang('login_password_label', 'password');?>
-    <?php echo form_input($password);?>
-  </p>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
 
-  <p>
-    <?php echo lang('login_remember_label', 'remember');?>
-    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
-  </p>
+    <!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+  </head>
 
+  <body>
 
-  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
+    <div class="container">
+	<?php $attributes = array('class' => 'form-signin'); ?>
+	<?php echo form_open("auth/login", $attributes);?>
+        <h2 class="form-signin-heading"><?php echo lang('login_heading');?></h2>
+        <p><?php echo lang('login_subheading');?></p>
+		<div id="infoMessage"><?php echo $message;?></div>
+		
+		<?php $identity['class'] = 'input-block-level'; ?>
+		<?php $identity['placeholder'] = 'Email address'; ?>
+		<?php echo form_input($identity);?>
 
-<?php echo form_close();?>
-
-<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
-
-<div class="container">
-	<form class="form-signin">
-		<h2 class="form-signin-heading">Please sign in</h2>
-		<input type="text" placeholder="Email address" class="input-block-level">
-		<input type="password" placeholder="Password" class="input-block-level">
+		<?php $password['class'] = 'input-block-level' ?>
+		<?php $password['placeholder'] = 'Password'; ?>
+		<?php echo form_input($password);?>
+		
 		<label class="checkbox">
-			<input type="checkbox" value="remember-me"> Remember me
+			<?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
+			<?php echo lang('login_remember_label', 'remember');?>
 		</label>
-		<button type="submit" class="btn btn-large btn-primary">Sign in</button>
-	</form>
-</div>
+		
+		
+		<?php $attributes = array(
+			'class' => 'btn btn-large btn-primary btn-block',
+			'name' => 'submit',
+			'value' => 'login'
+		); ?>
+  		<?php echo form_submit($attributes)?>
+
+      <?php echo form_close();?>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
+
