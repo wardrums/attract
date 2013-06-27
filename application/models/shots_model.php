@@ -141,8 +141,8 @@ class Shots_model extends CI_Model {
 		{
 			$this->db->select_sum('shot_duration');
 			$this->db->from('shots');
-			$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
-			$this->db->where('shot_status_name', $status);
+			$this->db->join('statuses', 'statuses.status_id = shots.status_id', 'left');
+			$this->db->where('status_name', $status);
 			$query = $this->db->get();
 			$result = $query->row_array();
 			return $result['shot_duration'];
@@ -152,9 +152,9 @@ class Shots_model extends CI_Model {
 	
 	function get_statuses_and_stages(){
 		$this->db->select('shots.shot_id, shots.shot_name, shots.shot_duration'); 
-		$this->db->select('shot_statuses.shot_status_name, tasks.task_name'); 
+		$this->db->select('statuses.status_name, tasks.task_name'); 
 	    $this->db->from('shots');
-		$this->db->join('shot_statuses', 'shot_statuses.shot_status_id = shots.status_id', 'left');
+		$this->db->join('statuses', 'statuses.status_id = shots.status_id', 'left');
 		$this->db->join('tasks', 'tasks.task_id = shots.stage_id', 'left');
 		//$this->db->group_by('shots.shot_id'); 
 		//$this->db->order_by('shots.shot_order', 'asc');

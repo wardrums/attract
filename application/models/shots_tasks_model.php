@@ -6,13 +6,17 @@ class Shots_tasks_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	function get_tasks($shot_id)
+	function get_tasks($shot_id = FALSE)
 	{
 					
-		$this->db->select('shots_tasks.shot_task_id, shots_tasks.task_id, tasks.task_name, shots_tasks.status_id'); 
+		$this->db->select('shots_tasks.shot_task_id, shots_tasks.task_id, tasks.task_name, shots_tasks.status_id, statuses.status_name'); 
 	    $this->db->from('shots_tasks');
 		$this->db->join('tasks', 'tasks.task_id = shots_tasks.task_id', 'left');
-		$this->db->where('shots_tasks.shot_id', $shot_id); 
+		$this->db->join('statuses', 'statuses.status_id = shots_tasks.status_id', 'left');
+		if ($shot_id)
+		{
+			$this->db->where('shots_tasks.shot_id', $shot_id); 
+		}
 	    $query = $this->db->get();
 			
 		//print_r ($query->result_array());
