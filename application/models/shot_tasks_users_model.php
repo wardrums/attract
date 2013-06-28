@@ -6,6 +6,24 @@ class Shot_tasks_users_model extends CI_Model {
 		$this->load->database();
 	}
 	
+	function get_shots($user_id)
+	{
+					
+		$this->db->select('shots.shot_name, shots.shot_id, shots.shot_description'); 
+		//$this->db->select('GROUP_CONCAT(DISTINCT shot_tasks_users.user_id SEPARATOR ",") as user_id', FALSE); 
+	    $this->db->from('shot_tasks_users');
+		$this->db->join('shots_tasks', 'shots_tasks.shot_task_id = shot_tasks_users.shot_task_id', 'left');
+		$this->db->join('shots', 'shots.shot_id = shots_tasks.shot_id', 'left');
+		$this->db->join('users', 'users.id = shot_tasks_users.user_id', 'left');
+		//$this->db->group_by('shots.shot_id'); 
+		$this->db->where('shot_tasks_users.user_id', $user_id); 
+	    $query = $this->db->get();
+		
+		//print_r($query->result_array());
+		return $query->result_array();
+	}
+
+	
 	function get_users($shot_id)
 	{
 					

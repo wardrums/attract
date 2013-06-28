@@ -65,7 +65,8 @@
           <a class="brand" href="/">Attract</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li <?php echo ($title == "Tasks" ? "class=\"active\"" : ""); ?>><a href="/user/tasks/">Tasks</a></li>
+              <li><a href="#contact">Messages</a></li>
               <?php 
               if ($is_admin)
               {
@@ -76,8 +77,6 @@
 					}
               }
 			  ?>
-              <li><a href="#about">Tasks</a></li>
-              <li><a href="#contact">Messages</a></li>
             </ul>
             <ul class="nav pull-right">
             <li id="fat-menu" class="dropdown">

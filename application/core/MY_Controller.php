@@ -29,9 +29,11 @@ class User_Controller extends CI_Controller {
 
         parent::__construct();
 
-        if($this->ion_auth->in_group('user')) {
+        if($this->ion_auth->in_group('users')) {
             $this->the_user = $this->ion_auth->user()->row();
+			$data = new stdClass;
             $data->the_user = $this->the_user;
+			$data->is_admin = FALSE;
             $this->load->vars($data);
         }
         else {
