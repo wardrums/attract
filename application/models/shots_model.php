@@ -14,11 +14,12 @@ class Shots_model extends CI_Model {
 			$this->db->select('shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration'); 
 			$this->db->select('statuses.status_name, shots.shot_notes'); 
 			$this->db->select('GROUP_CONCAT(DISTINCT shots_users.user_id SEPARATOR ",") as user_id', FALSE); 
-			$this->db->select('GROUP_CONCAT(shots_tasks.shot_task_id SEPARATOR ",") as shot_task_id', FALSE);
+			$this->db->select('GROUP_CONCAT(tasks.task_name SEPARATOR ",") as task_names', FALSE);
 		    $this->db->from('shots');
 		   	$this->db->join('shots_users', 'shots_users.shot_id = shots.shot_id', 'left');
 			$this->db->join('statuses', 'statuses.status_id = shots.status_id', 'left');
 			$this->db->join('shots_tasks', 'shots_tasks.shot_id = shots.shot_id', 'left');
+			$this->db->join('tasks', 'tasks.task_id = shots_tasks.task_id', 'left');
 			$this->db->group_by('shots.shot_id'); 
 			$this->db->order_by('shots.shot_order', 'asc');
 		    $query = $this->db->get(); 

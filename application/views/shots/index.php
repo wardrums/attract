@@ -41,41 +41,6 @@ var make_status_dropdown = function(status) {
 	return markup;
 };
 
-// here whe have some code generated with PHP, maybe not very elegant but it works
-
-
-var make_stages_dropdown = function(status) {
-	
-	// The following function generates a boostrap-style dropdown according
-	// to the "status" input given. The content of the dropdown menu itself
-	// can be loaded via further javascript, in order to reduce weight on 
-	// the DOM.
-	
-	var label = '';
-	
-	if (status == "boards") {
-		var label = 'Boards';
-	} else if (status == "layout") {
-		var label = 'Layout';
-	} else if (status == "animatic") {
-		var label = 'Animatic';
-	} else if (status == "lighting") {
-		var label = 'Lighting';
-	} else if (status == "animation") {
-		var label = 'Animation';
-	} else if (status == "simulation") {
-		var label = 'Simulation';
-	}     
-	
-	var markup = '<div class="btn-group btn-group-cell">';
-	var markup = markup + '<a class="btn btn-mini dropdown-toggle dropdown-stage" data-toggle="dropdown" href="#">';
-	var markup = markup + label;
-	var markup = markup + '<span class="caret"></span></a><ul class="dropdown-menu dropdown-menu-stages"></ul></div> ';
-
-	return markup;
-};
-
-
 
 // DataTables functionality (we inizialize the table and call it shotsTable)
 // then we replace the content of the 3rd and 4th column with some js generated code
@@ -85,8 +50,18 @@ $(document).ready(function() {
     	"iDisplayLength": 50,
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			$('td:eq(3)', nRow).html(make_status_dropdown(aData[3]));
-			$('td:eq(4)', nRow).html(make_stages_dropdown(aData[4]));
-		}
+		},
+		"aoColumns": [ 
+			/* Name */   null,
+			/* Description */  null,
+			/* Duration */ { "bSearchable": false},
+			/* Status */  { "bSearchable": false},
+			/* Tasks */   { "bVisible":    false },
+			/* Tasks */  // null,
+			/* Notes */    null,
+			/* Owners */   { "bSearchable": false}
+			
+		] 
 	//shotsTable.fnStandingRedraw();
     });
     
@@ -99,11 +74,6 @@ $(document).ready(function() {
     	}
 	});
 	
-	$(document).on("click", ".dropdown-stage", function() {
-		if(!$(this).hasClass('open')) {
-       		$(this).next().html(stages_list);
-    	}
-	});
 	
 	// this are the functions that actually set the new values in the database
 	// and update the table structure
@@ -119,21 +89,6 @@ $(document).ready(function() {
 		query = '/shots/edit_single/' + shotID + '/status_id/' + status_id;
 		$.getJSON(query, function() {
 			console.log('Shot status updated');	
-		});
-		
-	});
-	
-	$(document).on("click", ".dropdown-menu-stages a", function() {
-		var stage_id = $(this).attr('stage_id');
-		var stage_label = $(this).attr('stage_label');
-		var tableRow = $(this).parents("tr");
-		var rowPosition = shotsTable.fnGetPosition(tableRow[0]);
-		var shotID = tableRow.attr("id").split("_")[1];
-		
-		shotsTable.fnUpdate(stage_label, rowPosition ,4);
-		query = '/shots/edit_single/' + shotID + '/stage_id/' + stage_id;
-		$.getJSON(query, function() {
-			console.log('Shot status updated');
 		});
 		
 	});
@@ -241,17 +196,8 @@ $(document).ready(function() {
     		<td><a href="/shots/edit/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
     		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['shot_duration'] ?></td>
-    		<td><?php echo $shot['status_name']?></td>   
-    			<!-- <div class="btn-group dd_status">
-				    <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-				    <?php echo $shot['shot_status_name'] ?>
-				    <span class="caret"></span>
-				    </a>
-				    <ul class="dropdown-menu">
-				    </ul>
-			    </div> -->
-		    
-    		<td><?php echo $shot['shot_task_id'] ?></td>
+    		<td><?php echo $shot['status_name']?></td>       
+    		<td><?php echo $shot['task_names'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
     		<td><?php echo $shot['user_id']?> <a class="btn btn-mini edit-shot" href="#"><i class="icon-edit"></i> Edit</a></td>
     	</tr>
