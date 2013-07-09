@@ -61,3 +61,11 @@ input.dial:focus {
     background-image: linear-gradient(to bottom, #FBB450, #F89406);
     background-repeat: repeat-x;
 }
+
+#shots tbody {
+	font-size: 12px;
+}
+
+#shots tbody td {
+	padding: 3px 8px;
+}

@@ -59,7 +59,7 @@ $(document).ready(function() {
     	"iDisplayLength": 50,
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			$('td:eq(3)', nRow).html(make_status_dropdown(aData[3]));
-			$('td:eq(1)', nRow).html(trim_string(aData[1], 50));
+			$('td:eq(1)', nRow).html(trim_string(aData[1], 40));
 		},
 		"aoColumns": [ 
 			/* Name */   null,
@@ -192,7 +192,7 @@ $(document).ready(function() {
 	<thead>
 		<tr>
 			<th>Shot Name</th>
-			<th>Description</th>
+			<th width="25%">Description</th>
 			<th>Duration</th>
 			<th>Status</th>
 			<th>Tasks</th>
