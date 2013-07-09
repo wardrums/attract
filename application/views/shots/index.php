@@ -41,15 +41,25 @@ var make_status_dropdown = function(status) {
 	return markup;
 };
 
+var trim_string = function(string, length) {
+	if (string.length > length) {
+		var trimmedString = string.substring(0, length);
+		console.log(trimmedString);
+		trimmedString = trimmedString + '...';
+		return trimmedString;
+	}
+}
 
 // DataTables functionality (we inizialize the table and call it shotsTable)
 // then we replace the content of the 3rd and 4th column with some js generated code
+
 
 $(document).ready(function() {
     var shotsTable = $('#shots').dataTable( {
     	"iDisplayLength": 50,
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			$('td:eq(3)', nRow).html(make_status_dropdown(aData[3]));
+			$('td:eq(1)', nRow).html(trim_string(aData[1], 50));
 		},
 		"aoColumns": [ 
 			/* Name */   null,
