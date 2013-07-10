@@ -41,24 +41,28 @@ input.dial:focus {
 .progress-fix .bar, .progress .bar-fix {
     background-color: #DD514C;
     background-image: linear-gradient(to bottom, #EE5F5B, #C43C35);
+    background-image: -moz-linear-gradient(center top, #EE5F5B, #C43C35);
     background-repeat: repeat-x;
 }
 
 .progress-final_1 .bar, .progress .bar-final_1 {
     background-color: #5EB95E;
     background-image: linear-gradient(to bottom, #62C462, #57A957);
+    background-image: -moz-linear-gradient(center top, #62C462, #57A957);
     background-repeat: repeat-x;
 }
 
 .progress-info .bar, .progress .bar-info {
     background-color: #4BB1CF;
     background-image: linear-gradient(to bottom, #5BC0DE, #339BB9);
+    background-image: -moz-linear-gradient(center top, #5BC0DE, #339BB9);
     background-repeat: repeat-x;
 }
 
 .progress-in_progress .bar, .progress .bar-in_progress {
     background-color: #FAA732;
     background-image: linear-gradient(to bottom, #FBB450, #F89406);
+    background-image: -moz-linear-gradient(center top, #FBB450, #F89406);
     background-repeat: repeat-x;
 }
 
