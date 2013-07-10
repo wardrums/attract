@@ -220,7 +220,7 @@ $(document).ready(function() {
 			<th>Status</th>
 			<th>Tasks</th>
 			<th>Notes</th>
-			<th></th>
+			<th width="8%"></th>
 		</tr>
 	</thead>
 	<tbody>
