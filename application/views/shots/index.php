@@ -44,7 +44,6 @@ var make_status_dropdown = function(status) {
 var trim_string = function(string, length) {
 	if (string.length > length) {
 		var trimmedString = string.substring(0, length);
-		console.log(trimmedString);
 		trimmedString = trimmedString + '...';
 		return trimmedString;
 	}
@@ -75,6 +74,19 @@ $(document).ready(function() {
 	//shotsTable.fnStandingRedraw();
     });
     
+	$('select', this).change( function () {
+		options = $(this).val();
+		if (options) {
+			str = options.toString();
+			str = str.replace(/,/g , " ");
+			shotsTable.fnFilter( str, 1);
+		} else {
+			console.log('clean');
+			shotsTable.fnFilterClear();
+		}
+		
+	});
+
     // the next two functions populate dynamically the content of the dropdown menu
     // with two different lists build previously
     
@@ -184,10 +196,21 @@ $(document).ready(function() {
 		console.log('adding dropdowns');
 	});
 	
+	$(".chzn-select").chosen();
+	
 
 });
 </script>
-    
+
+
+<select class="chzn-select" multiple>
+	<?php foreach($users as $owner): ?>
+		<option value="<?php echo $owner['first_name']; ?>"><?php echo $owner['first_name']; ?></option>
+	<?php endforeach ?>
+</select>	
+
+   
+   
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="shots">
 	<thead>
 		<tr>
@@ -197,7 +220,7 @@ $(document).ready(function() {
 			<th>Status</th>
 			<th>Tasks</th>
 			<th>Notes</th>
-			<th>Owners</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -222,7 +245,7 @@ $(document).ready(function() {
 			<th>Status</th>
 			<th>Tasks</th>
 			<th>Notes</th>
-			<th>Owners</th>
+			<th></th>
 		</tr>
 	</tfoot>
 </table>

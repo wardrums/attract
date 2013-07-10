@@ -46,6 +46,8 @@
     <script src="<?php echo assets_url(); ?>/js/bootstrap.min.js"></script>
     <script src="<?php echo assets_url(); ?>/js/jquery.knob.js"></script>
     <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.fnGetColumnData.js"></script>
+    <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.fnFilterClear.js"></script>
     <script src="<?php echo assets_url(); ?>/js/custom.dataTables.js"></script>
     <!-- <script src="<?php echo assets_url(); ?>/js/jquery.jeditable.js"></script> -->
     <script src="<?php echo assets_url(); ?>/js/jquery.chosen.min.js"></script>
