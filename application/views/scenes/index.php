@@ -4,7 +4,7 @@
 
 <h2><?php echo $title ?></h2>
 
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="shots">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="scenes">
 	<thead>
 		<tr>
 			<th>Scene Name</th>
