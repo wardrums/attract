@@ -8,6 +8,7 @@ class Stats extends Common_Auth_Controller {
 		$this->load->database();
 		$this->load->model('shots_tasks_model');
 		$this->load->model('shots_model');
+		$this->load->model('statuses_model');
 	}
 
 
@@ -57,10 +58,15 @@ class Stats extends Common_Auth_Controller {
 		$tasks_names = array();
 		$statuses_names = array();
 		
+		// this further auxiliary array is used later to bring back the actual task id into
+		// the main tasks container (is used to jQuery post operations in the frontend)
+		$tasks_names_ids = array();
+		
 		// in particular we extract the task_name and build an array only with those values
 		foreach ($tasks as $task)
 		{
 			array_push($tasks_names, $task['task_name']);
+			$tasks_names_ids[$task['task_name']] = $task['task_id'];
 		}
 		
 		foreach ($statuses as $status)
@@ -84,6 +90,12 @@ class Stats extends Common_Auth_Controller {
 			$tasks_names, 
 			array('tasks_count' => 0, 'shots_duration_frames' => 0, 'statuses' => $statuses_container)
 		);	
+		
+		// here we append to all the task arrays the id (from the $task_names_id array defined earlier)
+		foreach ($tasks_container as $task => $value)
+		{
+			$tasks_container[$task]['task_id'] = $tasks_names_ids[$task];
+		}
 		
 		// echo "<br>";
 		// print_r($tasks_container);
@@ -159,6 +171,7 @@ class Stats extends Common_Auth_Controller {
 		$data['total_duration_frames'] = $total_show_duration;
 		$data['total_duration_time'] = gmdate("i:s", ($total_show_duration/24));;
 		$data['title'] = 'Stats';
+		$data['statuses'] = $this->statuses_model->get_statuses();
 		$data['use_sidebar'] = TRUE;
 		
 		$this->load->view('templates/header', $data);

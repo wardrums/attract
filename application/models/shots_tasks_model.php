@@ -125,6 +125,22 @@ class Shots_tasks_model extends CI_Model {
 		return;
 		
 	}
+	
+	// we query the database for a specific task_id and status_id, then we join
+	// the shots table and return the matching shots
+	
+	function get_shots_by_tasks($task_id, $status_id) {
+		$this->db->select('shots_tasks.shot_task_id, shots.shot_id, shots.shot_name, shots.shot_description, shots.shot_duration, shots.shot_notes'); 
+	    $this->db->from('shots_tasks');
+		$this->db->join('shots', 'shots.shot_id = shots_tasks.shot_id', 'left');
+		$this->db->where('shots_tasks.task_id', $task_id); 
+		$this->db->where('shots_tasks.status_id', $status_id); 
+	    $query = $this->db->get();
+			
+		//print_r ($query->result_array());
+
+		return $query->result_array();
+	}
 
 }
 

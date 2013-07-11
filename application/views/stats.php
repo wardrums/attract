@@ -26,14 +26,52 @@
 	});
 </script>
 
+<script>
+	$(document).ready(function() {
+		$('.task-filter', this).change( function () {
+			
+			var task_id = $(this).attr('task-id');
+			var status_id = $(this).val();
+			
+			var target = $(this).parent().next();
+			
+			$.post("/shots/post_index", { task_id: task_id, status_id: status_id } , function(data) {
+			  //$('.modal-body').html(data);
+			  //alert(data);
+			  
+			  // we check if a table already exists, if yes we remove it
+			  if ($(target).next().hasClass('filtered-shots-tasks')) {
+			  	$(target).next().remove();
+			  } 
+			  // we add the new table after the current row
+			  $(target).after(data);
+			});
+			
+		});
+	    
+		
+	});
+	
+	
+	
+</script>
+
 
 <div class="<?php echo $span_value ?>">
 
 <h2><?php echo $title ?></h2>
 
 <?php foreach ($tasks as $task_name => $value): ?>
-
-	<h3><?php echo $task_name; ?> - <?php echo $value['tasks_count']; ?> tasks</h3>
+	
+	<div class="row-fluid">
+		
+		<h3 class="stats-title"><?php echo $task_name; ?> - <?php echo $value['tasks_count']; ?> tasks</h3>
+		<select task-id="<?php echo $value['task_id']; ?>" class="task-filter pull-right">
+			<?php foreach ($statuses as $status) : ?>
+				<option value="<?php echo $status['status_id']; ?>"><?php echo $status['status_name']; ?></option>
+			<?php endforeach ?>
+		</select>
+	</div>
 	
 	<div class="row-fluid">
 		<div class="progress">

@@ -73,3 +73,7 @@ input.dial:focus {
 #shots tbody td {
 	padding: 3px 8px;
 }
+
+h3.stats-title {
+	display: inline;
+}

@@ -201,6 +201,19 @@ class Shots extends Common_Auth_Controller {
 		return;
 		
 	}
+	
+	// Generic function to get shots based on any related property. The first implementation
+	// uses tasks names and statuses (we enclose these properties in an array)
+	
+	function post_index() {
+		$task_id = $this->input->post('task_id');
+		$status_id = $this->input->post('status_id');
+		$this->load->model('shots_tasks_model');
+		$data['shots'] = $this->shots_tasks_model->get_shots_by_tasks($task_id, $status_id);
+	
+		$this->load->view('shots/index_ajax', $data);
+	}
+	
 }
 
 /*
