@@ -59,29 +59,6 @@
   </div>
 </div>
 
-<!-- Select Status -->
-<div class="control-group">
-	<label class="control-label" for="status_id">Status</label>
-	<div class="controls">
-		<select id="status_id" name="status_id" class="input-xlarge">
-	      	<?php foreach ($statuses as $status): ?>
-				<option value="<?php echo $status['shot_status_id'] ?>"><?php echo $status['shot_status_name'] ?></option>
-			<?php endforeach ?>
-	    </select>
-  	</div>
-</div>
-
-<!-- Select Stage -->
-<div class="control-group">
-	<label class="control-label" for="stage_id">Stage</label>
-	<div class="controls">
-		<select id="stage_id" name="stage_id" class="input-xlarge">
-	      	<?php foreach ($stages as $stage): ?>
-				<option value="<?php echo $stage['shot_stage_id'] ?>"><?php echo $stage['shot_stage_name'] ?></option>
-			<?php endforeach ?>
-	    </select>
-  	</div>
-</div>
 
 <!-- Button -->
 <div class="control-group">

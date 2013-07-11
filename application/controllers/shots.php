@@ -48,14 +48,20 @@ class Shots extends Common_Auth_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('scenes_model');
-		$this->load->model('shot_statuses_model');
+		$this->load->model('statuses_model');
 		$this->load->model('tasks_model');
 		$this->load->model('shots_users_model');
+		$this->load->model('shots_tasks_model');
+		$this->load->model('users_model');
+		$this->load->model('shot_tasks_users_model');
+		
+		
+		$data['scenes'] = $this->scenes_model->get_scenes();
+		$data['statuses'] = $this->statuses_model->get_statuses();
+		$data['tasks'] = $this->tasks_model->get_tasks();
 		
 		$data['title'] = 'Create a new shot';
-		$data['scenes'] = $this->scenes_model->get_scenes();
-		$data['statuses'] = $this->shot_statuses_model->get_shot_statuses();
-		$data['stages'] = $this->tasks_model->get_tasks();
+
 		$last_shot_position = $this->shots_model->get_last_shot_position();
 		$data['shot_order'] = $last_shot_position['shot_order'] + 1;
 		
@@ -74,7 +80,7 @@ class Shots extends Common_Auth_Controller {
 		{
 			$shot_data = $this->shots_model->set_shots();
 			// TODO at the moment we assign to one hardcoded user, should be changed
-			$this->shots_users_model->set_user($shot_data['shot_id'], $shot_data['user_id']);
+			// $this->shots_users_model->set_user($shot_data['shot_id'], $shot_data['user_id']);
 			
 			// we reload some data
 			$last_shot_position = $this->shots_model->get_last_shot_position();
