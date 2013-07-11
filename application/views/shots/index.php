@@ -215,7 +215,7 @@ $(document).ready(function() {
 	<thead>
 		<tr>
 			<th>Shot Name</th>
-			<th width="25%">Description</th>
+			<th>Description</th>
 			<th>Duration</th>
 			<th>Status</th>
 			<th>Tasks</th>

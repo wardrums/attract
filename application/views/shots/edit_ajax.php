@@ -118,6 +118,9 @@
 			//$(this).parent().before(aa); <input type="hidden" name="tasks[1][status_id]" value="7"> task_id status_id
 			//tasks-fields
 		});
+		
+		$(".task_owners").chosen();
+		
 	});
 </script>
 
