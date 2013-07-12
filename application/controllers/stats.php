@@ -16,7 +16,7 @@ class Stats extends Common_Auth_Controller {
 	{
 		// helper function to calculate percentage
 		// at the moment we use it only here
-		function percentage($val1, $val2, $precision = 2) 
+		function percentage($val1, $val2, $precision = 1) 
 		{
 			if ($val1 == 0) {
 				return 0;
