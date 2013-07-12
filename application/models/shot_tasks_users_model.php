@@ -111,8 +111,16 @@ class Shot_tasks_users_model extends CI_Model {
 		
 		
 		// we collect a user set for each task (using a multidimensional array)
-		$all_new_users_id = $this->input->post('task_owners');	
+		$all_new_users_id = $this->input->post('task_owners');
 		
+		// if we don't provide users at all, it means that we want to get rid of
+		// the task and the users connected to it
+		
+		if (empty($all_new_users_id))
+		{
+			$all_new_users_id = array();
+		}
+				
 		$all_new_users_id_clean = array_keys($all_new_users_id);
 		
 		

@@ -52,12 +52,18 @@ class Shots_tasks_model extends CI_Model {
 		
 	}
 	
-	function remove_task($shot_id, $task_id)
+	function remove_tasks($shot_id, $task_id = FALSE)
 	{
 		$data = array(
-			'task_id' => $task_id,
 			'shot_id' => $shot_id
 		);
+		
+		// we add the task_id if we want to remove a specific task, otherwise all the tasks
+		// associated with that shot will be removed
+		if ($task_id)
+		{
+			$data['task_id'] = $task_id;
+		}
 		
 		$shot_exists = $this->db->get_where('shots_tasks', $data);
 		$shot_exists->row();
@@ -119,7 +125,7 @@ class Shots_tasks_model extends CI_Model {
 		
 		foreach ($removed_tasks_id as $task_id) 
 		{
-			$this->remove_task($shot_id, $task_id);
+			$this->remove_tasks($shot_id, $task_id);
 		}
 		
 		return;
