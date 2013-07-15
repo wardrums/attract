@@ -5,7 +5,7 @@
 class Browser extends CI_Controller {
 
     var $roots = array(
-        'test' => '/Applications/'
+        'tube' => '/Users/tube/Documents/tubeSVN/'
         );
     
     public function __construct()
@@ -33,7 +33,7 @@ class Browser extends CI_Controller {
         if ( $controller == 'index' OR $virtual_root == '' ) show_404();
         
         // let's check if a virtual root matches
-        if ( ! array_key_exists( $virtual_root, $this->roots )) show_404();
+       	if ( ! array_key_exists( $virtual_root, $this->roots )) show_404();
         
         // build absolute path
         $path_in_url = '';
@@ -68,10 +68,9 @@ class Browser extends CI_Controller {
                 }
                 closedir( $handle );
                 sort( $dirs );
-                sort( $files );
-                
-                
+                sort( $files );                
             }
+			
             // parent directory
             // here to ensure it's available and the first in the array
             if ( $path_in_url != '' )
@@ -90,8 +89,9 @@ class Browser extends CI_Controller {
         else
         {
             // it's not a directory, but is it a file ?
-            if ( is_file($absolute_path))
+            if (is_file($absolute_path))
             {
+            	
                 // let's serve the file
                 header ('Cache-Control: no-store, no-cache, must-revalidate');
                 header ('Cache-Control: pre-check=0, post-check=0, max-age=0');
@@ -99,14 +99,14 @@ class Browser extends CI_Controller {
                  
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
-                // header('Content-Length: ' . filesize( ".$absolute_path." ));  // Modified
+
                 header('Content-Length: ' . filesize( $absolute_path ));
                 header('Content-Disposition: attachment; filename=' . basename( $absolute_path ));
                 
                 @readfile($absolute_path);
             }
             else
-            {
+            {	
                 show_404();
             }
         }
