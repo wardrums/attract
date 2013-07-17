@@ -13,11 +13,7 @@ class Browser extends CI_Controller {
 		parent::__construct();
 	}
 	
-	public function index()
-	{
-		$this->load->view('frontpage');
-	}
-    
+
     function _remap()
     {
         $segment_array = $this->uri->segment_array();
@@ -84,7 +80,9 @@ class Browser extends CI_Controller {
                 'dirs' => $dirs,
                 'files' => $files,
                 );
-            $this->load->view( 'browser', $data );
+
+			$this->load->view('/browser/browser', $data );
+            
         }
         else
         {

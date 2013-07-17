@@ -77,3 +77,12 @@ input.dial:focus {
 h3.stats-title {
 	display: inline;
 }
+
+ul.files {
+	list-style-type: none;
+	margin: 0;
+}
+
+.file.active {
+	background: #DDD;
+}
