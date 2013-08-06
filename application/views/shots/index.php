@@ -65,7 +65,7 @@ $(document).ready(function() {
 			/* Name */   null,
 			/* Description */  null,
 			/* Duration */ { "bSearchable": false},
-			/* Status */  //{ "bSearchable": false},
+			/* Status */  { "bSearchable": false},
 			/* Tasks */   { "bVisible":    false },
 			/* Tasks */  // null,
 			/* Notes */    null,
@@ -217,7 +217,7 @@ $(document).ready(function() {
 			<th>Shot Name</th>
 			<th>Description</th>
 			<th>Duration</th>
-			<!-- <th>Status</th> -->
+			<th>Status</th>
 			<th>Tasks</th>
 			<th>Notes</th>
 			<th width="8%"></th>
@@ -229,7 +229,7 @@ $(document).ready(function() {
     		<td><a href="/shots/edit/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
     		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['shot_duration'] ?></td>
-    		<!-- <td><?php //echo $shot['status_name']?></td>   -->     
+    		<td><?php echo $shot['status_name']?></td> 
     		<td><?php echo $shot['task_names'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
     		<td><?php echo $shot['user_id']?> <a class="btn btn-mini edit-shot" href="#"><i class="icon-edit"></i> Edit</a></td>
@@ -242,7 +242,7 @@ $(document).ready(function() {
 			<th>Shot Name</th>
 			<th>Description</th>
 			<th>Duration</th>
-			<!-- <th>Status</th> -->
+			<th>Status</th>
 			<th>Tasks</th>
 			<th>Notes</th>
 			<th></th>
