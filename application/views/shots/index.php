@@ -204,12 +204,11 @@ $(document).ready(function() {
 </script>
 
 
-<select class="chzn-select" multiple>
+<!-- <select class="chzn-select" multiple>
 	<?php foreach($users as $owner): ?>
 		<option value="<?php echo $owner['first_name']; ?>"><?php echo $owner['first_name']; ?></option>
 	<?php endforeach ?>
-</select>	
-
+</select>	 -->
    
    
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="shots">
