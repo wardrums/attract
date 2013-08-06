@@ -51,6 +51,49 @@ class Tasks extends Admin_Controller {
 		}
 	}
 
+	function edit($task_id, $async = FALSE)
+	{
+		$this->load->model('tasks_model');
+		
+		$data['task'] = $this->tasks_model->get_tasks($task_id);	
+		$data['title'] = 'Edit Shot';
+		$data['use_sidebar'] = TRUE;
+		
+		if (empty($data['task']))
+		{
+			show_404();
+		}
+		
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		
+		$this->form_validation->set_rules('task_name', 'text', 'required');
+		
+		if ($this->form_validation->run() === FALSE)
+		{
+			if ($async)
+			{
+				$this->load->view('tasks/edit_ajax', $data);
+			}
+			else 
+			{
+				$this->load->view('templates/header', $data);	
+				$this->load->view('templates/sidebar', $data);
+				$this->load->view('tasks/edit', $data);
+				$this->load->view('templates/footer');	
+			}
+		}
+		else
+		{
+						
+			// first we create the new tasks, which should be assigned to a user right after the page is reloaded
+			$this->tasks_model->edit_task();
+			
+			redirect('/tasks/edit/' . $task_id, 'refresh');
+		}
+	}
+
 }
 
 

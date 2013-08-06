@@ -18,6 +18,15 @@ class Tasks_model extends CI_Model {
 			//print_r ($query->result_array());
 
 			return $query->result_array();
+		} 
+		else 
+		{
+			$this->db->select('*');
+			$this->db->where('task_id', $id); 
+		    $this->db->from('tasks');
+		    $query = $this->db->get();
+			
+			return $query->row_array();
 		}
 	}
 	
@@ -40,7 +49,7 @@ class Tasks_model extends CI_Model {
 		);
 		
 		$this->db->where('task_id', $task_id);
-		$this->db->update('shots', $data);
+		$this->db->update('tasks', $data);
 		return;
 	}
 }
