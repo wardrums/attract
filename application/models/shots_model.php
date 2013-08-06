@@ -60,7 +60,7 @@ class Shots_model extends CI_Model {
 			
 			$ownership_data = array(
 				'shot_id' => $this->db->insert_id(),
-				'user_id' => $this->input->post('user_id')
+				'shot_name' => $this->input->post('shot_name')
 			);
 			
 			return $ownership_data;

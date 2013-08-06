@@ -8,6 +8,13 @@
 </div>
 <?php endif ?>
 
+<?php if($this->session->flashdata('message') != ''):?>
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<p><?php echo $this->session->flashdata('message') ?></p>
+</div>
+<?php endif ?>
+
 <?php 
 	$attributes = array('class' => 'form-horizontal');
 	echo form_open('shots/create', $attributes) 

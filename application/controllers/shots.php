@@ -83,12 +83,16 @@ class Shots extends Common_Auth_Controller {
 			// $this->shots_users_model->set_user($shot_data['shot_id'], $shot_data['user_id']);
 			
 			// we reload some data
-			$last_shot_position = $this->shots_model->get_last_shot_position();
-			$data['shot_order'] = $last_shot_position['shot_order'] + 1;
+			// $last_shot_position = $this->shots_model->get_last_shot_position();
+			// $data['shot_order'] = $last_shot_position['shot_order'] + 1;
+// 			
+			// $this->load->view('templates/header', $data);	
+			// $this->load->view('shots/create', $data);
+			// $this->load->view('templates/footer');
 			
-			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/create', $data);
-			$this->load->view('templates/footer');
+			$this->session->set_flashdata('message', 'Shot <strong>'. $shot_data['shot_name'] .'</strong> added to database!');
+
+			redirect('/shots/create');
 			
 		}
 	}
