@@ -14,7 +14,7 @@
 	<tbody>
 	<?php foreach ($scenes as $scene): ?>
     	<tr>
-    		<td><a href="/scenes/view/<?php echo $scene['scene_id'] ?>"><?php echo $scene['scene_name'] ?></a></td>
+    		<td><a href="/scenes/edit/<?php echo $scene['scene_id'] ?>"><?php echo $scene['scene_name'] ?></a></td>
     		<td><?php echo $scene['scene_description'] ?></td>
     	</tr>
 	<?php endforeach ?>
@@ -27,6 +27,8 @@
 		</tr>
 	</tfoot>
 </table>
+
+<a class="btn btn-large btn-block" href="/scenes/create/">Add scene</a>
 
 
 </div><!--/span-->

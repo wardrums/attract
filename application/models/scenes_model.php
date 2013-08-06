@@ -6,7 +6,7 @@ class Scenes_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function get_scenes($id = FALSE)
+	function get_scenes($id = FALSE)
 	{
 		if ($id === FALSE)
 		{
@@ -19,6 +19,32 @@ class Scenes_model extends CI_Model {
 
 			return $query->result_array();
 		}
+	}
+	
+	function create_scene()
+	{
+		$data = array(
+			'scene_name' => $this->input->post('scene_name'),
+			'scene_description' => $this->input->post('scene_description'),
+			'sequence_id' => 1
+		);
+
+		$this->db->insert('scenes', $data);
+		return;
+	}
+	
+	function edit_scene()
+	{
+		$scene_id = $this->input->post('scene_id');
+		
+		$data = array(
+			'scene_name' => $this->input->post('scene_name'),
+			'scene_description' => $this->input->post('scene_description')
+		);
+		
+		$this->db->where('scene_id', $scene_id);
+		$this->db->update('scenes', $data);
+		return;
 	}
 
 }
