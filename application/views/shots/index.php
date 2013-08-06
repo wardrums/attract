@@ -41,6 +41,42 @@ var make_status_dropdown = function(status) {
 	return markup;
 };
 
+
+var make_status_label = function(status) {
+	
+	// The following function generates a boostrap-style dropdown according
+	// to the "status" input given. The content of the dropdown menu itself
+	// can be loaded via further javascript, in order to reduce weight on 
+	// the DOM.
+	
+	var btn_style = '';
+	var label = '';
+	
+	if (status == "in_progress") {
+		var btn_style = 'label-warning';
+		var label = 'In Progress';
+	} else if (status == "todo") {
+		var btn_style = '';
+		var label = 'To do';
+	} else if (status == "fix") {
+		var btn_style = 'label-danger';
+		var label = 'Fix';
+	} else if (status == "final_1") {
+		var btn_style = 'label-success';
+		var label = 'Final 1';
+	} else if (status == "review") {
+		var btn_style = 'label-info';
+		var label = 'Review';
+	} 
+	
+	var markup = '<span class="label ' + btn_style + '">';
+	var markup = markup + label;
+	var markup = markup + '</span>';
+
+	return markup;
+};
+
+
 var trim_string = function(string, length) {
 	if (string.length > length) {
 		var trimmedString = string.substring(0, length);
@@ -58,7 +94,7 @@ $(document).ready(function() {
     	"iDisplayLength": 50,
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			// we disable the status dropdown column
-			//$('td:eq(3)', nRow).html(make_status_dropdown(aData[3]));
+			$('td:eq(3)', nRow).html(make_status_label(aData[3]));
 			$('td:eq(1)', nRow).html(trim_string(aData[1], 40));
 		},
 		"aoColumns": [ 
