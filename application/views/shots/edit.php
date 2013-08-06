@@ -183,11 +183,11 @@
 <div class="control-group">
 	<label class="control-label" for="status_id">Status</label>
 	<div class="controls">
-		<!-- <select id="status_id" name="status_id" class="input-xlarge">
+		<select id="status_id" name="status_id" class="input-xlarge">
 	      	<?php foreach ($statuses as $status): ?>
-				<option value="<?php echo $status['shot_status_id'] ?>"  <?php echo ($status['shot_status_id'] == $shot['shot_status_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $status['shot_status_name'] ?></option>
+				<option value="<?php echo $status['status_id'] ?>"  <?php echo ($status['status_id'] == $shot['status_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $status['status_name'] ?></option>
 			<?php endforeach ?>
-	    </select> -->
+	    </select>
   	</div>
 </div>
 
