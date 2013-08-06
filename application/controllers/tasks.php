@@ -36,17 +36,17 @@ class Tasks extends Admin_Controller {
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header', $data);	
-			$this->load->view('taks/create', $data);
+			$this->load->view('tasks/create', $data);
 			$this->load->view('templates/footer');
 			
 		}
 		else
 		{
-			$this->tasks_model->create_task();
+			$task_name = $this->tasks_model->create_task();
 
-			$this->load->view('templates/header', $data);	
-			$this->load->view('taks/create', $data);
-			$this->load->view('templates/footer');
+			$this->session->set_flashdata('message', 'Task <strong>'. $task_name .'</strong> added to database!');
+
+			redirect('/tasks/create');
 			
 		}
 	}

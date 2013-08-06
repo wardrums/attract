@@ -40,9 +40,9 @@ class Scenes extends Common_Auth_Controller {
 		}
 		else
 		{
-			$this->scenes_model->create_scene();
+			$scene_name = $this->scenes_model->create_scene();
 			
-			$this->session->set_flashdata('message', 'Scene added to database!');
+			$this->session->set_flashdata('message', 'Scene <strong>' . $scene_name . '</strong> added to database!');
 
 			redirect('/scenes/create');
 			

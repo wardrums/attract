@@ -28,7 +28,7 @@ class Tasks_model extends CI_Model {
 		);
 
 		$this->db->insert('tasks', $data);
-		return;
+		return $this->input->post('task_name');
 	}
 
 	function edit_task()

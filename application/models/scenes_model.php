@@ -30,7 +30,7 @@ class Scenes_model extends CI_Model {
 		);
 
 		$this->db->insert('scenes', $data);
-		return;
+		return $this->input->post('scene_name');
 	}
 	
 	function edit_scene()

@@ -8,29 +8,29 @@
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="users">
 	<thead>
 		<tr>
-			<th>Task ID</th>
-			<th>Task name</th>
+			<th>Status ID</th>
+			<th>Status name</th>
 		</tr>
 	</thead>
 	<tbody>
 		
-	<?php foreach ($tasks as $task): ?>
+	<?php foreach ($statuses as $status): ?>
     	<tr>
-    		<td><?php echo $task['task_id'] ?></td>
-    		<td><a href="/tasks/edit/<?php echo $task['task_id'] ?>"><?php echo $task['task_name'] ?></a></td>
+    		<td><?php echo $status['status_id'] ?></td>
+    		<td><a href="/users/edit/<?php echo $status['status_id'] ?>"><?php echo $status['status_name'] ?></a></td>
     	</tr>
 	<?php endforeach ?>
 		
 	</tbody>
 	<tfoot>
 		<tr>
-			<th>Task ID</th>
-			<th>Task name</th>
+			<th>Status ID</th>
+			<th>Status name</th>
 		</tr>
 	</tfoot>
 </table>
 
-<a class="btn btn-large btn-block" href="/tasks/create/">Add task</a>
+<a class="btn btn-large btn-block" href="/statuses/create">Add status</a>
 </div><!--/span-->
 
 

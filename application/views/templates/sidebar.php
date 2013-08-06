@@ -11,6 +11,7 @@
               <li class="nav-header">Admin</li>
               <li <?php echo ($title == "Users" ? "class=\"active\"" : ""); ?>><a href="/admin/users">User management</a></li>
               <li <?php echo ($title == "Tasks" ? "class=\"active\"" : ""); ?>><a href="/tasks">Tasks</a></li>
+              <li <?php echo ($title == "Statuses" ? "class=\"active\"" : ""); ?>><a href="/statuses">Statuses</a></li>
               <li <?php echo ($title == "Calendar" ? "class=\"active\"" : ""); ?>><a href="/admin/calendar">Calendar</a></li>
               <li><a href="#">Show management</a></li>
               <?php endif ?>

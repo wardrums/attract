@@ -21,18 +21,18 @@ if ($this->session->flashdata('message') != '')
 <?php endif ?>
 
 <?php $attributes = array('class' => 'form-horizontal'); ?>
-<?php echo form_open("tasks/create", $attributes);?>
+<?php echo form_open("statuses/create", $attributes);?>
 <fieldset>
 
 <!-- Form Name -->
-<legend>Task details</legend>
+<legend>Shot stage details</legend>
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="task_name">Task name</label>
+  <label class="control-label" for="status_name">Status name</label>
   <div class="controls">
-    <input id="task_name" name="task_name" placeholder="" class="input-xlarge" required="" type="text">
-    <p class="help-block">enter the stage name, e.g. "animation"</p>
+    <input id="status_name" name="status_name" placeholder="" class="input-xlarge" required="" type="text">
+    <p class="help-block">enter the status name, e.g. "in_progress"</p>
   </div>
 </div>
 
