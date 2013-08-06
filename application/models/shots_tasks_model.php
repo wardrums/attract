@@ -80,13 +80,18 @@ class Shots_tasks_model extends CI_Model {
 	function set_tasks($shot_id)
 	{
 		$new_tasks = $this->input->post('tasks');
-
+		
+		if (!$new_tasks) {
+			$new_tasks = array();
+		}
+		
 		$new_tasks_id = array_keys($new_tasks);	
-				
+			
 		if ($new_tasks_id == '')
 		{
 			$new_tasks_id = array();
-		}
+		}	
+		
 		
 		$this->db->select('shots_tasks.task_id'); 
 	    $this->db->from('shots_tasks');
