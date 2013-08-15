@@ -23,7 +23,7 @@ var make_status_dropdown = function(status) {
 		var btn_style = '';
 		var label = 'To do';
 	} else if (status == "fix") {
-		var btn_style = 'btn-danger';
+		var btn_style = 'btn-important';
 		var label = 'Fix';
 	} else if (status == "final_1") {
 		var btn_style = 'btn-success';
@@ -59,7 +59,7 @@ var make_status_label = function(status) {
 		var btn_style = '';
 		var label = 'To do';
 	} else if (status == "fix") {
-		var btn_style = 'label-danger';
+		var btn_style = 'label-important';
 		var label = 'Fix';
 	} else if (status == "final_1") {
 		var btn_style = 'label-success';
@@ -67,7 +67,10 @@ var make_status_label = function(status) {
 	} else if (status == "review") {
 		var btn_style = 'label-info';
 		var label = 'Review';
-	} 
+	} else {
+		var btn_style = 'label-inverse';
+		var label = status;
+	}
 	
 	var markup = '<span class="label ' + btn_style + '">';
 	var markup = markup + label;
