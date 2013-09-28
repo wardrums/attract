@@ -10,6 +10,10 @@ class Shows extends Admin_Controller {
 
 	function index()
 	{
+		$this->load->model('settings_model');
+		
+		// we get the current show setting (in the view we will get the ID and check it)
+		$data['current_show'] = $this->settings_model->get_settings('current_show');
 		$data['shows'] = $this->shows_model->get_shows();
 		$data['title'] = 'Shows';
 		$data['use_sidebar'] = TRUE;

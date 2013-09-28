@@ -12,16 +12,18 @@
 			<th>Show name</th>
 			<th>Show description</th>
 			<th>Show path</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		
 	<?php foreach ($shows as $show): ?>
-    	<tr>
+    	<tr <?php echo ($current_show['setting_value'] == $show['show_id'] ? "class=\"success\"" : ""); ?>>
     		<td><?php echo $show['show_id'] ?></td>
     		<td><a href="/shows/edit/<?php echo $show['show_id'] ?>"><?php echo $show['show_name'] ?></a></td>
     		<td><?php echo $show['show_description'] ?></td>
     		<td><?php echo $show['show_path'] ?></td>
+    		<td></td>
     	</tr>
 	<?php endforeach ?>
 		
@@ -32,6 +34,7 @@
 			<th>Show name</th>
 			<th>Show description</th>
 			<th>Show path</th>
+			<th></th>
 		</tr>
 	</tfoot>
 </table>
