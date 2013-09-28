@@ -94,7 +94,7 @@
 	<?php foreach ($files as $file): ?>
     	<tr class="file_<?php echo $file['file_id'] ?>">
     		<td><a href="/scenes/view/<?php echo $file['shot_id'] ?>"><?php echo $file['shot_name'] ?></a></td>
-    		<td><a class="file_link" data-target="#fileBrowser" href="/browser/tube/scenes/act_3/" role="button" data-toggle="modal"><?php echo $file['file_path'] ?></a></td>
+    		<td><a class="file_link" data-target="#fileBrowser" href="/browser/mate/" role="button" data-toggle="modal"><?php echo $file['file_path'] ?></a></td>
     		<td><?php echo $file['file_settings'] ?></td>
     	</tr>
 	<?php endforeach ?>

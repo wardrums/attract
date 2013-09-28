@@ -5,7 +5,7 @@
 class Browser extends CI_Controller {
 
     var $roots = array(
-        'tube' => '/Users/tube/Documents/tubeSVN/'
+        'mate' => '/Users/fsiddi/Dropbox/mate'
         );
     
     public function __construct()
