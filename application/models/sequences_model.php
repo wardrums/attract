@@ -4,6 +4,7 @@ class Sequences_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
+		
 	}
 	
 	function get_sequences($id = FALSE)
@@ -33,9 +34,16 @@ class Sequences_model extends CI_Model {
 	
 	function create_sequence()
 	{
+		
+		$this->load->model('settings_model');
+		
+		// we get the current show setting (in the view we will get the ID and check it)
+		$current_show = $this->settings_model->get_settings('current_show');
+		
 		$data = array(
 			'sequence_name' => $this->input->post('sequence_name'),
 			'sequence_description' => $this->input->post('sequence_description'),
+			'show_id' => $current_show['setting_value']
 		);
 
 		$this->db->insert('sequences', $data);
