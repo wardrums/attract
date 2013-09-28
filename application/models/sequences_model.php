@@ -11,8 +11,11 @@ class Sequences_model extends CI_Model {
 	{
 		if ($id === FALSE)
 		{
+			$this->load->model('settings_model');
+			$current_show = $this->settings_model->get_settings('current_show');
 					
 			$this->db->select('*'); 
+			$this->db->where('show_id', $current_show['setting_value']); 
 		    $this->db->from('sequences');
 		    $query = $this->db->get();
 				
@@ -36,8 +39,6 @@ class Sequences_model extends CI_Model {
 	{
 		
 		$this->load->model('settings_model');
-		
-		// we get the current show setting (in the view we will get the ID and check it)
 		$current_show = $this->settings_model->get_settings('current_show');
 		
 		$data = array(

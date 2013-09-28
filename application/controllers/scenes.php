@@ -21,11 +21,13 @@ class Scenes extends Common_Auth_Controller {
 	}
 	
 	function create()
-	{
+	{	
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
-		$this->load->model('scenes_model');
+		$this->load->model('sequences_model');
+		
+		$data['sequences'] = $this->sequences_model->get_sequences();
 		$data['title'] = 'Create scene';
 		$data['use_sidebar'] = TRUE;
 		

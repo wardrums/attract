@@ -26,7 +26,7 @@ class Scenes_model extends CI_Model {
 		$data = array(
 			'scene_name' => $this->input->post('scene_name'),
 			'scene_description' => $this->input->post('scene_description'),
-			'sequence_id' => 1
+			'sequence_id' => $this->input->post('sequence_id')
 		);
 
 		$this->db->insert('scenes', $data);

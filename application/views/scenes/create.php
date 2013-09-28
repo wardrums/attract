@@ -46,6 +46,18 @@ if ($this->session->flashdata('message') != '')
 		</div>
 	</div>
 	
+	<!-- Select Basic -->
+	<div class="control-group">
+		<label class="control-label" for="sequence_id">Sequence</label>
+	  	<div class="controls">
+	    	<select id="sequence_id" name="sequence_id" class="input-xlarge">
+	    		<?php foreach ($sequences as $sequence): ?>
+	      		<option value="<?php echo $sequence['sequence_id']; ?>"><?php echo $sequence['sequence_name']; ?></option>
+	      		<?php endforeach; ?>
+	    	</select>
+	  	</div>
+	</div>
+	
 	<!-- Button -->
 	<div class="control-group">
 		<label class="control-label" for="submit">Submit</label>
