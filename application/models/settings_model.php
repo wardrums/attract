@@ -45,14 +45,14 @@ class Settings_model extends CI_Model {
 
 	function edit_setting()
 	{
-		$setting_id = $this->input->post('setting_id');
+		$setting_name = $this->input->post('setting_name');
 		
 		$data = array(
-			'setting_name' => $this->input->post('setting_name'),
+			'setting_name' => $setting_name,
 			'setting_value' => $this->input->post('setting_value'),
 		);
 		
-		$this->db->where('setting_id', $setting_id);
+		$this->db->where('setting_name', $setting_name);
 		$this->db->update('settings', $data);
 		return;
 	}

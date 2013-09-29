@@ -86,3 +86,7 @@ ul.files {
 .file.active {
 	background: #DDD;
 }
+
+tr.success .make-current {
+	display: none;
+}

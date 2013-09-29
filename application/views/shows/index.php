@@ -8,7 +8,6 @@
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="users">
 	<thead>
 		<tr>
-			<th>Show ID</th>
 			<th>Show name</th>
 			<th>Show description</th>
 			<th>Show path</th>
@@ -18,19 +17,17 @@
 	<tbody>
 		
 	<?php foreach ($shows as $show): ?>
-    	<tr <?php echo ($current_show['setting_value'] == $show['show_id'] ? "class=\"success\"" : ""); ?>>
-    		<td><?php echo $show['show_id'] ?></td>
+    	<tr id="show_<?php echo $show['show_id'] ?>" <?php echo ($current_show['setting_value'] == $show['show_id'] ? "class=\"success\"" : ""); ?>>
     		<td><a href="/shows/edit/<?php echo $show['show_id'] ?>"><?php echo $show['show_name'] ?></a></td>
     		<td><?php echo $show['show_description'] ?></td>
     		<td><?php echo $show['show_path'] ?></td>
-    		<td></td>
+    		<td><a class="make-current btn btn-small" href="#"><i class="icon-glass"></i> Make current</a></td>
     	</tr>
 	<?php endforeach ?>
 		
 	</tbody>
 	<tfoot>
 		<tr>
-			<th>Show ID</th>
 			<th>Show name</th>
 			<th>Show description</th>
 			<th>Show path</th>
@@ -42,5 +39,18 @@
 <a class="btn btn-large btn-block" href="/shows/create">Add show</a>
 </div><!--/span-->
 
+<script>
+	
+	$(document).ready(function() {
+		$(document).on("click", ".make-current", function() {
+			var showID = $(this).parents("tr").attr("id").split("_")[1];
+			$.post( "/settings/edit/current_show", { setting_name : "current_show", setting_value: showID, setting_id : "1" } )
+			.done(function( data ) {
+    			$('tr').removeClass('success');
+    			$('#show_' + showID).addClass('success');
+    		});
+		});
+	});
+</script>
 
 

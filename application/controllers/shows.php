@@ -1,6 +1,6 @@
 <?php
 
-class Shows extends Admin_Controller {
+class Shows extends Common_Auth_Controller {
 
 	public function __construct()
 	{
