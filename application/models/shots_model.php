@@ -8,6 +8,9 @@ class Shots_model extends CI_Model {
 	
 	function get_shots($id = FALSE)
 	{
+		$this->load->model('settings_model');
+		$current_show = $this->settings_model->get_settings('current_show');
+			
 		if ($id === FALSE)
 		{
 					
@@ -20,8 +23,11 @@ class Shots_model extends CI_Model {
 			$this->db->join('statuses', 'statuses.status_id = shots.status_id', 'left');
 			$this->db->join('shots_tasks', 'shots_tasks.shot_id = shots.shot_id', 'left');
 			$this->db->join('tasks', 'tasks.task_id = shots_tasks.task_id', 'left');
+			$this->db->join('scenes', 'scenes.scene_id = shots.scene_id', 'left');
+			$this->db->join('sequences', 'sequences.sequence_id = scenes.sequence_id', 'left');
 			$this->db->group_by('shots.shot_id'); 
 			$this->db->order_by('shots.shot_order', 'asc');
+			$this->db->where('show_id', $current_show['setting_value']); 
 		    $query = $this->db->get(); 
 				
 			//print_r ($query->result_array());
