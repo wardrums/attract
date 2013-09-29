@@ -8,10 +8,15 @@ class Scenes_model extends CI_Model {
 	
 	function get_scenes($id = FALSE)
 	{
+		// we set up a filter in order to get only get scenes from the current show
+		$this->load->model('settings_model');
+		$current_show = $this->settings_model->get_settings('current_show');
+		
 		if ($id === FALSE)
 		{
-					
 			$this->db->select('*'); 
+			$this->db->join('sequences', 'sequences.sequence_id = scenes.sequence_id', 'left');
+			$this->db->where('show_id', $current_show['setting_value']);
 		    $this->db->from('scenes');
 		    $query = $this->db->get();
 				
