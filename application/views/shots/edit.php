@@ -188,6 +188,7 @@
 				<option value="<?php echo $status['status_id'] ?>"  <?php echo ($status['status_id'] == $shot['status_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $status['status_name'] ?></option>
 			<?php endforeach ?>
 	    </select>
+	    <p class="help-block">This value is not for stats purpose, it is only mean as a general indication for the shots view</p>
   	</div>
 </div>
 
@@ -273,9 +274,8 @@
 
 <!-- Button -->
 <div class="control-group">
-  <label class="control-label" for="submit">Submit</label>
   <div class="controls">
-    <button id="submit" name="submit" class="btn btn-inverse">Edit Shot</button>
+    <button id="submit" name="submit" class="btn">Update Shot</button>
     <a href="<?php echo '/shots/delete/' . $shot['shot_id'] ?>" id="submit" name="submit" class="btn btn-danger">Delete Shot</a>
   </div>
 </div>

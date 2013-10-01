@@ -155,8 +155,8 @@ class Shots extends Common_Auth_Controller {
 			// then we check if some tasks have been removed (and remove users associated with them)
 			$this->shot_tasks_users_model->set_users($shot_id);
 		
-			
-			redirect('/shots/edit/' . $shot_id, 'refresh');
+			$this->session->set_flashdata('message', 'Shot <strong>' . $shot_id . '</strong> has been updated!');
+			redirect('/shots');
 		}
 	}
 
@@ -169,7 +169,7 @@ class Shots extends Common_Auth_Controller {
 		$this->shots_tasks_model->remove_tasks($shot_id);
 		$this->shots_model->delete_shot($shot_id);
 		
-		
+		$this->session->set_flashdata('message', 'Shot <strong>' . $shot_id . '</strong> has been deleted!');
 		redirect('/shots/', 'refresh');
 	}
 
