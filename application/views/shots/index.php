@@ -1,6 +1,20 @@
-<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); 
+
+if ($this->session->flashdata('message') != '')
+{
+	$flahsdata = $this->session->flashdata('message'); 
+}
+
+?>
 
 <div class="<?php echo $span_value ?>">
+
+<?php if (isset($flahsdata)):?>
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<?php echo $flahsdata ?>
+</div>
+<?php endif ?>
 
 <h2><?php echo $title ?></h2>
 
