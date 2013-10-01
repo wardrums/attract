@@ -8,7 +8,6 @@
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="users">
 	<thead>
 		<tr>
-			<th>Sequence ID</th>
 			<th>Sequence name</th>
 			<th>Sequence description</th>
 		</tr>
@@ -16,8 +15,7 @@
 	<tbody>
 		
 	<?php foreach ($sequences as $sequence): ?>
-    	<tr>
-    		<td><?php echo $sequence['sequence_id'] ?></td>
+    	<tr class="sequence_<?php echo $sequence['sequence_id'] ?>">
     		<td><a href="/sequences/edit/<?php echo $sequence['sequence_id'] ?>"><?php echo $sequence['sequence_name'] ?></a></td>
     		<td><?php echo $sequence['sequence_description'] ?></td>
     	</tr>
@@ -26,7 +24,6 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<th>Sequence ID</th>
 			<th>Sequence name</th>
 			<th>Sequence description</th>
 		</tr>
