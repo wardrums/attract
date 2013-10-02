@@ -76,10 +76,7 @@ class Sequences extends Admin_Controller {
 			}
 			else 
 			{
-				$this->load->view('templates/header', $data);	
-				$this->load->view('templates/sidebar', $data);
-				$this->load->view('sequences/edit', $data);
-				$this->load->view('templates/footer');	
+				$this->load->view('sequences/edit_modal', $data);
 			}
 		}
 		else
@@ -88,7 +85,8 @@ class Sequences extends Admin_Controller {
 			// first we create the new tasks, which should be assigned to a user right after the page is reloaded
 			$this->sequences_model->edit_sequence();
 			
-			redirect('/sequences/edit/' . $sequence_id, 'refresh');
+			$this->session->set_flashdata('message', 'Sequence <strong>' . $sequence_id . '</strong> has been updated!');
+			redirect('/sequences/');
 		}
 	}
 
