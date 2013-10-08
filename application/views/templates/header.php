@@ -69,16 +69,6 @@
             <ul class="nav">
               <li <?php echo ($title == "Tasks" ? "class=\"active\"" : ""); ?>><a href="/user/tasks/">Tasks</a></li>
               <li><a href="#contact">Messages</a></li>
-              <?php 
-              if ($is_admin)
-              {
-              		if ($title == "Shots") {
-						echo " <li><a href=\"/shots/create/\">Add shot</a></li>";
-					} else if ($title == "Users") {
-						echo " <li><a href=\"/user/create/\">Add user</a></li>";
-					}
-              }
-			  ?>
             </ul>
             <ul class="nav pull-right">
             <li id="fat-menu" class="dropdown">

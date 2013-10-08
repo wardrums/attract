@@ -303,6 +303,7 @@ $(document).ready(function() {
 	</tfoot>
 </table>
 
+<a class="btn btn-large btn-block" href="/shots/create">Add shot</a>
 
 </div><!--/span-->
 
