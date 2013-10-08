@@ -130,6 +130,23 @@ class Shots_model extends CI_Model {
 	
 	function delete_shot($shot_id)
 	{
+		
+		$this->load->model('shots_tasks_model');
+		
+		$this->db->select('*'); 
+		$this->db->where('shot_id', $shot_id);
+	    $this->db->from('shots_tasks');
+	    $query = $this->db->get();	
+		$shots_tasks = $query->result_array();
+		
+		if (isset($shots_tasks))
+		{
+			foreach ($shots_tasks as $shot_task) 
+			{
+				$this->shots_tasks_model->delete_shot_task($shot_task['shot_task_id']);
+			}
+		}
+
 		$tables = array('shots', 'shots_users');
 		$this->db->where('shot_id', $shot_id);
 		$this->db->delete($tables);

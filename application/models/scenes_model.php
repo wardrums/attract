@@ -52,5 +52,28 @@ class Scenes_model extends CI_Model {
 		return;
 	}
 
+	function delete_scene($scene_id)
+	{
+		$this->load->model('shots_model');
+		
+		$this->db->select('*'); 
+		$this->db->where('scene_id', $scene_id);
+	    $this->db->from('shots');
+	    $query = $this->db->get();	
+		$shots = $query->result_array();
+		
+		if (isset($shots))
+		{
+			foreach ($shots as $shot) 
+			{
+				$this->shots_model->delete_shot($shot['shot_id']);
+			}
+		}
+			
+		$this->db->where('scene_id', $scene_id);
+		$this->db->delete('scenes');
+		return;
+	}
+
 }
 

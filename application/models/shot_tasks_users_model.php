@@ -206,6 +206,13 @@ class Shot_tasks_users_model extends CI_Model {
 		return;
 		
 	}
+	
+	function delete_shot_task_user($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('shot_tasks_users');
+		return;
+	}
 
 }
 

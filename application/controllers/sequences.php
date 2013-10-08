@@ -45,7 +45,7 @@ class Sequences extends Admin_Controller {
 
 			$this->session->set_flashdata('message', 'Sequence <strong>' . $sequence_name . '</strong> added to database!');
 
-			redirect('/sequences/create');
+			redirect('/sequences/');
 			
 		}
 	}
@@ -59,7 +59,7 @@ class Sequences extends Admin_Controller {
 		
 		if (empty($data['sequence']))
 		{
-			sequence_404();
+			show_404();
 		}
 		
 		$this->load->helper('form');
@@ -88,6 +88,23 @@ class Sequences extends Admin_Controller {
 			$this->session->set_flashdata('message', 'Sequence <strong>' . $sequence_id . '</strong> has been updated!');
 			redirect('/sequences/');
 		}
+	}
+
+
+	function delete($sequence_id, $async = FALSE)
+	{
+		
+		$data['sequence'] = $this->sequences_model->get_sequences($sequence_id);
+				
+		if (empty($data['sequence']))
+		{
+			show_404();
+		}
+						
+		$this->sequences_model->delete_sequence($sequence_id);
+		
+		$this->session->set_flashdata('message', 'Sequence <strong>' . $sequence_id . '</strong> has been deleted, along with the relative data!');
+		redirect('/sequences/');
 	}
 
 }

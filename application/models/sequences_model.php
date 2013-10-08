@@ -65,6 +65,31 @@ class Sequences_model extends CI_Model {
 		return;
 	}
 	
+	// will refactor this later into delete_sequence and delete_sequences
+	function delete_sequence($sequence_id)
+	{
+		$this->load->model('scenes_model');
+		
+		$this->db->select('*'); 
+		$this->db->where('sequence_id', $sequence_id);
+	    $this->db->from('scenes');
+	    $query = $this->db->get();	
+		$scenes = $query->result_array();
+		
+		if(isset($scenes))
+		{
+			foreach ($scenes as $scene) 
+			{
+				$this->scenes_model->delete_scene($scene['scene_id']);
+			}	
+		}
+		
+		$this->db->where('sequence_id', $sequence_id);
+		$this->db->delete('sequences');
+		return;
+		
+	}
+	
 
 }
 

@@ -31,6 +31,8 @@
 	<?php echo form_close();?>
 </div>
 <div class="modal-footer">
+	<a href="/sequences/delete/<?php echo $sequence['sequence_id']; ?>" id="delete" class="btn btn-danger pull-left"><i class="icon-fire icon-white"></i> Delete</a>
 	<button id="submit" class="btn btn-primary" onclick="$('.modal-body > form').submit();">Save Changes</button>
-	<button class="btn" data-dismiss="modal">Close</button>
+	<button class="btn" data-dismiss="modal">Cancel</button>
 </div>
+

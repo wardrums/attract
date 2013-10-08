@@ -162,11 +162,7 @@ class Shots extends Common_Auth_Controller {
 
 	function delete($shot_id)
 	{
-		$this->load->model('shots_tasks_model');
-		$this->load->model('shot_tasks_users_model');
-		
-		$this->shot_tasks_users_model->set_users($shot_id);
-		$this->shots_tasks_model->remove_tasks($shot_id);
+
 		$this->shots_model->delete_shot($shot_id);
 		
 		$this->session->set_flashdata('message', 'Shot <strong>' . $shot_id . '</strong> has been deleted!');

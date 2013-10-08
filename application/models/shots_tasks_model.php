@@ -152,6 +152,29 @@ class Shots_tasks_model extends CI_Model {
 
 		return $query->result_array();
 	}
+	
+	function delete_shot_task($shot_task_id)
+	{
+		$this->load->model('shot_tasks_users_model');
+		
+		$this->db->select('*'); 
+		$this->db->where('shot_task_id', $shot_task_id);
+	    $this->db->from('shot_tasks_users');
+	    $query = $this->db->get();	
+		$shot_tasks_users = $query->result_array();
+		
+		if (isset($shot_tasks_users))
+		{
+			foreach ($shot_tasks_users as $shot_tasks_user) 
+			{
+				$this->shot_tasks_users_model->delete_shot_task_user($shot_tasks_user['id']);
+			}
+		}
+
+		$this->db->where('shot_task_id', $shot_task_id);
+		$this->db->delete('shots_tasks');
+		return;
+	}
 
 }
 
