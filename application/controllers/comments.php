@@ -41,11 +41,11 @@ class Comments extends Common_Auth_Controller {
 		else
 		{
 			// we create the comment and get its name to expose it the next flash
-			$comment_name = $this->comments_model->create_comment();
+			$shot_id = $this->comments_model->create_comment();
 
-			$this->session->set_flashdata('message', 'Comment <strong>' . $comment_name . '</strong> added to database!');
+			//$this->session->set_flashdata('message', 'Comment <strong>' . $comment_name . '</strong> added to database!');
 
-			redirect('/comments/');
+			redirect('/shots/view/' . $shot_id);
 			
 		}
 	}
@@ -101,10 +101,10 @@ class Comments extends Common_Auth_Controller {
 			show_404();
 		}
 						
-		$this->comments_model->delete_comment($comment_id);
+		$shot_id = $this->comments_model->delete_comment($comment_id);
 		
-		$this->session->set_flashdata('message', 'Comment <strong>' . $comment_id . '</strong> has been deleted, along with the relative data!');
-		redirect('/comments/');
+		//$this->session->set_flashdata('message', 'Comment <strong>' . $comment_id . '</strong> has been deleted, along with the relative data!');
+		redirect('/shots/view/' . $shot_id);
 	}
 
 }

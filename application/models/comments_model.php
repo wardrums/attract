@@ -70,7 +70,7 @@ class Comments_model extends CI_Model {
 		);
 
 		$this->db->insert('comments', $data);
-		return;
+		return $data['shot_id'];
 	}
 
 	function edit_comment()
@@ -90,11 +90,21 @@ class Comments_model extends CI_Model {
 	// will refactor this later into delete_comment and delete_comments
 	function delete_comment($comment_id)
 	{
+		// The following code can be used for attachments
+		
+		$this->db->select('*'); 
+		$this->db->where('comment_id', $comment_id);
+	    $this->db->from('comments');
+	    $query = $this->db->get();	
+		
+		$comment = $query->row();
+		
+		/*
 		$this->load->model('scenes_model');
 		
 		$this->db->select('*'); 
 		$this->db->where('comment_id', $comment_id);
-	    $this->db->from('scenes');
+	    $this->db->from('comments');
 	    $query = $this->db->get();	
 		$scenes = $query->result_array();
 		
@@ -105,10 +115,10 @@ class Comments_model extends CI_Model {
 				$this->scenes_model->delete_scene($scene['scene_id']);
 			}	
 		}
-		
+		*/
 		$this->db->where('comment_id', $comment_id);
 		$this->db->delete('comments');
-		return;
+		return $comment->shot_id;
 		
 	}
 	
