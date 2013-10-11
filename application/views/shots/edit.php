@@ -1,4 +1,12 @@
 <?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+
+<?php 
+if ($this->session->flashdata('message') != '')
+	{
+	    $flahsdata = $this->session->flashdata('message'); 
+	}
+?>
+
 <div class="<?php echo $span_value ?>">
 
 <script>
@@ -136,6 +144,13 @@
 		<li><a href="/shots/view/<?php echo $shot['shot_id'] ?>">Comments</a></li>
 	</ul>
 </div>
+
+<?php if (isset($flahsdata)):?>
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<?php echo $flahsdata ?>
+</div>
+<?php endif ?>
 
 <?php echo validation_errors(); ?>
 

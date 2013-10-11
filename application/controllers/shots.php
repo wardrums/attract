@@ -165,7 +165,7 @@ class Shots extends Common_Auth_Controller {
 			$this->shot_tasks_users_model->set_users($shot_id);
 		
 			$this->session->set_flashdata('message', 'Shot <strong>' . $shot_id . '</strong> has been updated!');
-			redirect('/shots');
+			redirect('/shots/edit/' . $shot_id);
 		}
 	}
 
