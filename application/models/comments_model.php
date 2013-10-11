@@ -36,6 +36,25 @@ class Comments_model extends CI_Model {
 		}
 	}
 	
+	function get_shot_comments($shot_id)
+	{
+
+		$this->load->model('settings_model');
+		$current_show = $this->settings_model->get_settings('current_show');
+				
+		$this->db->select('*'); 
+	    $this->db->from('comments');
+		$this->db->join('users', 'users.id = comments.user_id', 'left');
+		$this->db->where('shot_id', $shot_id); 
+	    $query = $this->db->get();
+			
+		//print_r ($query->result_array());
+	
+		return $query->result_array();
+	
+	}
+		
+	
 	function create_comment()
 	{
 		// we user the auth library to get the current user ID and associate it with the comment

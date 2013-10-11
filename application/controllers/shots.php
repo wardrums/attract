@@ -29,8 +29,14 @@ class Shots extends Common_Auth_Controller {
 
 	function view($id)
 	{
+		$this->load->helper('form');
+		$this->load->model('comments_model');
+		
+		$data['shots'] = $this->shots_model->get_shots();
 		$data['shot'] = $this->shots_model->get_shots($id);
+		$data['comments'] = $this->comments_model->get_shot_comments($id);
 		$data['title'] = 'Shot';
+		$data['use_sidebar'] = TRUE;
 		
 		if (empty($data['shot']))
 		{
@@ -38,7 +44,7 @@ class Shots extends Common_Auth_Controller {
 		}
 	
 		$this->load->view('templates/header', $data);
-		$this->load->view('templates/sidebar', $data);
+		$this->load->view('templates/sidebar_shots', $data);
 		$this->load->view('shots/view', $data);
 		$this->load->view('templates/footer');
 	}
@@ -107,6 +113,7 @@ class Shots extends Common_Auth_Controller {
 		$this->load->model('users_model');
 		$this->load->model('shot_tasks_users_model');
 		
+		$data['shots'] = $this->shots_model->get_shots();
 		$data['shot'] = $this->shots_model->get_shots($shot_id);
 		$data['scenes'] = $this->scenes_model->get_scenes();
 		$data['statuses'] = $this->statuses_model->get_statuses();
@@ -116,6 +123,7 @@ class Shots extends Common_Auth_Controller {
 		$data['shot_tasks'] = $this->shots_tasks_model->get_tasks($shot_id);
 		$data['shot_tasks_users'] = $this->shot_tasks_users_model->get_users($shot_id);
 		$data['title'] = 'Edit Shot';
+		$data['use_sidebar'] = TRUE;
 		
 		if (empty($data['shot']))
 		{
@@ -137,7 +145,8 @@ class Shots extends Common_Auth_Controller {
 			}
 			else 
 			{
-				$this->load->view('templates/header', $data);	
+				$this->load->view('templates/header', $data);
+				$this->load->view('templates/sidebar_shots', $data);	
 				$this->load->view('shots/edit', $data);
 				$this->load->view('templates/footer');	
 			}
