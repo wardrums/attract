@@ -13,7 +13,7 @@
 	<?php foreach ($comments as $comment): ?>
     <div class="media">
 	    <a class="pull-left" href="#">
-	    	<img class="media-object" src="http://placehold.it/60x60">
+	    	<img class="media-object" src="<?php print_r ($comment['gravatar']); ?>">
 	    </a>
 	    <div class="media-body">
 	    	<h4 class="media-heading"><?php echo $comment['first_name'] ?></h4>

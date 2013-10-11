@@ -38,7 +38,7 @@ class Comments_model extends CI_Model {
 	
 	function get_shot_comments($shot_id)
 	{
-
+		$this->load->library('gravatar');
 		$this->load->model('settings_model');
 		$current_show = $this->settings_model->get_settings('current_show');
 				
@@ -47,10 +47,16 @@ class Comments_model extends CI_Model {
 		$this->db->join('users', 'users.id = comments.user_id', 'left');
 		$this->db->where('shot_id', $shot_id); 
 	    $query = $this->db->get();
-			
+		$comments = $query->result_array();	
 		//print_r ($query->result_array());
+		foreach ($comments as $comment => $value) 
+		{
+			//$comments[$comment]['email'] = $this->gravatar->get_gravatar($comment['email'], NULL, 60);
+			$comments[$comment]['gravatar'] = $this->gravatar->get_gravatar($value['email'], NULL, 60);
+			
+		}
 	
-		return $query->result_array();
+		return $comments;
 	
 	}
 		
