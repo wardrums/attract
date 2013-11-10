@@ -1,4 +1,14 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+* Shots Controller
+*
+* Manages shots
+*
+* @author Francesco Siddi
+* @package Attract
+*/
+
 
 class Shots extends Common_Auth_Controller {
 
@@ -37,6 +47,7 @@ class Shots extends Common_Auth_Controller {
 		$data['comments'] = $this->comments_model->get_shot_comments($id);
 		$data['title'] = 'Shot';
 		$data['use_sidebar'] = TRUE;
+		$data['error'] = '';
 		
 		if (empty($data['shot']))
 		{
@@ -236,25 +247,95 @@ class Shots extends Common_Auth_Controller {
 		$this->load->view('shots/index_ajax', $data);
 	}
 	
-}
-
-/*
-class Shots extends CI_Controller {
-
-	public function view($shot = 'home') {
 	
-		if ( ! file_exists('application/views/shots/'.$shot.'.php')) {
-			// Whoops, we don't have a page for that!
-			show_404();
+	function post_add_comment()
+	{
+		$shot_id = $this->input->post('shot_id');
+		
+		if (!$shot_id)
+		{
+			redirect('/shots');
 		}
 		
-		$data['title'] = ucfirst($shot); // Capitalize the first letter
+		$this->load->helper('form');
+		$this->load->model('comments_model');
+		$this->load->model('comments_attachments_model');
+		$this->load->library('form_validation');
 		
-		$this->load->view('templates/header', $data);
-		$this->load->view('shots/'.$shot, $data);
-		$this->load->view('templates/footer', $data);
+		$data['shots'] = $this->shots_model->get_shots();
+		$data['shot'] = $this->shots_model->get_shots($shot_id);
+		$data['comments'] = $this->comments_model->get_shot_comments($shot_id);
+		$data['title'] = 'Shot';
+		$data['use_sidebar'] = TRUE;
+		$data['error'] = '';
+		
 
+		$this->form_validation->set_rules('shot_id', 'comment_body');
+		
+				
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar_shots', $data);
+			$this->load->view('shots/view', $data);
+			$this->load->view('templates/footer');
+			
+		}
+		else
+		{
+			
+			
+			$this->load->model('attachments_model');
+		
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '1000';
+			$config['max_width']  = '2048';
+			$config['max_height']  = '2048';
+			$config['encrypt_name'] = true;
+
+			$this->load->library('upload', $config);
+			
+			if ( ! $this->upload->do_upload())
+			{
+				// we skip the missing file!	
+				$data['error'] = $this->upload->display_errors();
+				
+				if ($data['error'] == '<p>You did not select a file to upload.</p>') {
+					$data['error'] = '';
+				} 
+				//redirect('shots/view/' . $shot_id);
+				$this->session->set_flashdata('message', $data['error']);
+			}
+			else
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$attachment_id = $this->attachments_model->create_attachment($data['upload_data']['orig_name'], $data['upload_data']['raw_name'] . $data['upload_data']['file_ext']);
+				//$this->load->view('upload_success', $data);	
+				$this->session->set_flashdata('message', 'Comment added to database!');
+			}
+			// we create the comment and get its name to expose it the next flash
+			$comment_id = $this->comments_model->create_comment();
+			
+			if (isset($attachment_id))
+			{
+				$this->comments_attachments_model->create_comment_attachment($attachment_id, $comment_id);
+			}
+
+
+			redirect('/shots/view/'. $shot_id);
+			/*
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar_shots', $data);
+			$this->load->view('shots/view', $data);
+			$this->load->view('templates/footer');
+			 * */
+			
+		}
 	}
 	
 }
- */
+
+/* End of file shots.php */
+/* Location: ./application/controllers/shots.php */
+

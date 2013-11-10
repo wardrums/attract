@@ -1,5 +1,20 @@
-<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+<?php 
+$span_value = ($use_sidebar == TRUE ? "span9" : "span12"); 
+if ($this->session->flashdata('message') != '')
+{
+	$flahsdata = $this->session->flashdata('message'); 
+}
+
+?>
 <div class="<?php echo $span_value ?>">
+	
+	<?php if (isset($flahsdata)):?>
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<?php echo $flahsdata ?>
+	</div>
+	<?php endif ?>
+	
 	<h2>Shot <?php echo $shot['shot_name'] ?></h2>
 	<p><?php echo $shot['shot_description']; ?></p>
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
@@ -19,6 +34,11 @@
 	    	<h4 class="media-heading"><?php echo $comment['first_name'] ?></h4>
 	    	<h5 class="media-heading"><?php echo $comment['comment_creation_date'] ?></h5>
 	    	<?php echo $comment['comment_body'] ?>
+	    	<?php if($comment['attachment_path']): ?>
+	    		<a href="/uploads/<?php echo $comment['attachment_path'] ?>">
+	    			<p><?php echo $comment['attachment_name'] ?></p>
+	    		</a>
+	    	<?php endif ?>
 	    	<a href="/comments/delete/<?php echo $comment['comment_id'] ?>">Delete</a>
 	    	
 	    </div>
@@ -29,16 +49,19 @@
 	    <a class="pull-left" href="#">
 	    	<img class="media-object" src="http://placehold.it/60x60">
 	    </a>
+	    <?php echo $error;?>
 	    <div class="media-body">
-	    	<?php echo form_open("comments/create"); ?>
+	    	<?php echo form_open_multipart("shots/post_add_comment"); ?>
 	    	
 	    	<form class="form">    
 	    		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                
-			    <textarea id="comment_body" name="comment_body"></textarea>
+			    <textarea id="comment_body" name="comment_body" required=""></textarea>
+			    <input type="file" name="userfile" size="20" />
 			
 				<button class="btn">Add Comment</button>
 			</form>
 	    	<?php echo form_close();?>
+	    	
 	    </div>
     </div>
 </div>
