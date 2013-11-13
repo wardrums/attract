@@ -37,6 +37,9 @@ if ($this->session->flashdata('message') != '')
 	} ;
 	
 	$(document).ready(function() {
+		
+		$(".task_owners").chosen();
+		
 		// we do check against this variable to see if a task exists already
 		var old_id = '';
 				    
@@ -82,9 +85,7 @@ if ($this->session->flashdata('message') != '')
 					shot_task_id = data;
 					$(target).after(multiselect_users(shot_task_id));		
 				});
-				
-				
-				
+	
 				// we remove temporary classes and assign the normal one
 				$(this).parent().removeClass('task_id_new').addClass('task_id');
 				$(this).parent().next().removeClass('status_id_new').addClass('status_id');
