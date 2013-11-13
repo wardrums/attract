@@ -149,15 +149,19 @@ class Comments_model extends CI_Model {
 		{
 			foreach ($comments_attachments as $comment_attachment) 
 			{
-				// we get the attachment_name in order to build the filepath to be removed
-				// from the system
+				// we get the attachment_name in order to build the filepath to be removed from the system
 				$this->db->select('attachments.attachment_path'); 
 				$this->db->where('attachment_id', $comment_attachment['attachment_id']);
 	    		$this->db->from('attachments');
 				$query = $this->db->get();
 				$attachment = $query->row_array();
 				
-				$file_path = realpath(APPPATH . '../uploads/' . $attachment['attachment_path']);
+				// we remove the original image
+				$file_path = realpath(APPPATH . '../uploads/originals/' . $attachment['attachment_path']);
+				unlink($file_path);
+				
+				// we remove the thumbnail
+				$file_path = realpath(APPPATH . '../uploads/thumbnails/' . $attachment['attachment_path']);
 				unlink($file_path);
 				
 				// we delete the row in the attachments table

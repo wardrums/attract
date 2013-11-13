@@ -35,8 +35,8 @@ if ($this->session->flashdata('message') != '')
 	    	<h5 class="media-heading"><?php echo $comment['comment_creation_date'] ?></h5>
 	    	<?php echo $comment['comment_body'] ?>
 	    	<?php if($comment['attachment_path']): ?>
-	    		<a href="/uploads/<?php echo $comment['attachment_path'] ?>">
-	    			<p><?php echo $comment['attachment_name'] ?></p>
+	    		<a href="/uploads/originals/<?php echo $comment['attachment_path'] ?>">
+	    			<img src="/uploads/thumbnails/<?php echo $comment['attachment_path'] ?>" />
 	    		</a>
 	    	<?php endif ?>
 	    	<a href="/comments/delete/<?php echo $comment['comment_id'] ?>">Delete</a>

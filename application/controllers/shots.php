@@ -272,22 +272,16 @@ class Shots extends Common_Auth_Controller {
 
 		$this->form_validation->set_rules('shot_id', 'comment_body');
 		
-				
 		if ($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('templates/header', $data);
-			$this->load->view('templates/sidebar_shots', $data);
-			$this->load->view('shots/view', $data);
-			$this->load->view('templates/footer');
-			
+			redirect('/shots/view/'. $shot_id);	
 		}
 		else
 		{
 			
-			
 			$this->load->model('attachments_model');
 		
-			$config['upload_path'] = './uploads/';
+			$config['upload_path'] = './uploads/originals/';
 			$config['allowed_types'] = 'gif|jpg|png';
 			$config['max_size']	= '1000';
 			$config['max_width']  = '2048';
@@ -298,38 +292,61 @@ class Shots extends Common_Auth_Controller {
 			
 			if ( ! $this->upload->do_upload())
 			{
-				// we skip the missing file!	
+				// we skip the error if a file is not uploaded	
 				$data['error'] = $this->upload->display_errors();
 				
 				if ($data['error'] == '<p>You did not select a file to upload.</p>') {
 					$data['error'] = '';
-				} 
-				//redirect('shots/view/' . $shot_id);
+				}
+				
+				// in any other case we set the erro in a flashcard
 				$this->session->set_flashdata('message', $data['error']);
 			}
 			else
 			{
 				$data = array('upload_data' => $this->upload->data());
+				// we create an attachment entry in the database
 				$attachment_id = $this->attachments_model->create_attachment($data['upload_data']['orig_name'], $data['upload_data']['raw_name'] . $data['upload_data']['file_ext']);
-				//$this->load->view('upload_success', $data);	
+				//$this->load->view('upload_success', $data);
+				
+				// we make a thumbnail for the uploaded image
+				$this->load->library('image_lib');
+
+				$source_path = "./uploads/originals/";
+			    $thumbnail_path = "./uploads/thumbnails/";
+			
+			    $source_image = $data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
+			    $medium_image = $data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
+			
+			    // Resize to medium
+			
+			    $config['source_image'] = $source_path.$source_image;
+			    $config['new_image'] = $thumbnail_path.$medium_image;
+			    $config['width'] = 200;
+			    $config['height'] = 200;
+			
+			    $this->image_lib->initialize($config); 
+			
+			    if ( ! $this->image_lib->resize())
+			    {
+			    	echo $config['source_image'];
+			        echo $this->image_lib->display_errors();
+			        
+			    }
+			
 				$this->session->set_flashdata('message', 'Comment added to database!');
 			}
-			// we create the comment and get its name to expose it the next flash
+			// we create the comment (the model function will get all the data via post) and get its id
 			$comment_id = $this->comments_model->create_comment();
 			
+			// if we have uploaded an attachment we match it with the comment in the dedicated table
 			if (isset($attachment_id))
 			{
 				$this->comments_attachments_model->create_comment_attachment($attachment_id, $comment_id);
 			}
 
-
+			// we reload the page (will display flashcard if present)
 			redirect('/shots/view/'. $shot_id);
-			/*
-			$this->load->view('templates/header', $data);
-			$this->load->view('templates/sidebar_shots', $data);
-			$this->load->view('shots/view', $data);
-			$this->load->view('templates/footer');
-			 * */
 			
 		}
 	}
