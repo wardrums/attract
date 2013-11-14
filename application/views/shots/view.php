@@ -33,7 +33,7 @@ if ($this->session->flashdata('message') != '')
 	    <div class="media-body">
 	    	<h4 class="media-heading"><?php echo $comment['first_name'] ?></h4>
 	    	<h5 class="media-heading"><?php echo $comment['comment_creation_date'] ?></h5>
-	    	<?php echo $comment['comment_body'] ?>
+	    	<div class="thread_comment_body"><?php echo $comment['comment_body'] ?></div>
 	    	<?php if($comment['attachment_path']): ?>
 	    		<a href="/uploads/originals/<?php echo $comment['attachment_path'] ?>">
 	    			<img src="/uploads/thumbnails/<?php echo $comment['attachment_path'] ?>" />
@@ -55,7 +55,7 @@ if ($this->session->flashdata('message') != '')
 	    	
 	    	<form class="form">    
 	    		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                
-			    <textarea id="comment_body" name="comment_body" required=""></textarea>
+			    <textarea data-provide="markdown" id="comment_body" name="comment_body" required=""></textarea>
 			    <input type="file" name="userfile" size="20" />
 			
 				<button class="btn">Add Comment</button>
@@ -65,4 +65,17 @@ if ($this->session->flashdata('message') != '')
 	    </div>
     </div>
 </div>
+
+<script>
+	//$('.thread_comment_body').html(markdown.toHTML($(this).html()));
+	$( '.thread_comment_body' ).each(function() {
+		//$(this).html('a');
+		var test = markdown.toHTML($(this).html());
+		$(this).html(test);
+	});
+	//console.log($('.thread_comment_body').html());
+	console.log(markdown.toHTML('#11'));
+	$("#comment_body").markdown({autofocus:false,savable:false});
+
+</script>
 
