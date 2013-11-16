@@ -1,5 +1,5 @@
 <?php 
-$span_value = ($use_sidebar == TRUE ? "span9" : "span12"); 
+$span_value = ($use_sidebar == TRUE ? "col-md-9" : "col-md-12"); 
 if ($this->session->flashdata('message') != '')
 {
 	$flahsdata = $this->session->flashdata('message'); 
@@ -8,6 +8,9 @@ if ($this->session->flashdata('message') != '')
 ?>
 <div class="<?php echo $span_value ?>">
 	
+	<h2>Shot <?php echo $shot['shot_name'] ?></h2>
+	<p><?php echo $shot['shot_description']; ?></p>
+	
 	<?php if (isset($flahsdata)):?>
 	<div class="alert alert-success">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -15,8 +18,6 @@ if ($this->session->flashdata('message') != '')
 	</div>
 	<?php endif ?>
 	
-	<h2>Shot <?php echo $shot['shot_name'] ?></h2>
-	<p><?php echo $shot['shot_description']; ?></p>
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
 		<ul class="nav nav-tabs">
 			<li><a href="/shots/edit/<?php echo $shot['shot_id'] ?>">Edit</a></li>
@@ -58,7 +59,7 @@ if ($this->session->flashdata('message') != '')
 			    <textarea data-provide="markdown" id="comment_body" name="comment_body" required=""></textarea>
 			    <input type="file" name="userfile" size="20" />
 			
-				<button class="btn">Add Comment</button>
+				<button class="btn btn-default">Add Comment</button>
 			</form>
 	    	<?php echo form_close();?>
 	    	

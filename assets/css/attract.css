@@ -1,3 +1,16 @@
+body {
+	padding-top: 50px;
+}
+
+
+.list-group {
+	margin-top: 20px;
+}
+
+.panel .list-group {
+	margin-top: 0;
+}
+
 .stats-knobs div{
 	text-align:center;
 }
@@ -38,32 +51,35 @@ input.dial:focus {
 	height: 99px;
 }
 
-.progress-fix .bar, .progress .bar-fix {
-    background-color: #DD514C;
-    background-image: linear-gradient(to bottom, #EE5F5B, #C43C35);
-    background-image: -moz-linear-gradient(center top, #EE5F5B, #C43C35);
-    background-repeat: repeat-x;
+
+/* Edit shot page */
+
+.row-task {
+	margin-bottom: 10px;
 }
 
-.progress-final_1 .bar, .progress .bar-final_1 {
-    background-color: #5EB95E;
-    background-image: linear-gradient(to bottom, #62C462, #57A957);
-    background-image: -moz-linear-gradient(center top, #62C462, #57A957);
-    background-repeat: repeat-x;
+
+/* Stats page */
+
+.row.status-progress {
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 
-.progress-info .bar, .progress .bar-info {
-    background-color: #4BB1CF;
-    background-image: linear-gradient(to bottom, #5BC0DE, #339BB9);
-    background-image: -moz-linear-gradient(center top, #5BC0DE, #339BB9);
-    background-repeat: repeat-x;
+.progress-fix .progress-bar, .progress .progress-bar-fix {
+    background-color: #D9534F;
 }
 
-.progress-in_progress .bar, .progress .bar-in_progress {
-    background-color: #FAA732;
-    background-image: linear-gradient(to bottom, #FBB450, #F89406);
-    background-image: -moz-linear-gradient(center top, #FBB450, #F89406);
-    background-repeat: repeat-x;
+.progress-final_1 .progress-bar, .progress .progress-bar-final_1 {
+    background-color: #5CB85C;
+}
+
+.progress-info .progress-bar, .progress .progress-bar-info {
+    background-color: #5BC0DE;
+}
+
+.progress-in_progress .progress-bar, .progress .progress-bar-in_progress {
+    background-color: #F0AD4E;
 }
 
 #shots tbody {

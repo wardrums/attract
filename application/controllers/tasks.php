@@ -78,10 +78,10 @@ class Tasks extends Admin_Controller {
 			}
 			else 
 			{
-				$this->load->view('templates/header', $data);	
-				$this->load->view('templates/sidebar', $data);
-				$this->load->view('tasks/edit', $data);
-				$this->load->view('templates/footer');	
+				//$this->load->view('templates/header', $data);	
+				//$this->load->view('templates/sidebar', $data);
+				$this->load->view('tasks/edit_modal', $data);
+				//$this->load->view('templates/footer');	
 			}
 		}
 		else
@@ -90,9 +90,27 @@ class Tasks extends Admin_Controller {
 			// first we create the new tasks, which should be assigned to a user right after the page is reloaded
 			$this->tasks_model->edit_task();
 			
-			redirect('/tasks/edit/' . $task_id, 'refresh');
+			$this->session->set_flashdata('message', 'Task <strong>' . $task_id . '</strong> has been updated!');
+			redirect('/tasks/');
 		}
 	}
+
+	function delete($task_id, $async = FALSE)
+	{
+		
+		$task = $this->tasks_model->get_tasks($task_id);
+				
+		if (empty($task))
+		{
+			show_404();
+		}
+						
+		$this->tasks_model->delete_task($task_id);
+		
+		$this->session->set_flashdata('message', 'Task <strong>' . $task_id . '</strong> has been deleted, along with the relative data!');
+		redirect('/tasks/');
+	}
+
 
 }
 

@@ -1,4 +1,4 @@
-<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+<?php $span_value = ($use_sidebar == TRUE ? "col-md-9" : "col-md-12"); ?>
 
 <?php 
 if ($this->session->flashdata('message') != '')
@@ -18,11 +18,11 @@ if ($this->session->flashdata('message') != '')
 </div>
 <?php endif ?>
 
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="users">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="users">
 	<thead>
 		<tr>
 			<th>Sequence name</th>
-			<th>Sequence description</th>
+			<th>Description</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -38,12 +38,12 @@ if ($this->session->flashdata('message') != '')
 	<tfoot>
 		<tr>
 			<th>Sequence name</th>
-			<th>Sequence description</th>
+			<th>Description</th>
 		</tr>
 	</tfoot>
 </table>
 
-<a class="btn btn-large btn-block" href="/sequences/create">Add sequence</a>
+<a class="btn btn-default btn-lg btn-block" href="/sequences/create">Add sequence</a>
 </div><!--/span-->
 
 <script>
@@ -57,7 +57,7 @@ $(document).ready(function() {
 			$(url).modal('open');
 		} else {
 			$.get(url, function(data) {
-				$('<div class="modal hide fade">' + data + '</div>').modal();
+				$('<div class="modal fade">' + data + '</div>').modal();
 			}).success(function() { $('input:text:visible:first').focus(); });
 		}
 	});

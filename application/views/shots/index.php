@@ -1,4 +1,4 @@
-<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); 
+<?php $span_value = ($use_sidebar == TRUE ? "col-md-9" : "col-md-12"); 
 
 if ($this->session->flashdata('message') != '')
 {
@@ -264,7 +264,7 @@ $(document).ready(function() {
 </select>	 -->
    
    
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="shots">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="shots">
 	<thead>
 		<tr>
 			<th>Shot Name</th>
@@ -285,7 +285,7 @@ $(document).ready(function() {
     		<td><?php echo $shot['status_name']?></td> 
     		<td><?php echo $shot['task_names'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
-    		<td><?php echo $shot['user_id']?> <a class="btn btn-mini edit-shot" href="#"><i class="icon-edit"></i> Edit</a></td>
+    		<td><?php echo $shot['user_id']?> <a class="btn btn-default btn-xs edit-shot" href="#"><i class="icon-edit"></i> Edit</a></td>
     	</tr>
 	<?php endforeach ?>
 		
@@ -303,7 +303,7 @@ $(document).ready(function() {
 	</tfoot>
 </table>
 
-<a class="btn btn-large btn-block" href="/shots/create">Add shot</a>
+<a class="btn btn-default btn-lg btn-block" href="/shots/create">Add shot</a>
 
 </div><!--/span-->
 

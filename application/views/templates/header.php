@@ -9,27 +9,11 @@
 
     <!-- Le styles -->
     <link href="<?php echo assets_url(); ?>/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
 
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
-    </style>
-    <link href="<?php echo assets_url(); ?>/css/bootstrap-responsive.min.css" rel="stylesheet">
+  
     <link href="<?php echo assets_url(); ?>/css/chosen.min.css" rel="stylesheet">
     <link href="<?php echo assets_url(); ?>/css/bootstrap-markdown.min.css" rel="stylesheet">
+    <link href="<?php echo assets_url(); ?>/css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="<?php echo assets_url(); ?>/css/attract.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -49,7 +33,7 @@
     <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.fnGetColumnData.js"></script>
     <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.fnFilterClear.js"></script>
-    <script src="<?php echo assets_url(); ?>/js/custom.dataTables.js"></script>
+    <script src="<?php echo assets_url(); ?>/js/jquery.dataTables.bootstrap.js"></script>
     <!-- <script src="<?php echo assets_url(); ?>/js/jquery.jeditable.js"></script> -->
     <script src="<?php echo assets_url(); ?>/js/jquery.chosen.min.js"></script>
     <script src="<?php echo assets_url(); ?>/js/bootstrap-markdown.js"></script>
@@ -59,41 +43,38 @@
   </head>
 
   <body>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+            <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/">Attract</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li <?php echo ($title == "Tasks" ? "class=\"active\"" : ""); ?>><a href="/user/tasks/">Tasks</a></li>
-              <li><a href="#contact">Messages</a></li>
-            </ul>
-            <ul class="nav pull-right">
-            <li id="fat-menu" class="dropdown">
-              <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $the_user->username ?> <b class="caret"></b></a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">More settings</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="/auth/logout">Log out</a></li>
-              </ul>
-            </li>
-           </ul>
-          </div><!--/.nav-collapse -->
-          
-                    
-                  
+          <a href="/" class="navbar-brand">Attract</a>
         </div>
+        <div class="navbar-collapse collapse">
+        	
+        <ul class="nav navbar-nav navbar-right">
+
+	        <li id="fat-menu" class="dropdown">
+	          <a href="#" id="drop3" class="dropdown-toggle" data-toggle="dropdown"><?php echo $the_user->username ?> <b class="caret"></b></a>
+	          <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+	            <li><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
+	            <li><a role="menuitem" tabindex="-1" href="#">More settings</a></li>
+	            <li class="divider"></li>
+	            <li><a role="menuitem" tabindex="-1" href="/auth/logout">Log out</a></li>
+	          </ul>
+	    	</li>
+	    </ul>
+        
+        </div><!--/.navbar-collapse -->
       </div>
     </div>
 
-    <div class="container-fluid">
-    	<div class="row-fluid">
+    <div class="container">
+    	<div class="row">
       
  

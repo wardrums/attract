@@ -1,6 +1,6 @@
 /* Set the defaults for DataTables initialisation */
 $.extend( true, $.fn.dataTable.defaults, {
-	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+	"sDom": "<'row'<'col-xs-6'l><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
 	"sPaginationType": "bootstrap",
 	"oLanguage": {
 		"sLengthMenu": "_MENU_ records per page"
@@ -8,9 +8,13 @@ $.extend( true, $.fn.dataTable.defaults, {
 } );
 
 
+
+
 /* Default class modification */
 $.extend( $.fn.dataTableExt.oStdClasses, {
-	"sWrapper": "dataTables_wrapper form-inline"
+	"sWrapper": "dataTables_wrapper form-inline",
+	"sFilterInput": "form-control input-sm",
+	"sLengthSelect": "form-control input-sm"
 } );
 
 
@@ -23,8 +27,10 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 		"iLength":        oSettings._iDisplayLength,
 		"iTotal":         oSettings.fnRecordsTotal(),
 		"iFilteredTotal": oSettings.fnRecordsDisplay(),
-		"iPage":          Math.ceil( oSettings._iDisplayStart / oSettings._iDisplayLength ),
-		"iTotalPages":    Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
+		"iPage":          oSettings._iDisplayLength === -1 ?
+			0 : Math.ceil( oSettings._iDisplayStart / oSettings._iDisplayLength ),
+		"iTotalPages":    oSettings._iDisplayLength === -1 ?
+			0 : Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
 	};
 };
 
@@ -41,8 +47,8 @@ $.extend( $.fn.dataTableExt.oPagination, {
 				}
 			};
 
-			$(nPaging).addClass('pagination').append(
-				'<ul>'+
+			$(nPaging).append(
+				'<ul class="pagination">'+
 					'<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
 					'<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
 				'</ul>'
@@ -56,7 +62,7 @@ $.extend( $.fn.dataTableExt.oPagination, {
 			var iListLength = 5;
 			var oPaging = oSettings.oInstance.fnPagingInfo();
 			var an = oSettings.aanFeatures.p;
-			var i, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
+			var i, ien, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
 
 			if ( oPaging.iTotalPages < iListLength) {
 				iStart = 1;
@@ -73,7 +79,7 @@ $.extend( $.fn.dataTableExt.oPagination, {
 				iEnd = iStart + iListLength - 1;
 			}
 
-			for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
+			for ( i=0, ien=an.length ; i<ien ; i++ ) {
 				// Remove the middle elements
 				$('li:gt(0)', an[i]).filter(':not(:last)').remove();
 
@@ -105,3 +111,42 @@ $.extend( $.fn.dataTableExt.oPagination, {
 		}
 	}
 } );
+
+
+/*
+ * TableTools Bootstrap compatibility
+ * Required TableTools 2.1+
+ */
+if ( $.fn.DataTable.TableTools ) {
+	// Set the classes that TableTools uses to something suitable for Bootstrap
+	$.extend( true, $.fn.DataTable.TableTools.classes, {
+		"container": "DTTT btn-group",
+		"buttons": {
+			"normal": "btn btn-default",
+			"disabled": "disabled"
+		},
+		"collection": {
+			"container": "DTTT_dropdown dropdown-menu",
+			"buttons": {
+				"normal": "",
+				"disabled": "disabled"
+			}
+		},
+		"print": {
+			"info": "DTTT_print_info modal"
+		},
+		"select": {
+			"row": "active"
+		}
+	} );
+
+	// Have the collection use a bootstrap compatible dropdown
+	$.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
+		"collection": {
+			"container": "ul",
+			"button": "li",
+			"liner": "a"
+		}
+	} );
+}
+

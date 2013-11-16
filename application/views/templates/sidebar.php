@@ -1,21 +1,24 @@
-		<div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Show title</li>
-              <li <?php echo ($title == "Shots" ? "class=\"active\"" : ""); ?>><a href="/shots">Shots</a></li>
-              <li <?php echo ($title == "Scenes" ? "class=\"active\"" : ""); ?>><a href="/scenes">Scenes</a></li>
-              <li <?php echo ($title == "Sequences" ? "class=\"active\"" : ""); ?>><a href="/sequences">Sequences</a></li>
-              <li <?php echo ($title == "Stats" ? "class=\"active\"" : ""); ?>><a href="/stats">Stats</a></li>
-              
-              <?php if($is_admin == TRUE): ?>
-              <li class="nav-header">Admin</li>
-              <li <?php echo ($title == "Users" ? "class=\"active\"" : ""); ?>><a href="/admin/users">User management</a></li>
-              <li <?php echo ($title == "Tasks" ? "class=\"active\"" : ""); ?>><a href="/tasks">Tasks</a></li>
-              <li <?php echo ($title == "Statuses" ? "class=\"active\"" : ""); ?>><a href="/statuses">Statuses</a></li>
-              <li <?php echo ($title == "Calendar" ? "class=\"active\"" : ""); ?>><a href="/admin/calendar">Calendar</a></li>
-              <li <?php echo ($title == "Shows" ? "class=\"active\"" : ""); ?>><a href="/shows">Show management</a></li>
-              <?php endif ?>
-
-            </ul>
-          </div><!--/.well -->
+		<div class="col-md-3">
+			<div class="list-group">
+				<a href="/shots" class="list-group-item <?php echo ($title == "Shots" ? "active" : ""); ?>">Shots</a>
+              	<a href="/scenes" class="list-group-item <?php echo ($title == "Scenes" ? "active" : ""); ?>">Scenes</a>
+              	<a href="/sequences" class="list-group-item <?php echo ($title == "Sequences" ? "active" : ""); ?>">Sequences</a>
+              	<a href="/stats" class="list-group-item <?php echo ($title == "Stats" ? "active" : ""); ?>">Stats</a>
+			</div>
+			
+			
+			<?php if($is_admin == TRUE): ?>
+			<div class="panel panel-default">
+			 	<div class="panel-heading">Admin Panel</div>
+			    <div class="list-group">
+					<a href="/admin/users" class="list-group-item <?php echo ($title == "Users" ? "active" : ""); ?>">User management</a>
+	              	<a href="/tasks" class="list-group-item <?php echo ($title == "Tasks" ? "active" : ""); ?>">Tasks</a>
+	              	<a href="/statuses" class="list-group-item <?php echo ($title == "Statuses" ? "active" : ""); ?>">Statuses</a>
+	              	<a href="/admin/calendar" class="list-group-item <?php echo ($title == "Calendar" ? "active" : ""); ?>">Calendar</a>
+	              	<a href="/shows" class="list-group-item <?php echo ($title == "Shows" ? "active" : ""); ?>">Show management</a>
+				</div>
+			  	
+			</div>
+			
+			<?php endif ?>
         </div><!--/span-->

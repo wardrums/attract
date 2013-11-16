@@ -65,11 +65,14 @@ class Shots_tasks_model extends CI_Model {
 			$data['task_id'] = $task_id;
 		}
 		
+		// WARNING: at the moment we can actually remove only one task at a time
 		$shot_exists = $this->db->get_where('shots_tasks', $data);
-		$shot_exists->row();
-		
+		$row = $shot_exists->row_array();
+				
 		if ($shot_exists) {
-			return $this->db->delete('shots_tasks', $data);
+			
+			$this->delete_shot_task($row['shot_task_id']);
+			return;
 		}
 		else 
 		{

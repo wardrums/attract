@@ -1,13 +1,13 @@
-<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+<?php $span_value = ($use_sidebar == TRUE ? "col-md-9" : "col-md-12"); ?>
 
 <div class="<?php echo $span_value ?>">
 
 <h2><?php echo $title ?></h2>
 
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="scenes">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="scenes">
 	<thead>
 		<tr>
-			<th>Scene Name</th>
+			<th>Scene name</th>
 			<th>Description</th>
 		</tr>
 	</thead>
@@ -28,7 +28,7 @@
 	</tfoot>
 </table>
 
-<a class="btn btn-large btn-block" href="/scenes/create/">Add scene</a>
+<a class="btn btn-default btn-lg btn-block" href="/scenes/create/">Add scene</a>
 
 
 </div><!--/span-->

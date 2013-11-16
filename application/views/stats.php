@@ -1,4 +1,4 @@
-<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+<?php $span_value = ($use_sidebar == TRUE ? "col-md-9" : "col-md-12"); ?>
 
 
 <script>
@@ -33,7 +33,7 @@
 			var task_id = $(this).attr('task-id');
 			var status_id = $(this).val();
 			
-			var target = $(this).parent().next();
+			var target = $(this).parent().parent().next();
 			
 			$.post("/shots/post_index", { task_id: task_id, status_id: status_id } , function(data) {
 			  //$('.modal-body').html(data);
@@ -63,23 +63,29 @@
 
 <?php foreach ($tasks as $task_name => $value): ?>
 	
-	<div class="row-fluid">
-		
-		<h3 class="stats-title"><?php echo $task_name; ?> - <?php echo $value['tasks_count']; ?> tasks</h3>
-		<select task-id="<?php echo $value['task_id']; ?>" class="task-filter pull-right">
-			<?php foreach ($statuses as $status) : ?>
-				<option value="<?php echo $status['status_id']; ?>"><?php echo $status['status_name']; ?></option>
-			<?php endforeach ?>
-		</select>
+	<div class="row status-header">
+		<div class="col-md-6">
+			<h3 class="stats-title"><?php echo $task_name; ?> - <?php echo $value['tasks_count']; ?> tasks</h3>
+		</div>
+		<div class="col-md-offset-3 col-md-3">
+			<select task-id="<?php echo $value['task_id']; ?>" class="task-filter form-control pull-right">
+				<?php foreach ($statuses as $status) : ?>
+					<option value="<?php echo $status['status_id']; ?>"><?php echo $status['status_name']; ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
 	</div>
 	
-	<div class="row-fluid">
-		<div class="progress">
-		<?php foreach ($value['statuses'] as $status_name => $status): ?>
-			<?php if ($status_name != 'todo' AND $status > 0): ?>
-			<div class="bar bar-<?php echo $status_name ?>" style="width: <?php echo $status ?>%;"><span><?php echo $status_name ?>: <?php echo $status ?>%</span></div>
-			<?php endif ?>
-		<?php endforeach ?>
+	
+	<div class="row status-progress">
+		<div class="col-md-12">
+			<div class="progress">
+			<?php foreach ($value['statuses'] as $status_name => $status): ?>
+				<?php if ($status_name != 'todo' AND $status > 0): ?>
+				<div class="progress-bar progress-bar-<?php echo $status_name ?>" style="width: <?php echo $status ?>%;"><span><?php echo $status_name ?>: <?php echo $status ?>%</span></div>
+				<?php endif ?>
+			<?php endforeach ?>
+			</div>
 		</div>
 	</div>
 	
