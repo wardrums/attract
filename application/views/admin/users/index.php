@@ -10,7 +10,7 @@
 			<th>Name</th>
 			<th>Email</th>
 			<th>Group</th>
-			<th>Edit</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,7 +26,7 @@
 			</td>
 			<td>
 				<div class="btn-group">
-				  <?php echo anchor("auth/edit_user/".$user->id, 'Edit', 'class="btn btn-default btn-xs"') ;?>
+				  <a href="#" user="<?php echo '/admin/edit_user/'.$user->id ?>" data-toggle="modal" class="btn btn-default btn-xs">Edit</a>
 				  <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
 				    <span class="caret"></span>
 				  </button>
@@ -45,13 +45,32 @@
 			<th>Name</th>
 			<th>Email</th>
 			<th>Group</th>
-			<th>Edit</th>
+			<th></th>
 		</tr>
 	</tfoot>
 </table>
 
 
 </div><!--/span-->
+
+<script>
+$(document).ready(function() {
+	// Support for AJAX loaded modal window.
+	// Focuses on first input textbox after it loads the window.
+	$('[data-toggle="modal"]').click(function(e) {
+		e.preventDefault();
+		var url = $(this).attr('user');
+		if (url.indexOf('#') == 0) {
+			$(url).modal('open');
+		} else {
+			$.get(url, function(data) {
+				$('<div class="modal fade">' + data + '</div>').modal();
+			}).success(function() { $('input:text:visible:first').focus(); });
+		}
+	});
+});
+</script>
+
 
 
 

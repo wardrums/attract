@@ -5,9 +5,21 @@ class Admin extends Admin_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		
+		
+		$this->load->library('ion_auth');
+		$this->load->library('session');
+		$this->load->library('form_validation');
+		$this->load->helper('url');
+
 		$this->load->database();
+
+		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+		
 		$this->load->model('users_model');
 		$this->lang->load('auth');
+		$this->load->helper('language');
+		
 	}
 
 	function index()
@@ -38,7 +50,7 @@ class Admin extends Admin_Controller {
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
-		$this->load->view('admin/users', $data);
+		$this->load->view('admin/users/index', $data);
 		$this->load->view('templates/footer');
 	}
 	
@@ -51,27 +63,19 @@ class Admin extends Admin_Controller {
 		$groups=$this->ion_auth->groups()->result_array();
 		$currentGroups = $this->ion_auth->get_users_groups($id)->result();
 
-		//process the phone number
-		if (isset($user->phone) && !empty($user->phone))
-		{
-			$user->phone = explode('-', $user->phone);
-		}
 
 		//validate form input
 		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required|xss_clean');
-		//$this->form_validation->set_rules('phone1', $this->lang->line('edit_user_validation_phone1_label'), 'required|xss_clean|min_length[3]|max_length[3]');
-		//$this->form_validation->set_rules('phone2', $this->lang->line('edit_user_validation_phone2_label'), 'required|xss_clean|min_length[3]|max_length[3]');
-		//$this->form_validation->set_rules('phone3', $this->lang->line('edit_user_validation_phone3_label'), 'required|xss_clean|min_length[4]|max_length[4]');
 		//$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'required|xss_clean');
 		$this->form_validation->set_rules('groups', $this->lang->line('edit_user_validation_groups_label'), 'xss_clean');
 
 		if (isset($_POST) && !empty($_POST))
 		{
 			// do we have a valid request?
-			if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
+			if ($id != $this->input->post('id'))
 			{
-				show_error($this->lang->line('error_csrf'));
+				//show_error($this->lang->line('error_csrf'));
 			}
 
 			$data = array(
@@ -110,10 +114,24 @@ class Admin extends Admin_Controller {
 				//check to see if we are creating the user
 				//redirect them back to the admin page
 				$this->session->set_flashdata('message', "User Saved");
-				redirect("auth", 'refresh');
+				//redirect("auth", 'refresh');
+				redirect('admin/users/');
 			}
 		}
 
+		$data['groups'] = $groups;
+		
+		$data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+		$data['user'] = array(
+			'id' => $user->id,
+			'first_name' => $user->first_name,
+			'last_name' => $user->last_name,
+			'current_groups' => $currentGroups,
+		);
+		
+		
+		$this->load->view('admin/users/edit_modal', $data);
+/*
 		//display the edit user form
 		$this->data['csrf'] = $this->_get_csrf_nonce();
 
@@ -150,6 +168,8 @@ class Admin extends Admin_Controller {
 		);
 
 		$this->_render_page('auth/edit_user', $this->data);
+ * 
+ */
 	}
 	
 	
