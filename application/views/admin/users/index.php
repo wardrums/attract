@@ -32,7 +32,7 @@
 				  </button>
 				  <ul class="dropdown-menu pull-right">
 				    <li><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'));?></li>
-				    <li><?php echo(anchor('/admin/_post_delete_user/'.$user->id , 'Delete')) ?></li>
+				    <li><?php echo(anchor('/admin/delete_user/'.$user->id , 'Delete')) ?></li>
 				  </ul>
 				</div>
 			</td>
@@ -50,6 +50,7 @@
 	</tfoot>
 </table>
 
+<a class="btn btn-default btn-lg btn-block" data-toggle="modal" user="/admin/create_user/" href="#">Add user</a>
 
 </div><!--/span-->
 
