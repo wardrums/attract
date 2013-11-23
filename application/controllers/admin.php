@@ -37,11 +37,13 @@ class Admin extends Admin_Controller {
 
 	function users()
 	{
+		$this->load->library('gravatar');
 		$this->load->helper('language');
 		$data['users'] = $this->ion_auth->users()->result();
 		foreach ($data['users'] as $key => $user)
 		{
 			$data['users'][$key]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+			$data['users'][$key]->gravatar = $this->gravatar->get_gravatar($user->email, NULL, 22);
 		}
 		//$data['users'] = $this->ion_auth_model->users();
 		$data['title'] = 'Users';

@@ -7,6 +7,7 @@
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="users">
 	<thead>
 		<tr>
+			<th></th>
 			<th>Name</th>
 			<th>Email</th>
 			<th>Group</th>
@@ -17,6 +18,7 @@
 	<?php foreach ($users as $user):?>
 		
 		<tr>
+			<td><img src="<?php echo $user->gravatar;?>" /> </td>
 			<td><?php echo $user->first_name;?> <?php echo $user->last_name;?></td>
 			<td><?php echo $user->email;?></td>
 			<td>
@@ -42,6 +44,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
+			<th></th>
 			<th>Name</th>
 			<th>Email</th>
 			<th>Group</th>
