@@ -40,11 +40,16 @@ class Shots extends Common_Auth_Controller {
 	function view($id)
 	{
 		$this->load->helper('form');
+		$this->load->library('ion_auth');
+		$this->load->library('gravatar');
 		$this->load->model('comments_model');
+		
+		$user = $this->ion_auth->user()->row();
 		
 		$data['shots'] = $this->shots_model->get_shots();
 		$data['shot'] = $this->shots_model->get_shots($id);
 		$data['comments'] = $this->comments_model->get_shot_comments($id);
+		$data['gravatar'] = $this->gravatar->get_gravatar($user->email, NULL, 60);
 		$data['title'] = 'Shot';
 		$data['use_sidebar'] = TRUE;
 		$data['error'] = '';

@@ -47,9 +47,9 @@ if ($this->session->flashdata('message') != '')
 	<?php endforeach ?>
 	
 	<div class="media">
-	    <a class="pull-left" href="#">
-	    	<img class="media-object" src="http://placehold.it/60x60">
-	    </a>
+	    <span class="pull-left">
+	    	<img class="media-object" src="<?php echo $gravatar ?>">
+	    </span>
 	    <?php echo $error;?>
 	    <div class="media-body">
 	    	<?php echo form_open_multipart("shots/post_add_comment"); ?>
