@@ -100,6 +100,12 @@ class Attachments_model extends CI_Model {
 			unlink($file_path);
 		}
 		
+		// we remove the 80px thumbnail
+		$file_path = realpath(APPPATH . '../uploads/thumbnails/80_' . $attachment['attachment_path']);
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
+		
 		// we delete the row in the attachments table
 		$this->db->where('attachment_id', $attachment_id);
 		$this->db->delete('attachments');

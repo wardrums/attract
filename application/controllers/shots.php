@@ -423,13 +423,17 @@ class Shots extends Common_Auth_Controller {
 		        
 		    }
 			
+			$upload_data = $this->upload->data();
+			
 			// Resize to small
-			$medium_image = '200_'.$data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
+			$medium_image = '80_'.$data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
 				
 		    $config['source_image'] = $source_path.$source_image;
 		    $config['new_image'] = $thumbnail_path.$medium_image;
-		    $config['width'] = 200;
-		    $config['height'] = 200;
+		    $config['width'] = 80;
+		    $config['height'] = 40;
+			$dim = (intval($upload_data["image_width"]) / intval($upload_data["image_height"])) - ($config['width'] / $config['height']);
+			$config['master_dim'] = ($dim > 0)? "height" : "width";
 		
 		    $this->image_lib->initialize($config); 
 		
@@ -439,6 +443,22 @@ class Shots extends Common_Auth_Controller {
 		        echo $this->image_lib->display_errors();
 		        
 		    }
+			
+			$config['source_image']	= $thumbnail_path.$medium_image;
+			$config['new_image'] = $thumbnail_path.$medium_image;
+			$config['maintain_ratio'] = TRUE;
+			$config['width'] = 80;
+		    $config['height'] = 45;
+			$config['x_axis'] = '0';
+			$config['y_axis'] = '0';
+			
+			$this->image_lib->clear();
+			$this->image_lib->initialize($config); 
+			
+			if ( ! $this->image_lib->crop())
+			{
+			    echo $this->image_lib->display_errors();
+			}
 		
 		}
 		
