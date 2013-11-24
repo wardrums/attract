@@ -88,9 +88,10 @@ class Shots extends Common_Auth_Controller {
 		
 		if ($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('templates/header', $data);	
-			$this->load->view('shots/create', $data);
-			$this->load->view('templates/footer');
+			//$this->load->view('templates/header', $data);	
+			//$this->load->view('shots/create', $data);
+			//$this->load->view('templates/footer');
+			$this->load->view('shots/create_modal', $data);
 			
 		}
 		else
@@ -102,14 +103,14 @@ class Shots extends Common_Auth_Controller {
 			// we reload some data
 			// $last_shot_position = $this->shots_model->get_last_shot_position();
 			// $data['shot_order'] = $last_shot_position['shot_order'] + 1;
-// 			
+		
 			// $this->load->view('templates/header', $data);	
 			// $this->load->view('shots/create', $data);
 			// $this->load->view('templates/footer');
 			
 			$this->session->set_flashdata('message', 'Shot <strong>'. $shot_data['shot_name'] .'</strong> added to database!');
 
-			redirect('/shots/create');
+			redirect('/shots/');
 			
 		}
 	}

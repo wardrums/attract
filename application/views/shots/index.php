@@ -303,9 +303,26 @@ $(document).ready(function() {
 	</tfoot>
 </table>
 
-<a class="btn btn-default btn-lg btn-block" href="/shots/create">Add shot</a>
+<a class="btn btn-default btn-lg btn-block" data-toggle="modal" shot="/shots/create" href="#">Add shot</a>
 
 </div><!--/span-->
 
+<script>
+$(document).ready(function() {
+	// Support for AJAX loaded modal window.
+	// Focuses on first input textbox after it loads the window.
+	$('[data-toggle="modal"]').click(function(e) {
+		e.preventDefault();
+		var url = $(this).attr('shot');
+		if (url.indexOf('#') == 0) {
+			$(url).modal('open');
+		} else {
+			$.get(url, function(data) {
+				$('<div class="modal fade">' + data + '</div>').modal();
+			}).success(function() { $('input:text:visible:first').focus(); });
+		}
+	});
+});
+</script>
 
 
