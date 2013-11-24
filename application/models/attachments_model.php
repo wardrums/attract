@@ -75,7 +75,32 @@ class Attachments_model extends CI_Model {
 	// will refactor this later into delete_attachment and delete_attachments
 	function delete_attachment($attachment_id)
 	{
+		// we get the attachment_name in order to build the filepath to be removed from the system
+		$this->db->select('attachments.attachment_path'); 
+		$this->db->where('attachment_id', $attachment_id);
+		$this->db->from('attachments');
+		$query = $this->db->get();
+		$attachment = $query->row_array();
 		
+		// we remove the original image
+		$file_path = realpath(APPPATH . '../uploads/originals/' . $attachment['attachment_path']);
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
+		
+		// we remove the 400px thumbnail
+		$file_path = realpath(APPPATH . '../uploads/thumbnails/400_' . $attachment['attachment_path']);
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
+		
+		// we remove the 200px thumbnail
+		$file_path = realpath(APPPATH . '../uploads/thumbnails/200_' . $attachment['attachment_path']);
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
+		
+		// we delete the row in the attachments table
 		$this->db->where('attachment_id', $attachment_id);
 		$this->db->delete('attachments');
 		return;

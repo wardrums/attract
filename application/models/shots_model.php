@@ -153,7 +153,8 @@ class Shots_model extends CI_Model {
 		return;
 	}
 	
-	function get_shots_sum_duration($status = FALSE){
+	function get_shots_sum_duration($status = FALSE)
+	{
 		if ($status == FALSE)
 		{
 			$this->db->select_sum('shot_duration');
@@ -174,7 +175,8 @@ class Shots_model extends CI_Model {
 		
 	}
 	
-	function get_statuses_and_stages(){
+	function get_statuses_and_stages()
+	{
 		$this->db->select('shots.shot_id, shots.shot_name, shots.shot_duration'); 
 		$this->db->select('statuses.status_name, tasks.task_name'); 
 	    $this->db->from('shots');
@@ -184,6 +186,16 @@ class Shots_model extends CI_Model {
 		//$this->db->order_by('shots.shot_order', 'asc');
 	    $query = $this->db->get(); 
 		return $query->result_array();
+	}
+	
+	function delete_preview($attachment_id)
+	{
+		$this->load->model('attachments_model');
+		$this->attachments_model->delete_attachment($attachment_id);
+		
+		$this->db->where('attachment_id', $attachment_id);
+		$this->db->delete('shots_attachments');
+		
 	}
 
 }

@@ -43,12 +43,14 @@ class Shots extends Common_Auth_Controller {
 		$this->load->library('ion_auth');
 		$this->load->library('gravatar');
 		$this->load->model('comments_model');
+		$this->load->model('shots_attachments_model');
 		
 		$user = $this->ion_auth->user()->row();
 		
 		$data['shots'] = $this->shots_model->get_shots();
 		$data['shot'] = $this->shots_model->get_shots($id);
 		$data['comments'] = $this->comments_model->get_shot_comments($id);
+		$data['previews'] = $this->shots_attachments_model->get_shot_attachments($id);
 		$data['gravatar'] = $this->gravatar->get_gravatar($user->email, NULL, 60);
 		$data['title'] = 'Shot';
 		$data['use_sidebar'] = TRUE;
@@ -170,8 +172,7 @@ class Shots extends Common_Auth_Controller {
 		}
 		else
 		{
-			
-				
+							
 			$this->shots_model->set_shots($shot_id);
 			//$this->shots_users_model->set_users($shot_id);
 			
@@ -322,7 +323,7 @@ class Shots extends Common_Auth_Controller {
 			    $thumbnail_path = "./uploads/thumbnails/";
 			
 			    $source_image = $data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
-			    $medium_image = $data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
+			    $medium_image = '200_'.$data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
 			
 			    // Resize to medium
 			
@@ -355,6 +356,107 @@ class Shots extends Common_Auth_Controller {
 			redirect('/shots/view/'. $shot_id);
 			
 		}
+	}
+
+	function post_add_preview()
+	{
+		$shot_id = $this->input->post('shot_id');
+		
+		if (!$shot_id)
+		{
+			redirect('/shots');
+		}
+		
+		$this->load->helper('form');
+		$this->load->model('shots_attachments_model');
+		$this->load->library('form_validation');
+		
+		// shot thumbnail creation
+		$this->load->model('attachments_model');
+	
+		$config['upload_path'] = './uploads/originals/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '1000';
+		$config['max_width']  = '2048';
+		$config['max_height']  = '2048';
+		$config['encrypt_name'] = true;
+
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload())
+		{
+			// we collect any error	
+			$data['error'] = $this->upload->display_errors();
+						
+			// we set the error in a flashcard
+			$this->session->set_flashdata('message', $data['error']);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			// we create an attachment entry in the database
+			$attachment_id = $this->attachments_model->create_attachment($data['upload_data']['orig_name'], $data['upload_data']['raw_name'] . $data['upload_data']['file_ext']);
+			//$this->load->view('upload_success', $data);
+			
+			// we make a thumbnail for the uploaded image
+			$this->load->library('image_lib');
+
+			$source_path = "./uploads/originals/";
+		    $thumbnail_path = "./uploads/thumbnails/";
+		
+		    $source_image = $data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
+			
+			// Resize to medium
+		    $medium_image = '400_'.$data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
+		
+		    $config['source_image'] = $source_path.$source_image;
+		    $config['new_image'] = $thumbnail_path.$medium_image;
+		    $config['width'] = 400;
+		    $config['height'] = 400;
+		
+		    $this->image_lib->initialize($config); 
+		
+		    if ( ! $this->image_lib->resize())
+		    {
+		    	echo $config['source_image'];
+		        echo $this->image_lib->display_errors();
+		        
+		    }
+			
+			// Resize to small
+			$medium_image = '200_'.$data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
+				
+		    $config['source_image'] = $source_path.$source_image;
+		    $config['new_image'] = $thumbnail_path.$medium_image;
+		    $config['width'] = 200;
+		    $config['height'] = 200;
+		
+		    $this->image_lib->initialize($config); 
+		
+		    if ( ! $this->image_lib->resize())
+		    {
+		    	echo $config['source_image'];
+		        echo $this->image_lib->display_errors();
+		        
+		    }
+		
+		}
+		
+		// if we have uploaded an attachment we match it with the comment in the dedicated table
+		if (isset($attachment_id))
+		{
+			$this->shots_attachments_model->create_shot_attachment($attachment_id, $shot_id);
+		}
+		
+		redirect('/shots/view/' . $shot_id);
+	}
+
+	function delete_preview($attachment_id) 
+	{				
+		$this->shots_model->delete_preview($attachment_id);
+		
+		$this->session->set_flashdata('message', 'Attachment <strong>' . $attachment_id . '</strong> has been deleted, along with the relative data!');
+		redirect('/shots/');
 	}
 	
 }

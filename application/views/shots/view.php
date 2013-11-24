@@ -17,6 +17,30 @@ if ($this->session->flashdata('message') != '')
 		<?php echo $flahsdata ?>
 	</div>
 	<?php endif ?>
+		
+	<?php if($previews): ?>
+		<?php foreach ($previews as $preview): ?>
+			<?php if($preview['is_current'] == TRUE): ?>
+				<img src="/uploads/thumbnails/400_<?php echo $preview['attachment_path'] ?>" />
+				<?php echo anchor('/shots/delete_preview/' . $preview['attachment_id'], 'Delete') ?>
+			<?php else: ?>
+				<img src="/uploads/thumbnails/200_<?php echo $preview['attachment_path'] ?>" />
+				<?php echo anchor('/shots/delete_preview/' . $preview['attachment_id'], 'Delete') ?>
+			<?php endif ?>
+			
+		<?php endforeach ?>
+	<?php else: ?>
+		<p>NO PREVIEW at the moment</p>
+	<?php endif ?>
+	
+	<?php echo form_open_multipart("shots/post_add_preview"); ?>
+	<form class="form">    
+		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                
+	    <input type="file" name="userfile" size="20" />
+	
+		<button class="btn btn-default">Add Preview</button>
+	</form>
+	<?php echo form_close();?>
 	
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
 		<ul class="nav nav-tabs">
@@ -37,7 +61,7 @@ if ($this->session->flashdata('message') != '')
 	    	<div class="thread_comment_body"><?php echo $comment['comment_body'] ?></div>
 	    	<?php if($comment['attachment_path']): ?>
 	    		<a href="/uploads/originals/<?php echo $comment['attachment_path'] ?>">
-	    			<img src="/uploads/thumbnails/<?php echo $comment['attachment_path'] ?>" />
+	    			<img src="/uploads/thumbnails/200_<?php echo $comment['attachment_path'] ?>" />
 	    		</a>
 	    	<?php endif ?>
 	    	<a href="/comments/delete/<?php echo $comment['comment_id'] ?>">Delete</a>

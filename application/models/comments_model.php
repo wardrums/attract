@@ -135,7 +135,9 @@ class Comments_model extends CI_Model {
 	 * @return 	TRUE is successful
 	 */
 	function delete_comment($comment_id)
-	{			
+	{
+		$this->load->model('attachments_model');
+		$this->load->model('comments_attachments_model');		
 		$this->db->select('*'); 
 		$this->db->where('comments_attachments.comment_id', $comment_id);
 	    $this->db->from('comments_attachments');
@@ -149,24 +151,9 @@ class Comments_model extends CI_Model {
 		{
 			foreach ($comments_attachments as $comment_attachment) 
 			{
-				// we get the attachment_name in order to build the filepath to be removed from the system
-				$this->db->select('attachments.attachment_path'); 
-				$this->db->where('attachment_id', $comment_attachment['attachment_id']);
-	    		$this->db->from('attachments');
-				$query = $this->db->get();
-				$attachment = $query->row_array();
-				
-				// we remove the original image
-				$file_path = realpath(APPPATH . '../uploads/originals/' . $attachment['attachment_path']);
-				unlink($file_path);
-				
-				// we remove the thumbnail
-				$file_path = realpath(APPPATH . '../uploads/thumbnails/' . $attachment['attachment_path']);
-				unlink($file_path);
-				
-				// we delete the row in the attachments table
-		 		$this->db->where('attachment_id', $comment_attachment['attachment_id']);
-				$this->db->delete('attachments');
+				// via the attachment model we delete the actual file (and thumbails) as well
+				// as removing the entry from the attachments table	
+				$this->attachments_model->delete_attachment($comment_attachment['attachment_id']);	
 		 		
 				// finally we delete the relation between comment and attachment
 		 		$this->db->where('attachment_id', $comment_attachment['attachment_id']);

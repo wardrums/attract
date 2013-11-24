@@ -86,7 +86,7 @@ class Comments_attachments_model extends CI_Model {
 	function delete_comment_attachment($id)
 	{
 
-		$this->db->where('comment_attachment_id', $id);
+		$this->db->where('id', $id);
 		$this->db->delete('comments_attachments');
 		return $comment_attachment->shot_id;
 		

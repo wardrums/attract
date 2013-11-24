@@ -279,13 +279,17 @@ $(document).ready(function() {
 	<tbody>
 	<?php foreach ($shots as $shot): ?>
     	<tr id="row_<?php echo $shot['shot_id'] ?>">
-    		<td><a href="/shots/edit/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
+    		<td><a href="/shots/view/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
     		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['shot_duration'] ?></td>
     		<td><?php echo $shot['status_name']?></td> 
     		<td><?php echo $shot['task_names'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
-    		<td><?php echo $shot['user_id']?> <a class="btn btn-default btn-xs edit-shot" href="#"><i class="icon-edit"></i> Edit</a></td>
+    		<td><?php echo $shot['user_id']?> 
+    			<!-- we temporarily disabled in-table shot editing, too much work for now -->
+    			<!-- <a class="btn btn-default btn-xs edit-shot" href="#"><i class="icon-edit"></i> Edit</a> -->
+    			<a class="btn btn-default btn-xs" href="/shots/edit/<?php echo $shot['shot_id'] ?>"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+    		</td>
     	</tr>
 	<?php endforeach ?>
 		
