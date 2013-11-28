@@ -49,6 +49,25 @@ if ($this->session->flashdata('message') != '')
 		</ul>
 	</div>
 	
+	<div class="media">
+	    <span class="pull-left">
+	    	<img class="media-object" src="<?php echo $gravatar ?>">
+	    </span>
+	    <?php echo $error;?>
+	    <div class="media-body">
+	    	<?php echo form_open_multipart("shots/post_add_comment"); ?>
+	    	
+	    	<form class="form">    
+	    		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                
+			    <textarea data-provide="markdown" id="comment_body" name="comment_body" required=""></textarea>
+			    <input type="file" name="userfile" size="20" />
+			
+				<button class="btn btn-default">Add Comment</button>
+			</form>
+	    	<?php echo form_close();?>
+	    	
+	    </div>
+    </div>
 
 	<?php foreach ($comments as $comment): ?>
     <div class="media">
@@ -70,25 +89,7 @@ if ($this->session->flashdata('message') != '')
     </div>
 	<?php endforeach ?>
 	
-	<div class="media">
-	    <span class="pull-left">
-	    	<img class="media-object" src="<?php echo $gravatar ?>">
-	    </span>
-	    <?php echo $error;?>
-	    <div class="media-body">
-	    	<?php echo form_open_multipart("shots/post_add_comment"); ?>
-	    	
-	    	<form class="form">    
-	    		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                
-			    <textarea data-provide="markdown" id="comment_body" name="comment_body" required=""></textarea>
-			    <input type="file" name="userfile" size="20" />
-			
-				<button class="btn btn-default">Add Comment</button>
-			</form>
-	    	<?php echo form_close();?>
-	    	
-	    </div>
-    </div>
+	
 </div>
 
 <script>

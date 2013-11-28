@@ -78,6 +78,7 @@ class Comments_model extends CI_Model {
 		$this->db->join('users', 'users.id = comments.user_id', 'left');
 		$this->db->join('comments_attachments', 'comments_attachments.comment_id = comments.comment_id', 'left');
 		$this->db->join('attachments', 'attachments.attachment_id = comments_attachments.attachment_id', 'left');
+		$this->db->order_by('comment_id', "desc"); 
 		//$this->db->group_by('comments.comment_id'); 
 		$this->db->where('shot_id', $shot_id); 
 	    $query = $this->db->get();
