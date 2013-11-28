@@ -15,6 +15,7 @@
     <link href="<?php echo assets_url(); ?>/css/bootstrap-markdown.min.css" rel="stylesheet">
     <link href="<?php echo assets_url(); ?>/css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="<?php echo assets_url(); ?>/css/attract.css" rel="stylesheet">
+    <link href="<?php echo assets_url(); ?>/css/shots.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

@@ -70,20 +70,27 @@ if ($this->session->flashdata('message') != '')
     </div>
 
 	<?php foreach ($comments as $comment): ?>
-    <div class="media">
+    <div class="media shot-comment">
 	    <a class="pull-left" href="#">
 	    	<img class="media-object" src="<?php print_r ($comment['gravatar']); ?>">
 	    </a>
 	    <div class="media-body">
-	    	<h4 class="media-heading"><?php echo $comment['first_name'] ?></h4>
-	    	<h5 class="media-heading"><?php echo $comment['comment_creation_date'] ?></h5>
+	    	<div>
+	    		<h5 class="media-heading pull-left"><?php echo $comment['first_name'] ?></h5>
+	    		<h5 class="media-heading pull-right details">
+	    			<?php echo $comment['comment_creation_date'] ?>
+	    			<a href="/comments/delete/<?php echo $comment['comment_id'] ?>"><i class="glyphicon glyphicon-trash"></i></a>
+	    		</h5>
+	    	</div>
+	    	<div class="clearfix"></div>
+	    	
 	    	<div class="thread_comment_body"><?php echo $comment['comment_body'] ?></div>
 	    	<?php if($comment['attachment_path']): ?>
 	    		<a href="/uploads/originals/<?php echo $comment['attachment_path'] ?>">
 	    			<img src="/uploads/thumbnails/200_<?php echo $comment['attachment_path'] ?>" />
 	    		</a>
 	    	<?php endif ?>
-	    	<a href="/comments/delete/<?php echo $comment['comment_id'] ?>">Delete</a>
+	    	
 	    	
 	    </div>
     </div>
