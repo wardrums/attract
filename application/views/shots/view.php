@@ -9,7 +9,7 @@ if ($this->session->flashdata('message') != '')
 <div class="<?php echo $span_value ?>">
 	
 	<h2>Shot <?php echo $shot['shot_name'] ?></h2>
-	<p><?php echo $shot['shot_description']; ?></p>
+	
 	
 	<?php if (isset($flahsdata)):?>
 	<div class="alert alert-success">
@@ -17,40 +17,52 @@ if ($this->session->flashdata('message') != '')
 		<?php echo $flahsdata ?>
 	</div>
 	<?php endif ?>
-		
-	<?php if($previews): ?>
-		<?php foreach ($previews as $preview): ?>
-			<?php if($preview['is_current'] == TRUE): ?>
-				<img src="/uploads/thumbnails/400_<?php echo $preview['attachment_path'] ?>" />
-				<?php echo anchor('/shots/delete_preview/' . $preview['attachment_id'], 'Delete') ?>
+	
+	<div class="row">
+		<div class="col-md-6">
+			<?php if($previews): ?>
+				<div class="row">
+				<?php foreach ($previews as $preview): ?>
+					<?php if($preview['is_current'] == TRUE): ?>
+						<div class="col-md-10">
+							<img class="img-responsive" src="/uploads/thumbnails/400_<?php echo $preview['attachment_path'] ?>" />
+							<?php echo anchor('/shots/delete_preview/' . $preview['attachment_id'], 'Delete') ?>
+						</div>
+					<?php else: ?>
+						<div class="col-md-2">
+							<img class="img-responsive" src="/uploads/thumbnails/80_<?php echo $preview['attachment_path'] ?>" />
+							<?php echo anchor('/shots/delete_preview/' . $preview['attachment_id'], 'Delete') ?>
+						</div>
+					<?php endif ?>
+				<?php endforeach ?>
+				</div>
 			<?php else: ?>
-				<img src="/uploads/thumbnails/200_<?php echo $preview['attachment_path'] ?>" />
-				<?php echo anchor('/shots/delete_preview/' . $preview['attachment_id'], 'Delete') ?>
+				<img src="http://placehold.it/320x180">
+				 
+		
 			<?php endif ?>
 			
-		<?php endforeach ?>
-	<?php else: ?>
-		<p>NO PREVIEW at the moment</p>
-		 
-
-	<?php endif ?>
-	
-	<?php echo form_open_multipart("shots/post_add_preview"); ?>
-	<form class="form">    
-		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                   
-	    <div class="fileinput fileinput-new" data-provides="fileinput">
-		  	<span class="btn btn-default btn-file">
-		  		<span class="fileinput-new">Select shot preview</span>
-		  		<span class="fileinput-exists">Change selection</span>
-		  		<input type="file" name="userfile" size="20" />
-		  	</span>
-		  	<span class="fileinput-filename"></span>
-		  	<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+			<?php echo form_open_multipart("shots/post_add_preview"); ?>
+			<form class="form">    
+				<?php echo form_hidden('shot_id', $shot['shot_id']);?>                   
+			    <div class="fileinput fileinput-new" data-provides="fileinput">
+				  	<span class="btn btn-default btn-file">
+				  		<span class="fileinput-new">Select shot preview</span>
+				  		<span class="fileinput-exists">Change selection</span>
+				  		<input type="file" name="userfile" size="20" />
+				  	</span>
+				  	<span class="fileinput-filename"></span>
+				  	<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+				</div>
+			
+				<button class="btn btn-default">Add Preview</button>
+			</form>
+			<?php echo form_close();?>
+		</div>	
+		<div class="col-md-6">
+			<p><?php echo $shot['shot_description']; ?></p>
 		</div>
-	
-		<button class="btn btn-default">Add Preview</button>
-	</form>
-	<?php echo form_close();?>
+	</div>
 	
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
 		<ul class="nav nav-tabs">
