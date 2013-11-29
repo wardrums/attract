@@ -34,7 +34,7 @@ var make_status_dropdown = function(status) {
 		var btn_style = 'btn-warning';
 		var label = 'In Progress';
 	} else if (status == "todo") {
-		var btn_style = '';
+		var btn_style = 'btn-default';
 		var label = 'To do';
 	} else if (status == "fix") {
 		var btn_style = 'btn-important';
@@ -70,7 +70,7 @@ var make_status_label = function(status) {
 		var btn_style = 'label-warning';
 		var label = 'In Progress';
 	} else if (status == "todo") {
-		var btn_style = '';
+		var btn_style = 'label-default';
 		var label = 'To do';
 	} else if (status == "fix") {
 		var btn_style = 'label-important';
