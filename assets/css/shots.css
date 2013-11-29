@@ -10,3 +10,8 @@
 	font-weight: normal;
 	font-size: 80%;
 }
+
+
+.media-body .fileinput {
+	margin-bottom: 0;
+}

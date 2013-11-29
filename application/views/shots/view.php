@@ -31,12 +31,22 @@ if ($this->session->flashdata('message') != '')
 		<?php endforeach ?>
 	<?php else: ?>
 		<p>NO PREVIEW at the moment</p>
+		 
+
 	<?php endif ?>
 	
 	<?php echo form_open_multipart("shots/post_add_preview"); ?>
 	<form class="form">    
-		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                
-	    <input type="file" name="userfile" size="20" />
+		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                   
+	    <div class="fileinput fileinput-new" data-provides="fileinput">
+		  	<span class="btn btn-default btn-file">
+		  		<span class="fileinput-new">Select shot preview</span>
+		  		<span class="fileinput-exists">Change selection</span>
+		  		<input type="file" name="userfile" size="20" />
+		  	</span>
+		  	<span class="fileinput-filename"></span>
+		  	<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+		</div>
 	
 		<button class="btn btn-default">Add Preview</button>
 	</form>
@@ -59,10 +69,21 @@ if ($this->session->flashdata('message') != '')
 	    	
 	    	<form class="form">    
 	    		<?php echo form_hidden('shot_id', $shot['shot_id']);?>                
-			    <textarea data-provide="markdown" id="comment_body" name="comment_body" required=""></textarea>
-			    <input type="file" name="userfile" size="20" />
-			
-				<button class="btn btn-default">Add Comment</button>
+			     
+			  		<textarea required="" name="comment_body" id="comment_body" data-provide="markdown" class="md-input" rows="5" style="resize: none;"></textarea>
+			  		<div class="md-footer">
+					    <div class="fileinput fileinput-new" data-provides="fileinput">
+						  	<span class="btn btn-default btn-file">
+						  		<span class="fileinput-new">Select file</span>
+						  		<span class="fileinput-exists">Change</span>
+						  		<input type="file" name="userfile" >
+						  	</span>
+						  	<span class="fileinput-filename"></span>
+						  	<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+						</div>
+						<button class="btn btn-default pull-right">Add Comment</button>
+					</div>
+					
 			</form>
 	    	<?php echo form_close();?>
 	    	
@@ -107,8 +128,6 @@ if ($this->session->flashdata('message') != '')
 		$(this).html(test);
 	});
 	//console.log($('.thread_comment_body').html());
-	console.log(markdown.toHTML('#11'));
-	$("#comment_body").markdown({autofocus:false,savable:false});
 
 </script>
 
