@@ -8,22 +8,33 @@ class Shows extends Common_Auth_Controller {
 		$this->load->model('shows_model');
 	}
 
-	function index()
+	function index($format = FALSE)
 	{
 		$this->load->model('settings_model');
+		if (!$format)
+		{
+			// we get the current show setting (in the view we will get the ID and check it)
+			$data['current_show'] = $this->settings_model->get_settings('current_show');
+			$data['shows'] = $this->shows_model->get_shows();
+			$data['title'] = 'Shows';
+			$data['use_sidebar'] = TRUE;
+			
 		
-		// we get the current show setting (in the view we will get the ID and check it)
-		$data['current_show'] = $this->settings_model->get_settings('current_show');
-		$data['shows'] = $this->shows_model->get_shows();
-		$data['title'] = 'Shows';
-		$data['use_sidebar'] = TRUE;
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('shows/index', $data);
+			$this->load->view('templates/footer');
+		} 
+		else if ($format == 'JSON')
+		{
+			$data['shows'] = $this->shows_model->get_shows();
+			$this->output
+			    ->set_content_type('application/json')
+			    ->set_output(json_encode($data));
+		}
 		
-	
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/sidebar', $data);
-		$this->load->view('shows/index', $data);
-		$this->load->view('templates/footer');
 	}
+		
 	
 	function create()
 	{
@@ -54,7 +65,7 @@ class Shows extends Common_Auth_Controller {
 		}
 	}
 	
-	function edit($show_id, $async = FALSE)
+	function edit($show_id)
 	{
 		
 		$data['show'] = $this->shows_model->get_shows($show_id);	
@@ -74,17 +85,11 @@ class Shows extends Common_Auth_Controller {
 		
 		if ($this->form_validation->run() === FALSE)
 		{
-			if ($async)
-			{
-				$this->load->view('shows/edit_ajax', $data);
-			}
-			else 
-			{
-				$this->load->view('templates/header', $data);	
-				$this->load->view('templates/sidebar', $data);
-				$this->load->view('shows/edit', $data);
-				$this->load->view('templates/footer');	
-			}
+		
+			$this->load->view('templates/header', $data);	
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('shows/edit', $data);
+			$this->load->view('templates/footer');	
 		}
 		else
 		{

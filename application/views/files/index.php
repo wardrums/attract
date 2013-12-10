@@ -1,4 +1,4 @@
-<?php $span_value = ($use_sidebar == TRUE ? "span9" : "span12"); ?>
+<?php $span_value = ($use_sidebar == TRUE ? "col-md-9" : "col-md-12"); ?>
 
 <script>
 	$(document).ready(function() {
