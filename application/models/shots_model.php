@@ -60,7 +60,7 @@ class Shots_model extends CI_Model {
 				'shot_description' =>  $this->input->post('shot_description'),
 				'scene_id' => $this->input->post('scene_id'),
 				'shot_duration' => $this->input->post('shot_duration'),
-				'status_id' => $this->input->post('status_id'),
+				'status_id' => $this->input->post('shot_status_id'),
 				'shot_order' => $this->input->post('shot_order')
 			);
 			
@@ -80,7 +80,7 @@ class Shots_model extends CI_Model {
 				'scene_id' => $this->input->post('scene_id'),
 				'shot_name' => $this->input->post('shot_name'),
 				'shot_description' =>  $this->input->post('shot_description'),
-				'status_id' => $this->input->post('status_id'),
+				'status_id' => $this->input->post('shot_status_id'),
 				'shot_notes' =>  $this->input->post('shot_notes'),
 				'shot_duration' => $this->input->post('shot_duration')
 			);

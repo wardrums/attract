@@ -202,7 +202,7 @@ if ($this->session->flashdata('message') != '')
 		<!-- Select Status -->
 		<div class="col-md-3">
 			<label class="control-label" for="status_id">Status</label>
-			<select id="status_id" name="status_id" class="form-control">
+			<select id="status_id" name="shot_status_id" class="form-control">
 		      	<?php foreach ($statuses as $status): ?>
 					<option value="<?php echo $status['status_id'] ?>"  <?php echo ($status['status_id'] == $shot['status_id'] ? "selected=\"selected\"" : ""); ?>><?php echo $status['status_name'] ?></option>
 				<?php endforeach ?>
