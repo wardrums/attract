@@ -13,7 +13,13 @@ In order to use and install Attract you need to satisfy some basic requirements:
 
 ## Install and Configure
 Set the Apache DocumentRoot to the folder containing attract (the folder where this readme file is).
-Get a database image from Dropbox and import it in the database. Properly configure the database. At the moment there is no installer for Attract so this procedure is not easy.
+Eventually set a proper hostname if you are working locally - modify the `/etc/hosts` file and add something like:
+
+```
+127.0.0.1	attract
+```
+
+Visit `http://attract/install` and follow the installation instructions.
 
 Attract was originally developed by Francesco Siddi ([@fsiddi](https://github.com/fsiddi)). Any contributor willing to help out and improve the software is welcome!
 
