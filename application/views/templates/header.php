@@ -63,8 +63,8 @@
 	        <li id="fat-menu" class="dropdown">
 	          <a href="#" id="drop3" class="dropdown-toggle" data-toggle="dropdown"><?php echo $the_user->username ?> <b class="caret"></b></a>
 	          <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-	            <li><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
-	            <li><a role="menuitem" tabindex="-1" href="#">More settings</a></li>
+	            <li><a role="menuitem" tabindex="-1" href="/user/tasks/">Tasks</a></li>
+	            <li><a role="menuitem" tabindex="-1" href="/user/profile/">Profile</a></li>
 	            <li class="divider"></li>
 	            <li><a role="menuitem" tabindex="-1" href="/auth/logout">Log out</a></li>
 	          </ul>
