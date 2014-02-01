@@ -15,6 +15,7 @@ if ($this->session->flashdata('message') != '')
 	var dropdown_group = '<div class="row row-task">' +
 		'<div class="col-md-2">' +
 	    	'<select class="task_id_new form-control">' +
+	    		'<option>Select Task</option>' +
 	    		<?php foreach ($tasks as $task): ?>
 					'<option value="<?php echo $task['task_id'] ?>"><?php echo $task['task_name'] ?></option>' +
 				<?php endforeach ?>
