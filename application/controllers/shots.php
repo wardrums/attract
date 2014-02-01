@@ -407,6 +407,8 @@ class Shots extends Common_Auth_Controller {
 		    $source_image = $data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
 			
 			// Resize to medium
+			// We prepend the resolution value (400) so that in the frontend we can call any version
+			// by just prepend the desired value
 		    $medium_image = '400_'.$data['upload_data']['raw_name'].$data['upload_data']['file_ext'];
 		
 		    $config['source_image'] = $source_path.$source_image;
