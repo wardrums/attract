@@ -47,7 +47,7 @@ class Statuses extends Admin_Controller {
 
 			$this->session->set_flashdata('message', 'Status <strong>' . $status_name . '</strong> added to database!');
 
-			redirect('/statuses/create');
+			redirect('/statuses');
 			
 		}
 	}
