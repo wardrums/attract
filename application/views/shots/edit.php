@@ -70,20 +70,20 @@ if ($this->session->flashdata('message') != '')
 		$(document).on("click", ".task_id_new option", function() {
 			var shot_id = $('input[name=shot_id]').val();
 			var task_id = $(this).val();
-			var status_id = $(this).parents('.row-task').find('.status_id').val();
+			var status_id = $(this).parents('.row-task').find('.status_id_new').val();
 			var name_value = 'tasks[' + task_id + '][status_id]';
 			
 			if ($('#tasks-fields input[name="' + name_value + '"]').val() != null) {
 				console.log('The field exists');
 			} else {
-				console.log('Adding new task');
+				console.log('Adding new taska');
 				$('#tasks-fields').append('<input type="hidden" name="' + name_value + '" value="' + status_id + '">');
 				
 				var shot_task_id = '';
 				
 				var target = $(this).parent().parent().next()[0];
 				
-				console.log(target);
+				//console.log(target);
 				
 				//var set_shot_task_id = function(shot_task_id) {
 				//	$(this).parent().next().after(multiselect_users(shot_task_id));
@@ -98,7 +98,7 @@ if ($this->session->flashdata('message') != '')
 	
 				// we remove temporary classes and assign the normal one
 				$(this).parent().removeClass('task_id_new').addClass('task_id');
-				$(this).parent().next().removeClass('status_id_new').addClass('status_id');
+				$(this).parents('.row-task').find('.status_id_new').removeClass('status_id_new').addClass('status_id');
 			}
 
 			//$(this).parent().before(aa); <input type="hidden" name="tasks[1][status_id]" value="7"> task_id status_id
@@ -109,7 +109,7 @@ if ($this->session->flashdata('message') != '')
 			//console.log('old_task_id: ' + old_id);
 			//console.log('old_task_id: ' + $(this).parent().val());
 			var task_id = $(this).val();
-			var status_id = $(this).parents('.row-task').find('.statis_id').val();
+			var status_id = $(this).parents('.row-task').find('.status_id').val();
 			var old_name_value = 'tasks[' + old_id + '][status_id]';
 			var name_value = 'tasks[' + task_id + '][status_id]';
 			
