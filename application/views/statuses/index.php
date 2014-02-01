@@ -10,6 +10,7 @@
 		<tr>
 			<th>Status ID</th>
 			<th>Status name</th>
+			<th>Status color</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,7 +18,8 @@
 	<?php foreach ($statuses as $status): ?>
     	<tr>
     		<td><?php echo $status['status_id'] ?></td>
-    		<td><a href="/users/edit/<?php echo $status['status_id'] ?>"><?php echo $status['status_name'] ?></a></td>
+    		<td><a href="#" status="/statuses/edit/<?php echo $status['status_id'] ?>" data-toggle="modal"><?php echo $status['status_name'] ?></a></td>
+    		<td><span class="label label-default" style="background-color:<?php echo $status['status_color'] ?>"><?php echo $status['status_color'] ?></span></td>
     	</tr>
 	<?php endforeach ?>
 		
@@ -26,6 +28,7 @@
 		<tr>
 			<th>Status ID</th>
 			<th>Status name</th>
+			<th>Status color</th>
 		</tr>
 	</tfoot>
 </table>
@@ -34,4 +37,20 @@
 </div><!--/span-->
 
 
-
+<script>
+$(document).ready(function() {
+	// Support for AJAX loaded modal window.
+	// Focuses on first input textbox after it loads the window.
+	$('[data-toggle="modal"]').click(function(e) {
+		e.preventDefault();
+		var url = $(this).attr('status');
+		if (url.indexOf('#') == 0) {
+			$(url).modal('open');
+		} else {
+			$.get(url, function(data) {
+				$('<div class="modal fade">' + data + '</div>').modal();
+			}).success(function() { $('input:text:visible:first').focus(); });
+		}
+	});
+});
+</script>

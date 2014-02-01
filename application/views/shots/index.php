@@ -55,7 +55,7 @@ var make_status_dropdown = function(status) {
 	return markup;
 };
 
-
+// THIS FUNCTION IS UNUSED AT THE MOMENT
 var make_status_label = function(status) {
 	
 	// The following function generates a boostrap-style dropdown according
@@ -111,7 +111,8 @@ $(document).ready(function() {
     	"iDisplayLength": 50,
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			// we disable the status dropdown column
-			$('td:eq(3)', nRow).html(make_status_label(aData[3]));
+			// also, we are not parsing the status label, but we build it directly in the table
+			//$('td:eq(3)', nRow).html(make_status_label(aData[3]));
 			$('td:eq(1)', nRow).html(trim_string(aData[1], 40));
 		},
 		"aoColumns": [ 
@@ -282,7 +283,7 @@ $(document).ready(function() {
     		<td><a href="/shots/view/<?php echo $shot['shot_id'] ?>"><?php echo $shot['shot_name'] ?></a></td>
     		<td><?php echo $shot['shot_description'] ?></td>
     		<td><?php echo $shot['shot_duration'] ?></td>
-    		<td><?php echo $shot['status_name']?></td> 
+    		<td><span class="label label-default" style="background-color:<?php echo $shot['status_color'] ?>"><?php echo $shot['status_name'] ?></span></td> 
     		<td><?php echo $shot['task_names'] ?></td>
     		<td><?php echo $shot['shot_notes'] ?></td>
     		<td><?php echo $shot['user_id']?> 
