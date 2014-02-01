@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: localhost (MySQL 5.5.29)
-# Database: attract-ci
-# Generation Time: 2013-11-22 00:26:07 +0000
+# Host: localhost (MySQL 5.5.33)
+# Database: attract-test
+# Generation Time: 2014-02-01 14:03:29 +0000
 # ************************************************************
 
 
@@ -134,7 +134,7 @@ LOCK TABLES `migrations` WRITE;
 
 INSERT INTO `migrations` (`version`)
 VALUES
-	(3);
+	(4);
 
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -250,6 +250,21 @@ CREATE TABLE `shots` (
 
 
 
+# Dump of table shots_attachments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `shots_attachments`;
+
+CREATE TABLE `shots_attachments` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `attachment_id` int(11) unsigned NOT NULL,
+  `shot_id` int(11) unsigned NOT NULL,
+  `is_current` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table shots_files
 # ------------------------------------------------------------
 
@@ -262,15 +277,6 @@ CREATE TABLE `shots_files` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `shots_files` WRITE;
-/*!40000 ALTER TABLE `shots_files` DISABLE KEYS */;
-
-INSERT INTO `shots_files` (`id`, `shot_id`, `file_id`)
-VALUES
-	(1,1,1);
-
-/*!40000 ALTER TABLE `shots_files` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table shots_tasks
@@ -413,7 +419,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`)
 VALUES
-	(1,X'7F000001','admin','59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4','9462e8eee0','admin@admin.com','',NULL,NULL,NULL,1268889823,1385079851,1,'Admin','istrator','ADMIN','123-123-2123');
+	(1,X'7F000001','admin','59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4','9462e8eee0','admin@admin.com','',NULL,NULL,NULL,1268889823,1391261939,1,'Admin','istrator','ADMIN','123-123-2123');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -438,13 +444,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`)
 VALUES
 	(11,1,1),
 	(12,1,2),
-	(13,1,3),
-	(15,2,2),
-	(19,3,1),
-	(20,3,2),
-	(22,4,1),
-	(23,4,2),
-	(24,2,1);
+	(13,1,3);
 
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 UNLOCK TABLES;

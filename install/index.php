@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Installer v 1.0
+* Installer v 1.1
 *
 * Installs Attract
 *
@@ -51,6 +51,7 @@ if($_POST) {
 	}
 	else {
 		$message = $core->show_message('error','Not all fields have been filled in correctly. The host, username, password, and database name are required.');
+		$error_message = 'Not all fields have been filled in correctly. The host, username, password, and database name are required.';
 	}
 }
 
@@ -70,50 +71,53 @@ if($_POST) {
 	        <div class="col-md-6 col-md-offset-3">
 	        	<div class="page-header">
 					<h1>Attract 2.0 Installation</h1>
-					<p class="lead">Inser the <i>database</i> credentials to install Attract</p>
+					<p class="lead">Insert the <i>database</i> credentials to install Attract</p>
 				</div>
+				
+				<?php if (isset($error_message)): ?>
+				<div class="alert alert-warning">
+					<?php echo($error_message); ?>
+				</div>
+				<?php endif;?>
 	        	
-			    <?php if(is_writable($db_config_path)){?>
-			
-					<?php if(isset($message)) {echo '<p class="error">' . $message . '</p>';}?>
-					  
-					<form class="form-horizontal" role="form" id="install_form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-						<input type="hidden" name="base_url" value="<?php echo $_SERVER['SERVER_NAME']; ?>" />
-						<div class="form-group">
-							<label class="col-sm-4 control-label">Hostname</label>
-							<div class="col-sm-8">
-						      	<input type="text" id="hostname" value="localhost" class="form-control" name="hostname" />
-						    </div>
-						</div>
-						<div class="form-group">
-						   	<label class="col-sm-4 control-label">Username</label>
-						    <div class="col-sm-8">
-						    	<input type="text" id="username" class="form-control" name="username" />
-						    </div>
-						</div>
-						<div class="form-group">
-						    <label for="inputPassword" class="col-sm-4 control-label">Password</label>
-						    <div class="col-sm-8">
-							    <input type="password" id="password" class="form-control" name="password" />
-						    </div>
-						</div>
-						<div class="form-group">
-						    <label class="col-sm-4 control-label">Name</label>
-						    <div class="col-sm-8">
-							    <input type="text" id="database" class="form-control" name="database" />
-						    </div>
-						</div>
-						<div class="form-group">
-						    <div class="col-sm-8 col-sm-offset-4">
-							    <button class="btn btn-primary" type="submit" value="Install" id="submit">Install Attract</button>
-						    </div>
-						</div>
-					</form>
-			
-				  <?php } else { ?>
-			      <p class="error">Please make the application/config/database.php file writable. <strong>Example</strong>:<br /><br /><code>chmod 777 application/config/database.php</code></p>
-				  <?php } ?>
-				        	
+				  
+				<form class="form-horizontal" role="form" id="install_form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+					<input type="hidden" name="base_url" value="<?php echo $_SERVER['SERVER_NAME']; ?>" />
+					<div class="form-group">
+						<label class="col-sm-4 control-label">Hostname</label>
+						<div class="col-sm-8">
+					      	<input type="text" id="hostname" value="localhost" class="form-control" name="hostname" />
+					    </div>
+					</div>
+					<div class="form-group">
+					   	<label class="col-sm-4 control-label">Username</label>
+					    <div class="col-sm-8">
+					    	<input type="text" id="username" class="form-control" name="username" placeholder="root" />
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="inputPassword" class="col-sm-4 control-label">Password</label>
+					    <div class="col-sm-8">
+						    <input type="password" id="password" class="form-control" name="password" placeholder="root" />
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label class="col-sm-4 control-label">DB Name</label>
+					    <div class="col-sm-8">
+						    <input type="text" id="database" class="form-control" name="database" placeholder="attract" />
+					    </div>
+					</div>
+					<div class="form-group">
+					    <div class="col-sm-8 col-sm-offset-4">
+						    <button class="btn btn-primary" type="submit" value="Install" id="submit">Install Attract</button>
+					    </div>
+					</div>
+				</form>
+			    <p>You will be able to login into Attract with the following credentials:</p>
+			    <ul>
+			    	<li>Username: admin@admin.com</li>
+			    	<li>Password: password</li>
+			    </ul>
 	        </div>
       	</div>
 	</div>
