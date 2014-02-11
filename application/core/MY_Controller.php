@@ -38,9 +38,12 @@ class User_Controller extends CI_Controller {
 			$data = new stdClass;
             $data->the_user = $this->the_user;
 			$data->is_admin = FALSE;
-            // we load comment notifications
-			$this->load->model('shot_comment_notifications_model');
-			$data->unread_comment_notifications = $this->shot_comment_notifications_model->get_unread_shot_comment_notifications_count();
+            // we don't load comment notifications. Currently this is a workaround to prevent
+            // migration issues, but should be fixed by placing the notifications somewhere
+            // welse perhaps
+			// $this->load->model('shot_comment_notifications_model');
+			// $data->unread_comment_notifications = $this->shot_comment_notifications_model->get_unread_shot_comment_notifications_count();
+			$data->unread_comment_notifications = 0;
 			
 			$this->load->vars($data);
         }
