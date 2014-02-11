@@ -8,7 +8,15 @@ if ($this->session->flashdata('message') != '')
 ?>
 <div class="<?php echo $span_value ?>">
 	
-	<h2>Shot <?php echo $shot['shot_name'] ?></h2>
+	<h2>
+		Shot <?php echo $shot['shot_name'] ?> 
+			<? if ($subscriptions['comments']): ?>
+			<button id="comments_unsubscribe" class="btn btn-default pull-right">Unsubscribe from comments</button>
+			<? else: ?>
+			<button id="comments_subscribe" class="btn btn-default pull-right">Subscribe to comments</button>
+			<? endif ?>
+		
+	</h2>
 	
 	
 	<?php if (isset($flahsdata)):?>
@@ -140,6 +148,24 @@ if ($this->session->flashdata('message') != '')
 		$(this).html(test);
 	});
 	//console.log($('.thread_comment_body').html());
+	
+	$(document).on("click", "#comments_subscribe", function() {
+		$.post( "/shots/post_subscribe_to_comments/", { shot_id: <?php echo $shot['shot_id'] ?> , subscription_type: 'comments' })
+		.done(function( data ) {
+			console.log('Subscribed to comments');
+			$('#comments_subscribe').text('Unsubscribe from comments');
+			$('#comments_subscribe').attr('id', 'comments_unsubscribe');
+		});
+	});
+	
+	$(document).on("click", "#comments_unsubscribe", function() {
+		$.post( "/shots/post_unsubscribe_from_comments/", { shot_id: <?php echo $shot['shot_id'] ?> , subscription_type: 'comments' })
+		.done(function( data ) {
+			console.log('Unsubscribed from comments');
+			$('#comments_unsubscribe').text('Subscribe to comments');
+			$('#comments_unsubscribe').attr('id', 'comments_subscribe');
+		});
+	});
 
 </script>
 

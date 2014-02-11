@@ -13,7 +13,9 @@ class User extends Common_Auth_Controller {
 		
 		$this->load->database();
 		$this->load->model('users_model');
+		$this->load->model('shot_comment_notifications_model');
 	}
+	
 
 	function index()
 	{
@@ -27,6 +29,19 @@ class User extends Common_Auth_Controller {
 		$this->load->view('admin/users', $data);
 		$this->load->view('templates/footer');
 	}
+	
+	function activity()
+	{
+		
+		$data['title'] = 'Activity';
+		$data['use_sidebar'] = TRUE;
+		$data['comment_notifications'] = $this->shot_comment_notifications_model->get_shot_comment_notifications();
+	
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar_user', $data);
+		$this->load->view('user/activity', $data);
+		$this->load->view('templates/footer');
+	}
 
 	function tasks()
 	{
@@ -36,7 +51,7 @@ class User extends Common_Auth_Controller {
 		$user = $this->ion_auth->user()->row();
 
 		$data['shots'] = $this->shot_tasks_users_model->get_shots($user->id);
-		$data['title'] = 'Tasks';
+		$data['title'] = 'My tasks';
 		$data['use_sidebar'] = TRUE;
 		
 	
