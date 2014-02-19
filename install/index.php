@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Installer v 1.1
+* Installer v 1.2
 *
 * Installs Attract
 *
@@ -10,6 +10,20 @@
 */
 
 //error_reporting(E_NONE); //Setting this to E_ALL showed that that cause of not redirecting were few blank lines added in some php files.
+
+
+function currentPageUrlMinusInstall() {
+	$pageURL = 'http';
+	if (isset($_SERVER["HTTPS"])) {$pageURL .= "s";}
+		$pageURL .= "://";
+	if ($_SERVER["SERVER_PORT"] != "80") {
+		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+	} else {
+		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	}
+	return substr($pageURL,0,strrpos($pageURL,'install/'));
+}
+
 
 $db_config_path = '../application/config/database.php';
 
@@ -60,7 +74,7 @@ if($_POST) {
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="<?php echo currentPageUrlMinusInstall(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
 
 		<title>Install | Attract</title>
 	</head>
@@ -80,9 +94,14 @@ if($_POST) {
 				</div>
 				<?php endif;?>
 	        	
-				  
 				<form class="form-horizontal" role="form" id="install_form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-					<input type="hidden" name="base_url" value="<?php echo $_SERVER['SERVER_NAME']; ?>" />
+		
+					<div class="form-group">
+						<label class="col-sm-4 control-label">Webroot</label>
+						<div class="col-sm-8">
+					      	<input type="text" id="base_url" value="<?php echo currentPageUrlMinusInstall(); ?>" class="form-control" name="base_url" />
+					    </div>
+					</div>
 					<div class="form-group">
 						<label class="col-sm-4 control-label">Hostname</label>
 						<div class="col-sm-8">
