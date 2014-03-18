@@ -54,7 +54,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/" class="navbar-brand">Attract</a>
+          <a href="<?php echo site_url(); ?>" class="navbar-brand">Attract</a>
         </div>
         <div class="navbar-collapse collapse">
         	
@@ -67,11 +67,11 @@
 	          	<b class="caret"></b>
 	          </a>
 	          <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-	            <li><a role="menuitem" tabindex="-1" href="/user/tasks/">My tasks</a></li>
-	            <li><a role="menuitem" tabindex="-1" href="/user/activity/">Activity</a></li>
-	            <li><a role="menuitem" tabindex="-1" href="/user/profile/">Edit profile</a></li>
+	            <li><a role="menuitem" tabindex="-1" href="<?php echo site_url("/user/tasks/") ;?>">My tasks</a></li>
+	            <li><a role="menuitem" tabindex="-1" href="<?php echo site_url("/user/activity/") ;?>">Activity</a></li>
+	            <li><a role="menuitem" tabindex="-1" href="<?php echo site_url("/user/profile/") ;?>">Edit profile</a></li>
 	            <li class="divider"></li>
-	            <li><a role="menuitem" tabindex="-1" href="/auth/logout">Log out</a></li>
+	            <li><a role="menuitem" tabindex="-1" href="<?php echo site_url("/auth/logout/") ;?>">Log out</a></li>
 	          </ul>
 	    	</li>
 	    </ul>
