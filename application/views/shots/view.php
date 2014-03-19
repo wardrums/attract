@@ -50,7 +50,7 @@ if ($this->session->flashdata('message') != '')
 		
 			<?php endif ?>
 			
-			<?php echo form_open_multipart("shots/post_add_preview"); ?>
+			<?php echo form_open_multipart(site_url("shots/post_add_preview")); ?>
 			<form class="form">    
 				<?php echo form_hidden('shot_id', $shot['shot_id']);?>                   
 			    <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -74,7 +74,7 @@ if ($this->session->flashdata('message') != '')
 	
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
 		<ul class="nav nav-tabs">
-			<li><a href="/shots/edit/<?php echo $shot['shot_id'] ?>">Edit</a></li>
+                    <li><a href="<?php echo site_url("/shots/edit/{$shot['shot_id']}") ?>">Edit</a></li>
 			<li class="active"><a href="#">Comments</a></li>
 		</ul>
 	</div>
