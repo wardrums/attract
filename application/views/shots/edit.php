@@ -154,7 +154,7 @@ if ($this->session->flashdata('message') != '')
 <div class="tabbable"> <!-- Only required for left/right tabs -->
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab1">Edit</a></li>
-		<li><a href="/shots/view/<?php echo $shot['shot_id'] ?>">Comments</a></li>
+                <li><a href="<?php echo site_url("/shots/view/{$shot['shot_id']}") ?>">Comments</a></li>
 	</ul>
 </div>
 
