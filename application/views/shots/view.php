@@ -33,7 +33,6 @@ if ($this->session->flashdata('message') != '')
 				<?php foreach ($previews as $preview): ?>
 					<?php if($preview['is_current'] == TRUE): ?>
 						<div class="col-md-10">
-						<?php echo site_url("/uploads/thumbnails/400_");?>
 							<img class="img-responsive" src=<?php echo site_url("/uploads/thumbnails/400_"). $preview['attachment_path'] ?> />
 							<?php echo anchor('/shots/delete_preview/' . $preview['attachment_id'], 'Delete') ?>
 						</div>
